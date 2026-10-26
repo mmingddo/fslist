@@ -621,6 +621,15 @@ img.goods-preview {
 .goods-detail-with-actions > .goods-photo-link {
   align-self: center;
 }
+/* 접혔을 때 ▼ */
+.accordion-arrow::before {
+  border-top-color: #3662ae;
+}
+
+/* 펼쳤을 때 ▲ */
+.goods-accordion[open] .accordion-arrow::before {
+  border-bottom-color: #3662ae;
+}
   </style>
 </head>
 
@@ -690,7 +699,7 @@ img.goods-preview {
         target="_blank"
         rel="noopener noreferrer"
       >
-        원본 게시글 보러가기
+        공지글 보기
       </a>
 
       <button
@@ -698,7 +707,7 @@ img.goods-preview {
         type="button"
         onclick="document.querySelector('.menu-button[data-page=list]').click()"
       >
-        리스트 보러가기
+        리스트 보기
       </button>
     </div>
   </div>
