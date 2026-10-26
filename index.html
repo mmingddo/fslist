@@ -270,6 +270,134 @@ h1,
   min-height: 44px;
   padding: 8px 4px;
 }
+/* 내용이 짧아도 제작자 표기가 화면 아래에 오도록 설정 */
+main {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 업데이트 / 제보 버튼 */
+.home-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.home-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 6px;
+  border: 1px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* 얇은 구분선 */
+.home-divider {
+  margin: 28px 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+/* 메인 제목 32px보다 조금 작은 제목 */
+.news-title {
+  margin: 0 0 18px;
+  font-family: "GmarketSans", "맑은 고딕", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* 굿즈 소식 5개 */
+.goods-news {
+  display: grid;
+  gap: 12px;
+}
+
+.goods-card {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 80px;
+  align-items: center;
+  gap: 12px;
+  min-height: 104px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+}
+
+/* 연번과 굿즈 이름 사이 세로선 */
+.goods-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  border-right: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.goods-name {
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* 사진을 넣기 전 미리보기 자리 */
+.goods-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  background: #f2f2f2;
+  color: #777;
+  font-size: 11px;
+}
+
+/* 실제 미리보기 사진 */
+img.goods-preview {
+  object-fit: contain;
+}
+
+/* 링크 연결 후 마우스 표시 */
+.home-link[href],
+.goods-card[href] {
+  cursor: pointer;
+}
+
+.home-link[href]:focus-visible,
+.goods-card[href]:focus-visible {
+  outline: 2px solid #3662ae;
+  outline-offset: 3px;
+}
+
+/* 공통 제작자 표기 */
+.site-credit {
+  margin-top: auto;
+  padding-top: 32px;
+  color: #555;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* 하단 페이지 이동 탭과 동일한 글자 크기 */
+.menu-button {
+  font-size: 12px;
+}
   </style>
 </head>
 
@@ -296,12 +424,56 @@ h1,
     </section>
 
     <!-- 메인 화면 -->
-    <section id="home">
-    <h1 class="site-title">
-      <img src="./logo.png" alt="FS LIST" class="site-logo">
-      <span class="title-text">굿즈 리스트</span>
-    </h1>
-    </section>
+<!-- 메인 화면 -->
+<section id="home">
+  <h1 class="site-title">
+    <img src="./logo.png" alt="FS LIST" class="site-logo">
+    <span class="title-text">굿즈 리스트</span>
+  </h1>
+
+  <!-- 상단 버튼 2개 -->
+  <div class="home-links">
+    <a class="home-link">업데이트 소식</a>
+    <a class="home-link">제보 / 오류 신고</a>
+  </div>
+
+  <hr class="home-divider">
+
+  <h2 class="news-title">최근 발매된 굿즈 소식</h2>
+
+  <!-- 각 항목에 href를 넣으면 공지로 연결돼요 -->
+  <div class="goods-news">
+    <a class="goods-card">
+      <span class="goods-number">1</span>
+      <span class="goods-name">굿즈 이름 1</span>
+      <span class="goods-preview">미리보기</span>
+    </a>
+
+    <a class="goods-card">
+      <span class="goods-number">2</span>
+      <span class="goods-name">굿즈 이름 2</span>
+      <span class="goods-preview">미리보기</span>
+    </a>
+
+    <a class="goods-card">
+      <span class="goods-number">3</span>
+      <span class="goods-name">굿즈 이름 3</span>
+      <span class="goods-preview">미리보기</span>
+    </a>
+
+    <a class="goods-card">
+      <span class="goods-number">4</span>
+      <span class="goods-name">굿즈 이름 4</span>
+      <span class="goods-preview">미리보기</span>
+    </a>
+
+    <a class="goods-card">
+      <span class="goods-number">5</span>
+      <span class="goods-name">굿즈 이름 5</span>
+      <span class="goods-preview">미리보기</span>
+    </a>
+  </div>
+</section>
 
     <!-- 카테고리 화면 -->
     <section id="category" hidden>
@@ -321,6 +493,10 @@ h1,
   <button type="button" class="category-item">개인</button>
 </div>
     </section>
+      <footer class="site-credit">
+    제작: X @ing_ddo_11
+  </footer>
+</main>
   </main>
 
   <!-- 하단 메뉴 -->
