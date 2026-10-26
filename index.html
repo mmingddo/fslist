@@ -6,6 +6,23 @@
   <title>FSGOODSLIST</title>
 
   <style>
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+        format("woff");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+       format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+ }
     * {
       box-sizing: border-box;
     }
@@ -121,6 +138,33 @@
 
 .title-text {
   font-size: 24px;
+  font-weight: 700;
+}
+/* 본문: G마켓 산스 Medium */
+body {
+  font-family: "GmarketSans", "맑은 고딕", sans-serif;
+  font-weight: 500;
+}
+
+/* 입력창과 버튼에도 같은 폰트 적용 */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-weight: 500;
+}
+
+/* 하단 메뉴: 선택 상태에서도 Medium 유지 */
+.menu-button,
+.menu-button[aria-current="page"] {
+  font-weight: 500;
+}
+
+/* 제목: G마켓 산스 Bold */
+h1,
+.title-text {
+  font-family: "GmarketSans", "맑은 고딕", sans-serif;
   font-weight: 700;
 }
   </style>
