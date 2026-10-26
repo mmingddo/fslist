@@ -189,6 +189,33 @@ h1,
   border-radius: 2px;
   background-color: #3662ae;
 }
+/* 검색 제목 아래 여백 */
+#search h1 {
+  margin-bottom: 10px;
+}
+
+/* 검색창 위 여백 */
+#search .search-input {
+  margin-top: 6px;
+}
+/* 아이콘과 제목을 나란히 배치 */
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 제목 옆 아이콘 */
+.page-title svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
   </style>
 </head>
 
@@ -196,12 +223,18 @@ h1,
   <main>
     <!-- 검색 화면 -->
     <section id="search" hidden>
-      <h1>검색</h1>
+      <h1 class="page-title">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="10.5" cy="10.5" r="6.5"></circle>
+    <path d="m16 16 5 5"></path>
+  </svg>
+  <span>검색</span>
+</h1>
       <input
         id="search-input"
         class="search-input"
         type="search"
-        placeholder="찾고싶은 사진의 키워드를 입력하세요 (예. 2025 시그/레거시 엠디)"
+        placeholder="찾고싶은 사진의 키워드를 입력하세요"
       >
       <p class="description">
         사진을 등록한 뒤 검색 기능을 연결할 예정이에요.
@@ -218,7 +251,12 @@ h1,
 
     <!-- 카테고리 화면 -->
     <section id="category" hidden>
-      <h1>카테고리</h1>
+      <h1 class="page-title">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 6h16M4 12h16M4 18h16"></path>
+  </svg>
+  <span>카테고리</span>
+</h1>
       <p class="description">
         사진을 분류할 카테고리가 여기에 표시돼요.
       </p>
