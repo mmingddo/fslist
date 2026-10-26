@@ -472,6 +472,180 @@
   </style>
 </head>
 
+<script>
+  (() => {
+    const storageKey = "goodslist-recent-searches";
+
+    /*
+      연관 검색어로 보여줄 실제 제품명을 등록하세요.
+      예시 형식:
+      "2025 시즌그리팅",
+      "레거시 포토카드",
+
+      아직 실제 제품이 등록되지 않아 빈 목록으로 두었습니다.
+    */
+    const productNames = [
+    ];
+
+    const form = document.getElementById("search-form");
+    const input = document.getElementById("search-input");
+    const relatedBox = document.getElementById("related-searches");
+    const relatedList = document.getElementById("related-list");
+    const recentList = document.getElementById("recent-list");
+    const emptyMessage = document.getElementById("recent-empty");
+    const clearButton = document.getElementById("clear-searches");
+    const searchMessage = document.getElementById("search-message");
+
+    let recentKeywords = [];
+
+    // 공백·대소문자를 무시하고 비교
+    function normalize(text) {
+      return text.replace(/\s+/g, "").toLowerCase();
+    }
+
+    // 이전 검색 기록 읽기
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey));
+
+      if (Array.isArray(saved)) {
+        recentKeywords = saved
+          .filter((item) => typeof item === "string" && item.trim())
+          .slice(0, 5);
+      }
+    } catch {
+      recentKeywords = [];
+    }
+
+    function saveHistory() {
+      try {
+        localStorage.setItem(
+          storageKey,
+          JSON.stringify(recentKeywords)
+        );
+      } catch {
+        // 저장이 제한된 환경에서도 현재 화면에서는 사용 가능
+      }
+    }
+
+    function runSearch(keyword) {
+      input.value = keyword;
+      form.requestSubmit();
+    }
+
+    // 최근 검색어 표시
+    function renderRecent() {
+      recentList.replaceChildren();
+
+      emptyMessage.hidden = recentKeywords.length > 0;
+      clearButton.hidden = recentKeywords.length === 0;
+
+      recentKeywords.forEach((keyword) => {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "recent-keyword";
+        button.textContent = keyword;
+
+        button.addEventListener("click", () => {
+          runSearch(keyword);
+        });
+
+        item.append(button);
+        recentList.append(item);
+      });
+    }
+
+    // 입력한 글자를 포함하는 제품명 최대 5개 표시
+    function renderRelated() {
+      const keyword = normalize(input.value.trim());
+
+      relatedList.replaceChildren();
+
+      if (!keyword) {
+        relatedBox.hidden = true;
+        return;
+      }
+
+      // "시그"를 입력해도 "시즌그리팅"과 연결
+      const expandedKeyword = keyword.replace(
+        /시그/g,
+        "시즌그리팅"
+      );
+
+      const matches = [...new Set(productNames)]
+        .filter((name) => {
+          const normalizedName = normalize(name);
+
+          return normalizedName.includes(keyword) ||
+            normalizedName.includes(expandedKeyword);
+        })
+        .slice(0, 5);
+
+      relatedBox.hidden = matches.length === 0;
+
+      matches.forEach((name) => {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "related-keyword";
+        button.textContent = name;
+
+        button.addEventListener("click", () => {
+          runSearch(name);
+        });
+
+        item.append(button);
+        relatedList.append(item);
+      });
+    }
+
+    input.addEventListener("input", () => {
+      searchMessage.textContent = "";
+      renderRelated();
+    });
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        relatedBox.hidden = true;
+      }
+    });
+
+    // Enter 또는 검색 키를 누르면 최근 검색어에 저장
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const keyword = input.value.trim();
+
+      if (!keyword) return;
+
+      recentKeywords = [
+        keyword,
+        ...recentKeywords.filter(
+          (item) => normalize(item) !== normalize(keyword)
+        )
+      ].slice(0, 5);
+
+      saveHistory();
+      renderRecent();
+      relatedBox.hidden = true;
+      input.blur();
+
+      // 실제 제품 목록 검색은 이후 이 위치에 연결
+      searchMessage.textContent =
+        "제품 목록을 준비 중이에요. 검색어는 최근 검색어에 추가했어요.";
+    });
+
+    clearButton.addEventListener("click", () => {
+      recentKeywords = [];
+      saveHistory();
+      renderRecent();
+    });
+
+    renderRecent();
+  })();
+</script>
 <body>
   <main>
  <!-- 메인 화면 -->
