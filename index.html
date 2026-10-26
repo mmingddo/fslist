@@ -81,11 +81,6 @@
       font-weight: 700;
     }
 
-    .description {
-      color: #888;
-      line-height: 1.6;
-    }
-
     /* 제목 배치 */
     .site-title,
     .page-title {
@@ -113,23 +108,20 @@
       line-height: 1;
     }
 
-    /* 검색 제목 */
-    #search .page-title {
-      margin-bottom: 10px;
-      font-size: 26px;
-    }
-
-    /* 리스트 제목 */
+    /* 각 화면 제목 크기 */
     #list .page-title {
       font-size: 26px;
     }
 
-    /* 카테고리 제목 */
+    #search .page-title {
+      font-size: 26px;
+    }
+
     #category .page-title {
       font-size: 26px;
     }
 
-    /* 제목·메뉴 아이콘 */
+    /* 제목·하단 메뉴 아이콘 */
     .page-title svg,
     .menu-button svg {
       flex-shrink: 0;
@@ -145,15 +137,13 @@
       height: 32px;
     }
 
-    /* 검색창 */
-    .search-input {
-      width: 100%;
-      margin-top: 6px;
-      padding: 15px 18px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      background: #fff;
-      color: #333;
+    /* 안내 문구 */
+    .news-description {
+      margin: 10px 0 16px;
+      color: #555;
+      font-size: var(--small-text-size);
+      font-weight: 500;
+      line-height: 1.6;
     }
 
     /* 메인 상단 버튼 배치 */
@@ -201,14 +191,6 @@
       line-height: 1.5;
     }
 
-    /* 최근 굿즈 소식 안내 */
-.news-description {
-  margin: 10px 0 16px;
-  color: #555;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.6;
-}
     /* 굿즈 카드 목록 */
     .goods-news {
       display: grid;
@@ -229,7 +211,6 @@
       text-decoration: none;
     }
 
-    /* 연번: 왼쪽 테두리와 세로선 사이 가운데 정렬 */
     .goods-number {
       display: flex;
       align-items: center;
@@ -247,7 +228,7 @@
       overflow-wrap: anywhere;
     }
 
-    /* 미리보기 자리 및 이미지 */
+    /* 미리보기 */
     .goods-preview {
       display: flex;
       align-items: center;
@@ -284,6 +265,102 @@
 
     .category-all {
       grid-column: 1 / -1;
+    }
+
+    .category-year {
+      margin-top: 30px;
+    }
+
+    /* 검색창 */
+    .search-input {
+      width: 100%;
+      margin: 0;
+      padding: 15px 18px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
+      color: #333;
+    }
+
+    /* 검색 영역 소제목 */
+    .search-subtitle {
+      margin: 0;
+      color: #555;
+      font-size: var(--small-text-size);
+      font-weight: 500;
+    }
+
+    /* 최근 검색어 */
+    .recent-searches {
+      margin-top: 24px;
+    }
+
+    .recent-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    #clear-searches {
+      padding: 6px 0 6px 10px;
+      border: 0;
+      background: transparent;
+      color: #777;
+      font-size: var(--small-text-size);
+      cursor: pointer;
+    }
+
+    .recent-list,
+    .related-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .recent-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .recent-keyword {
+      padding: 9px 12px;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      background: #fff;
+      color: #333;
+      font-size: var(--small-text-size);
+      cursor: pointer;
+    }
+
+    /* 연관 검색어 */
+    #related-searches {
+      margin-top: 10px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .related-list {
+      margin-top: 8px;
+    }
+
+    .related-keyword {
+      width: 100%;
+      padding: 12px 4px;
+      border: 0;
+      background: transparent;
+      color: #333;
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .related-keyword:hover {
+      color: var(--accent-color);
     }
 
     /* 공통 제작자 표기 */
@@ -342,12 +419,10 @@
       padding-bottom: 7px;
     }
 
-    /* 선택된 메뉴 색상 */
     .menu-button[aria-current="page"] {
       color: var(--accent-color);
     }
 
-    /* 선택된 메뉴 밑줄 */
     .menu-button[aria-current="page"] span::after {
       content: "";
       position: absolute;
@@ -363,7 +438,10 @@
     .home-link[href]:focus-visible,
     .goods-card[href]:focus-visible,
     .category-item:focus-visible,
-    .search-input:focus-visible {
+    .search-input:focus-visible,
+    .recent-keyword:focus-visible,
+    .related-keyword:focus-visible,
+    #clear-searches:focus-visible {
       outline: 2px solid var(--accent-color);
       outline-offset: 3px;
     }
@@ -373,282 +451,12 @@
       outline-offset: -5px;
       border-radius: 10px;
     }
-    /* 위 카테고리와 년도별 버튼 사이 여백 */
-.category-year {
-  margin-top: 30px;
-}
-/* 검색창 */
-#search .search-input {
-  margin-top: 0;
-}
-
-/* 검색어 영역 소제목 */
-.search-subtitle {
-  margin: 0;
-  color: #555;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* 최근 검색어 */
-.recent-searches {
-  margin-top: 24px;
-}
-
-.recent-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-#clear-searches {
-  padding: 6px 0 6px 10px;
-  border: 0;
-  background: transparent;
-  color: #777;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.recent-list,
-.related-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.recent-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.recent-keyword {
-  padding: 9px 12px;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-  background: #fff;
-  color: #333;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-/* 연관 검색어 */
-#related-searches {
-  margin-top: 10px;
-  padding: 14px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #fff;
-}
-
-.related-list {
-  margin-top: 8px;
-}
-
-.related-keyword {
-  width: 100%;
-  padding: 12px 4px;
-  border: 0;
-  background: transparent;
-  color: #333;
-  font-size: 14px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.related-keyword:hover {
-  color: #3662ae;
-}
-
-.recent-keyword:focus-visible,
-.related-keyword:focus-visible,
-#clear-searches:focus-visible {
-  outline: 2px solid #3662ae;
-  outline-offset: 2px;
-}
   </style>
 </head>
 
-<script>
-  (() => {
-    const storageKey = "goodslist-recent-searches";
-
-    /*
-      연관 검색어로 보여줄 실제 제품명을 등록하세요.
-      예시 형식:
-      "2025 시즌그리팅",
-      "레거시 포토카드",
-
-      아직 실제 제품이 등록되지 않아 빈 목록으로 두었습니다.
-    */
-    const productNames = [
-    ];
-
-    const form = document.getElementById("search-form");
-    const input = document.getElementById("search-input");
-    const relatedBox = document.getElementById("related-searches");
-    const relatedList = document.getElementById("related-list");
-    const recentList = document.getElementById("recent-list");
-    const emptyMessage = document.getElementById("recent-empty");
-    const clearButton = document.getElementById("clear-searches");
-    const searchMessage = document.getElementById("search-message");
-
-    let recentKeywords = [];
-
-    // 공백·대소문자를 무시하고 비교
-    function normalize(text) {
-      return text.replace(/\s+/g, "").toLowerCase();
-    }
-
-    // 이전 검색 기록 읽기
-    try {
-      const saved = JSON.parse(localStorage.getItem(storageKey));
-
-      if (Array.isArray(saved)) {
-        recentKeywords = saved
-          .filter((item) => typeof item === "string" && item.trim())
-          .slice(0, 5);
-      }
-    } catch {
-      recentKeywords = [];
-    }
-
-    function saveHistory() {
-      try {
-        localStorage.setItem(
-          storageKey,
-          JSON.stringify(recentKeywords)
-        );
-      } catch {
-        // 저장이 제한된 환경에서도 현재 화면에서는 사용 가능
-      }
-    }
-
-    function runSearch(keyword) {
-      input.value = keyword;
-      form.requestSubmit();
-    }
-
-    // 최근 검색어 표시
-    function renderRecent() {
-      recentList.replaceChildren();
-
-      emptyMessage.hidden = recentKeywords.length > 0;
-      clearButton.hidden = recentKeywords.length === 0;
-
-      recentKeywords.forEach((keyword) => {
-        const item = document.createElement("li");
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.className = "recent-keyword";
-        button.textContent = keyword;
-
-        button.addEventListener("click", () => {
-          runSearch(keyword);
-        });
-
-        item.append(button);
-        recentList.append(item);
-      });
-    }
-
-    // 입력한 글자를 포함하는 제품명 최대 5개 표시
-    function renderRelated() {
-      const keyword = normalize(input.value.trim());
-
-      relatedList.replaceChildren();
-
-      if (!keyword) {
-        relatedBox.hidden = true;
-        return;
-      }
-
-      // "시그"를 입력해도 "시즌그리팅"과 연결
-      const expandedKeyword = keyword.replace(
-        /시그/g,
-        "시즌그리팅"
-      );
-
-      const matches = [...new Set(productNames)]
-        .filter((name) => {
-          const normalizedName = normalize(name);
-
-          return normalizedName.includes(keyword) ||
-            normalizedName.includes(expandedKeyword);
-        })
-        .slice(0, 5);
-
-      relatedBox.hidden = matches.length === 0;
-
-      matches.forEach((name) => {
-        const item = document.createElement("li");
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.className = "related-keyword";
-        button.textContent = name;
-
-        button.addEventListener("click", () => {
-          runSearch(name);
-        });
-
-        item.append(button);
-        relatedList.append(item);
-      });
-    }
-
-    input.addEventListener("input", () => {
-      searchMessage.textContent = "";
-      renderRelated();
-    });
-
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        relatedBox.hidden = true;
-      }
-    });
-
-    // Enter 또는 검색 키를 누르면 최근 검색어에 저장
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const keyword = input.value.trim();
-
-      if (!keyword) return;
-
-      recentKeywords = [
-        keyword,
-        ...recentKeywords.filter(
-          (item) => normalize(item) !== normalize(keyword)
-        )
-      ].slice(0, 5);
-
-      saveHistory();
-      renderRecent();
-      relatedBox.hidden = true;
-      input.blur();
-
-      // 실제 제품 목록 검색은 이후 이 위치에 연결
-      searchMessage.textContent =
-        "제품 목록을 준비 중이에요. 검색어는 최근 검색어에 추가했어요.";
-    });
-
-    clearButton.addEventListener("click", () => {
-      recentKeywords = [];
-      saveHistory();
-      renderRecent();
-    });
-
-    renderRecent();
-  })();
-</script>
 <body>
   <main>
- <!-- 메인 화면 -->
+    <!-- 메인 화면 -->
     <section id="home">
       <h1 class="site-title">
         <img
@@ -673,56 +481,56 @@
 
       <h2 class="news-title">최근 발매된 굿즈 소식</h2>
 
-<p class="news-description">
-  누르면 각 굿즈의 공지 페이지로 이동합니다.<br>
-  (X(구 트위터), 인스타그램 등)
-</p>
+      <p class="news-description">
+        누르면 각 굿즈의 공지 페이지로 이동합니다.<br>
+        (X(구 트위터), 인스타그램 등)
+      </p>
 
-      <!--
-        공지 주소가 정해지면 카드 시작 태그를 변경하세요.
-
+      <div class="goods-news">
+        <!-- 1번 굿즈 -->
         <a
           class="goods-card"
-          href="실제 공지 주소"
+          href="https://www.instagram.com/p/DdTkgByGnRB/?img_index=1"
           target="_blank"
           rel="noopener noreferrer"
         >
-
-        사진을 넣으려면 미리보기 span을 아래처럼 교체하세요.
-
-        <img
-          class="goods-preview"
-          src="./goods-01.jpg"
-          alt="굿즈 미리보기"
-          loading="lazy"
-        >
-      -->
-
-      <div class="goods-news">
-        <a class="goods-card">
           <span class="goods-number">1</span>
-          <span class="goods-name">굿즈 이름 1</span>
-          <span class="goods-preview">미리보기</span>
+
+          <span class="goods-name">
+            조민규 2026 MONO DRAMA<br>
+            Sweet Escape MD
+          </span>
+
+          <img
+            class="goods-preview"
+            src="./Sweet-Escape-MD.png"
+            alt="조민규 Sweet Escape MD 미리보기"
+            loading="lazy"
+          >
         </a>
 
+        <!-- 2번 굿즈: 공지 주소와 사진 추가 예정 -->
         <a class="goods-card">
           <span class="goods-number">2</span>
           <span class="goods-name">굿즈 이름 2</span>
           <span class="goods-preview">미리보기</span>
         </a>
 
+        <!-- 3번 굿즈 -->
         <a class="goods-card">
           <span class="goods-number">3</span>
           <span class="goods-name">굿즈 이름 3</span>
           <span class="goods-preview">미리보기</span>
         </a>
 
+        <!-- 4번 굿즈 -->
         <a class="goods-card">
           <span class="goods-number">4</span>
           <span class="goods-name">굿즈 이름 4</span>
           <span class="goods-preview">미리보기</span>
         </a>
 
+        <!-- 5번 굿즈 -->
         <a class="goods-card">
           <span class="goods-number">5</span>
           <span class="goods-name">굿즈 이름 5</span>
@@ -731,63 +539,83 @@
       </div>
     </section>
 
+    <!-- 리스트 화면 -->
+    <section id="list" hidden>
+      <h1 class="page-title">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect
+            x="4"
+            y="3"
+            width="16"
+            height="18"
+            rx="2"
+          ></rect>
+          <path d="m8 12 3 3 5-6"></path>
+        </svg>
+        <span>리스트</span>
+      </h1>
+
+      <p class="news-description">
+        활동 별로 분류되어 있어요.<br>
+        다른 카테고리로 보고 싶다면, 하단 카테고리 메뉴를 이용해 주세요!
+      </p>
+    </section>
+
     <!-- 검색 화면 -->
-<!-- 검색 화면 -->
-<section id="search" hidden>
-  <h1 class="page-title">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="10.5" cy="10.5" r="6.5"></circle>
-      <path d="m16 16 5 5"></path>
-    </svg>
-    <span>검색</span>
-  </h1>
+    <section id="search" hidden>
+      <h1 class="page-title">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5"></circle>
+          <path d="m16 16 5 5"></path>
+        </svg>
+        <span>검색</span>
+      </h1>
 
-  <p class="news-description">
-    찾고싶은 제품명을 입력해 주세요.<br>
-    (예. 2025 시그 / 시즌그리팅 / 레거시)
-  </p>
+      <p class="news-description">
+        찾고싶은 제품명을 입력해 주세요.<br>
+        (예. 2025 시그 / 시즌그리팅 / 레거시)
+      </p>
 
-  <form id="search-form" role="search">
-    <input
-      id="search-input"
-      class="search-input"
-      type="search"
-      aria-label="제품명 검색"
-      aria-controls="related-searches"
-      placeholder="제품명을 입력하세요"
-      autocomplete="off"
-      enterkeyhint="search"
-    >
+      <form id="search-form" role="search">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          aria-label="제품명 검색"
+          aria-controls="related-searches"
+          placeholder="제품명을 입력하세요"
+          autocomplete="off"
+          enterkeyhint="search"
+        >
 
-    <!-- 입력할 때 연관 검색어 표시 -->
-    <div id="related-searches" hidden>
-      <p class="search-subtitle">연관 검색어</p>
-      <ul id="related-list" class="related-list"></ul>
-    </div>
-  </form>
+        <div id="related-searches" hidden>
+          <p class="search-subtitle">연관 검색어</p>
+          <ul id="related-list" class="related-list"></ul>
+        </div>
+      </form>
 
-  <!-- 최근 검색어 -->
-  <div class="recent-searches">
-    <div class="recent-heading">
-      <h2 class="search-subtitle">최근 검색어</h2>
-      <button id="clear-searches" type="button">
-        전체 삭제
-      </button>
-    </div>
+      <div class="recent-searches">
+        <div class="recent-heading">
+          <h2 class="search-subtitle">최근 검색어</h2>
 
-    <ul id="recent-list" class="recent-list"></ul>
+          <button id="clear-searches" type="button" hidden>
+            전체 삭제
+          </button>
+        </div>
 
-    <p id="recent-empty" class="news-description">
-      최근 검색어가 없어요.
-    </p>
-  </div>
+        <ul id="recent-list" class="recent-list"></ul>
 
-  <p
-    id="search-message"
-    class="news-description"
-    role="status"
-  ></p>
-</section>
+        <p id="recent-empty" class="news-description">
+          최근 검색어가 없어요.
+        </p>
+      </div>
+
+      <p
+        id="search-message"
+        class="news-description"
+        role="status"
+      ></p>
+    </section>
 
     <!-- 카테고리 화면 -->
     <section id="category" hidden>
@@ -831,11 +659,11 @@
         </button>
 
         <button
-  class="category-item category-all category-year"
-  type="button"
->
-  년도별
-</button>
+          class="category-item category-all category-year"
+          type="button"
+        >
+          년도별
+        </button>
       </div>
     </section>
 
@@ -845,92 +673,275 @@
     </footer>
   </main>
 
-<!-- 하단 메뉴: 메인 → 리스트 → 검색 → 카테고리 -->
-<nav class="bottom-menu" aria-label="하단 메뉴">
-  <div class="menu-inner">
+  <!-- 하단 메뉴: 메인 → 리스트 → 검색 → 카테고리 -->
+  <nav class="bottom-menu" aria-label="하단 메뉴">
+    <div class="menu-inner">
+      <!-- 메인 -->
+      <button
+        class="menu-button"
+        type="button"
+        data-page="home"
+        aria-controls="home"
+        aria-current="page"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 10 12 3l9 7"></path>
+          <path d="M5 9v12h5v-7h4v7h5V9"></path>
+        </svg>
+        <span>메인</span>
+      </button>
 
-    <!-- 메인 -->
-    <button
-      class="menu-button"
-      type="button"
-      data-page="home"
-      aria-controls="home"
-      aria-current="page"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M3 10 12 3l9 7"></path>
-        <path d="M5 9v12h5v-7h4v7h5V9"></path>
-      </svg>
-      <span>메인</span>
-    </button>
+      <!-- 리스트 -->
+      <button
+        class="menu-button"
+        type="button"
+        data-page="list"
+        aria-controls="list"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect
+            x="4"
+            y="3"
+            width="16"
+            height="18"
+            rx="2"
+          ></rect>
+          <path d="m8 12 3 3 5-6"></path>
+        </svg>
+        <span>리스트</span>
+      </button>
 
-    <!-- 리스트 -->
-    <button
-      class="menu-button"
-      type="button"
-      data-page="list"
-      aria-controls="list"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="4" y="3" width="16" height="18" rx="2"></rect>
-        <path d="m8 12 3 3 5-6"></path>
-      </svg>
-      <span>리스트</span>
-    </button>
+      <!-- 검색 -->
+      <button
+        class="menu-button"
+        type="button"
+        data-page="search"
+        aria-controls="search"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5"></circle>
+          <path d="m16 16 5 5"></path>
+        </svg>
+        <span>검색</span>
+      </button>
 
-    <!-- 검색 -->
-    <button
-      class="menu-button"
-      type="button"
-      data-page="search"
-      aria-controls="search"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="10.5" cy="10.5" r="6.5"></circle>
-        <path d="m16 16 5 5"></path>
-      </svg>
-      <span>검색</span>
-    </button>
+      <!-- 카테고리 -->
+      <button
+        class="menu-button"
+        type="button"
+        data-page="category"
+        aria-controls="category"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <span>카테고리</span>
+      </button>
+    </div>
+  </nav>
 
-    <!-- 카테고리 -->
-    <button
-      class="menu-button"
-      type="button"
-      data-page="category"
-      aria-controls="category"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-      <span>카테고리</span>
-    </button>
-
-  </div>
-</nav>
-
+  <!-- 화면이 만들어진 뒤 기능 실행 -->
   <script>
-    const menuButtons = document.querySelectorAll(".menu-button");
-    const pages = document.querySelectorAll("main > section");
+    (() => {
+      /* 하단 메뉴 전환 */
+      const menuButtons = document.querySelectorAll(".menu-button");
+      const pages = document.querySelectorAll("main > section");
 
-    menuButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const selectedPage = button.dataset.page;
+      menuButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedPage = button.dataset.page;
 
-        pages.forEach((page) => {
-          page.hidden = page.id !== selectedPage;
+          pages.forEach((page) => {
+            page.hidden = page.id !== selectedPage;
+          });
+
+          menuButtons.forEach((item) => {
+            if (item === button) {
+              item.setAttribute("aria-current", "page");
+            } else {
+              item.removeAttribute("aria-current");
+            }
+          });
+
+          window.scrollTo(0, 0);
+
+          // 검색창 자동 포커스는 사용하지 않음
         });
-
-        menuButtons.forEach((item) => {
-          if (item === button) {
-            item.setAttribute("aria-current", "page");
-          } else {
-            item.removeAttribute("aria-current");
-          }
-        });
-
-        window.scrollTo(0, 0);
       });
-    });
+
+      /* 검색 기능 설정 */
+      const storageKey = "goodslist-recent-searches";
+
+      /*
+        연관 검색어로 표시할 실제 제품명을 등록하세요.
+        예시 형식:
+        "2025 시즌그리팅",
+        "레거시 포토카드",
+      */
+      const productNames = [];
+
+      const form = document.getElementById("search-form");
+      const input = document.getElementById("search-input");
+      const relatedBox = document.getElementById("related-searches");
+      const relatedList = document.getElementById("related-list");
+      const recentList = document.getElementById("recent-list");
+      const emptyMessage = document.getElementById("recent-empty");
+      const clearButton = document.getElementById("clear-searches");
+      const searchMessage = document.getElementById("search-message");
+
+      let recentKeywords = [];
+
+      function normalize(text) {
+        return text.replace(/\s+/g, "").toLowerCase();
+      }
+
+      /* 저장된 검색 기록 읽기 */
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey));
+
+        if (Array.isArray(saved)) {
+          recentKeywords = saved
+            .filter((item) => {
+              return typeof item === "string" && item.trim();
+            })
+            .slice(0, 5);
+        }
+      } catch {
+        recentKeywords = [];
+      }
+
+      function saveHistory() {
+        try {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify(recentKeywords)
+          );
+        } catch {
+          // 저장이 제한되어도 현재 화면에서는 사용 가능
+        }
+      }
+
+      function runSearch(keyword) {
+        input.value = keyword;
+        form.requestSubmit();
+      }
+
+      /* 최근 검색어 최대 5개 표시 */
+      function renderRecent() {
+        recentList.replaceChildren();
+
+        emptyMessage.hidden = recentKeywords.length > 0;
+        clearButton.hidden = recentKeywords.length === 0;
+
+        recentKeywords.forEach((keyword) => {
+          const item = document.createElement("li");
+          const button = document.createElement("button");
+
+          button.type = "button";
+          button.className = "recent-keyword";
+          button.textContent = keyword;
+
+          button.addEventListener("click", () => {
+            runSearch(keyword);
+          });
+
+          item.append(button);
+          recentList.append(item);
+        });
+      }
+
+      /* 연관 검색어 최대 5개 표시 */
+      function renderRelated() {
+        const keyword = normalize(input.value.trim());
+
+        relatedList.replaceChildren();
+
+        if (!keyword) {
+          relatedBox.hidden = true;
+          return;
+        }
+
+        const expandedKeyword = keyword.replace(
+          /시그/g,
+          "시즌그리팅"
+        );
+
+        const matches = [...new Set(productNames)]
+          .filter((name) => {
+            const normalizedName = normalize(name);
+
+            return (
+              normalizedName.includes(keyword) ||
+              normalizedName.includes(expandedKeyword)
+            );
+          })
+          .slice(0, 5);
+
+        relatedBox.hidden = matches.length === 0;
+
+        matches.forEach((name) => {
+          const item = document.createElement("li");
+          const button = document.createElement("button");
+
+          button.type = "button";
+          button.className = "related-keyword";
+          button.textContent = name;
+
+          button.addEventListener("click", () => {
+            runSearch(name);
+          });
+
+          item.append(button);
+          relatedList.append(item);
+        });
+      }
+
+      input.addEventListener("input", () => {
+        searchMessage.textContent = "";
+        renderRelated();
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          relatedBox.hidden = true;
+        }
+      });
+
+      /* Enter 또는 검색 키를 누르면 기록 저장 */
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const keyword = input.value.trim();
+
+        if (!keyword) return;
+
+        recentKeywords = [
+          keyword,
+          ...recentKeywords.filter((item) => {
+            return normalize(item) !== normalize(keyword);
+          })
+        ].slice(0, 5);
+
+        saveHistory();
+        renderRecent();
+
+        relatedBox.hidden = true;
+        input.blur();
+
+        // 실제 제품 검색 결과는 추후 연결
+        searchMessage.textContent =
+          "제품 목록을 준비 중이에요. 검색어는 최근 검색어에 추가했어요.";
+      });
+
+      /* 최근 검색어 전체 삭제 */
+      clearButton.addEventListener("click", () => {
+        recentKeywords = [];
+        saveHistory();
+        renderRecent();
+      });
+
+      renderRecent();
+    })();
   </script>
 </body>
 </html>
