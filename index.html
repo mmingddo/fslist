@@ -106,14 +106,22 @@
       border-radius: 10px;
     }
     .site-title {
-  margin: 0 0 24px;
-}
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+    }
 
-.site-logo {
-  display: block;
-  width: 200px;
-  max-width: 100%;
-  height: auto;
+    .site-logo {
+      display: block;
+      width: 80px;
+      max-width: 30%;
+      height: auto;
+ }
+
+.title-text {
+  font-size: 24px;
+  font-weight: 700;
 }
   </style>
 </head>
@@ -139,6 +147,7 @@
     <section id="home">
     <h1 class="site-title">
       <img src="./logo.png" alt="FS LIST" class="site-logo">
+      <span class="title-text">굿즈 리스트</span>
     </h1>
       <p class="description">사진으로 모아두는 소중한 순간들</p>
     </section>
