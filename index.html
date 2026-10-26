@@ -558,6 +558,12 @@
       outline-offset: -5px;
       border-radius: 10px;
     }
+    /* 펼쳤을 때 제목 아래에 구분선 표시 */
+.goods-title-divider {
+  margin: 0 12px;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
   </style>
 </head>
 
@@ -610,18 +616,18 @@
               class="accordion-arrow"
               aria-hidden="true"
             ></span>
-          </summary>
+</summary>
 
-          <!-- 펼쳐지는 상세 목록 -->
-          <div class="goods-detail">
+<hr class="goods-title-divider">
+
+<!-- 펼쳐지는 상세 목록 -->
+<div class="goods-detail">
             <!-- 상세 제품 1 -->
             <div class="goods-detail-row">
               <span class="goods-number">1</span>
 
               <div class="goods-info">
                 <span class="goods-name">MD</span>
-
-                <hr class="goods-name-divider">
 
                 <div class="goods-info-buttons">
                   <a
