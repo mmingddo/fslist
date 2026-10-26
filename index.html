@@ -242,6 +242,33 @@ h1,
 /* 전체 버튼은 3칸과 그 사이 간격까지 차지 */
 .category-all {
   grid-column: 1 / -1;
+  
+}
+/* 카테고리 버튼 모서리를 완전히 둥글게 */
+.category-item {
+  border-radius: 999px;
+}
+
+/* 포토카드 버튼 */
+.photocard-button {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 32px;
+  padding: 12px;
+  border: 1px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.category-item,
+.photocard-button {
+  min-height: 44px;
+  padding: 8px 4px;
 }
   </style>
 </head>
@@ -293,6 +320,9 @@ h1,
   <button type="button" class="category-item">기타</button>
   <button type="button" class="category-item">개인</button>
 </div>
+<button type="button" class="photocard-button">
+  포토카드만 보기
+</button>
     </section>
   </main>
 
