@@ -167,6 +167,28 @@ h1,
   font-family: "GmarketSans", "맑은 고딕", sans-serif;
   font-weight: 700;
 }
+/* 선택된 탭의 아이콘·글자 색상 */
+.menu-button[aria-current="page"] {
+  color: #3662ae;
+}
+
+/* 밑줄 공간을 미리 확보 */
+.menu-button span {
+  position: relative;
+  padding-bottom: 7px;
+}
+
+/* 선택된 탭 이름 아래 밑줄 */
+.menu-button[aria-current="page"] span::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #3662ae;
+}
   </style>
 </head>
 
@@ -175,12 +197,11 @@ h1,
     <!-- 검색 화면 -->
     <section id="search" hidden>
       <h1>검색</h1>
-      <label for="search-input">찾고 싶은 사진의 키워드</label>
       <input
         id="search-input"
         class="search-input"
         type="search"
-        placeholder="찾고싶은 사진의 키워드를 입력하세요(예. 2025 시그/레거시 엠디)"
+        placeholder="찾고싶은 사진의 키워드를 입력하세요 (예. 2025 시그/레거시 엠디)"
       >
       <p class="description">
         사진을 등록한 뒤 검색 기능을 연결할 예정이에요.
