@@ -398,6 +398,26 @@ img.goods-preview {
 .menu-button {
   font-size: 12px;
 }
+.goods-card {
+  grid-template-columns: 48px minmax(0, 1fr) 64px;
+  min-height: 80px;
+  padding: 8px 12px 8px 0;
+}
+
+.goods-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid #ddd;
+}
+
+.goods-preview {
+  width: 64px;
+  height: 64px;
+}
   </style>
 </head>
 
@@ -433,8 +453,12 @@ img.goods-preview {
 
   <!-- 상단 버튼 2개 -->
   <div class="home-links">
-    <a class="home-link">업데이트 소식</a>
-    <a class="home-link">제보 / 오류 신고</a>
+    <a class="home-link" href="./updates.html">
+  업데이트 소식
+    </a>
+    <a class="home-link" href="./report.html">
+  제보 / 오류 신고
+    </a>
   </div>
 
   <hr class="home-divider">
@@ -443,31 +467,56 @@ img.goods-preview {
 
   <!-- 각 항목에 href를 넣으면 공지로 연결돼요 -->
   <div class="goods-news">
-    <a class="goods-card">
-      <span class="goods-number">1</span>
-      <span class="goods-name">굿즈 이름 1</span>
-      <span class="goods-preview">미리보기</span>
-    </a>
+  <a
+  class="goods-card"
+  href="여기에 실제 공지 주소를 붙여넣기"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span class="goods-number">1</span>
+  <span class="goods-name">굿즈 이름 1</span>
+  <span class="goods-preview">미리보기</span>
+</a>
 
-    <a class="goods-card">
-      <span class="goods-number">2</span>
-      <span class="goods-name">굿즈 이름 2</span>
-      <span class="goods-preview">미리보기</span>
-    </a>
+    <a
+  class="goods-card"
+  href="여기에 실제 공지 주소를 붙여넣기"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span class="goods-number">1</span>
+  <span class="goods-name">굿즈 이름 2</span>
+  <span class="goods-preview">미리보기</span>
+</a>
 
-    <a class="goods-card">
-      <span class="goods-number">3</span>
+    <a
+  class="goods-card"
+  href="여기에 실제 공지 주소를 붙여넣기"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span class="goods-number">3</span>
       <span class="goods-name">굿즈 이름 3</span>
       <span class="goods-preview">미리보기</span>
     </a>
 
-    <a class="goods-card">
+    <a
+  class="goods-card"
+  href="여기에 실제 공지 주소를 붙여넣기"
+  target="_blank"
+  rel="noopener noreferrer"
+>
       <span class="goods-number">4</span>
       <span class="goods-name">굿즈 이름 4</span>
       <span class="goods-preview">미리보기</span>
     </a>
 
-    <a class="goods-card">
+    <a
+  class="goods-card"
+  href="여기에 실제 공지 주소를 붙여넣기"
+  target="_blank"
+  rel="noopener noreferrer"
+>
       <span class="goods-number">5</span>
       <span class="goods-name">굿즈 이름 5</span>
       <span class="goods-preview">미리보기</span>
