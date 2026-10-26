@@ -10,12 +10,14 @@
 
   <title>굿즈리스트</title>
 
-  <!-- 설치 설정 및 브라우저 아이콘 -->
+  <!-- 앱 설치 설정 및 브라우저 아이콘 -->
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" type="image/png" href="./icon-192.png">
 
   <style>
-    /* 폰트 */
+    /* ====================
+       폰트
+    ==================== */
     @font-face {
       font-family: "GmarketSans";
       src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
@@ -34,7 +36,9 @@
       font-display: swap;
     }
 
-    /* 공통 설정 */
+    /* ====================
+       공통 설정
+    ==================== */
     :root {
       --accent-color: #3662ae;
       --background-color: #fafafa;
@@ -81,7 +85,9 @@
       font-weight: 700;
     }
 
-    /* 제목 배치 */
+    /* ====================
+       제목 및 안내 문구
+    ==================== */
     .site-title,
     .page-title {
       display: flex;
@@ -94,7 +100,6 @@
       line-height: 1.3;
     }
 
-    /* 메인 제목 */
     .site-logo {
       display: block;
       flex-shrink: 0;
@@ -102,26 +107,28 @@
       height: 40px;
     }
 
+    /* 메인 제목 크기 */
     .title-text {
       font-size: 25px;
       font-weight: 700;
       line-height: 1;
     }
 
-    /* 각 화면 제목 크기 */
+    /* 리스트 제목 크기 */
     #list .page-title {
       font-size: 26px;
     }
 
+    /* 검색 제목 크기 */
     #search .page-title {
       font-size: 26px;
     }
 
+    /* 카테고리 제목 크기 */
     #category .page-title {
       font-size: 26px;
     }
 
-    /* 제목·하단 메뉴 아이콘 */
     .page-title svg,
     .menu-button svg {
       flex-shrink: 0;
@@ -137,7 +144,6 @@
       height: 32px;
     }
 
-    /* 안내 문구 */
     .news-description {
       margin: 10px 0 16px;
       color: #555;
@@ -146,7 +152,9 @@
       line-height: 1.6;
     }
 
-    /* 메인 상단 버튼 배치 */
+    /* ====================
+       메인 상단 버튼
+    ==================== */
     .home-links {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -154,7 +162,6 @@
       margin-top: 12px;
     }
 
-    /* 둥근 버튼 공통 설정 */
     .home-link,
     .category-item {
       display: flex;
@@ -170,20 +177,19 @@
       font-weight: 500;
       text-align: center;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .home-link {
       padding: 10px 6px;
     }
 
-    /* 메인 구분선 */
     .home-divider {
       margin: 28px 0;
       border: 0;
       border-top: 1px solid #ddd;
     }
 
-    /* 최근 굿즈 소식 제목 */
     .news-title {
       margin: 0 0 6px;
       font-size: 20px;
@@ -191,24 +197,40 @@
       line-height: 1.5;
     }
 
-    /* 굿즈 카드 목록 */
+    /* ====================
+       굿즈 펼치기 카드
+    ==================== */
     .goods-news {
       display: grid;
       gap: 12px;
     }
 
-    .goods-card {
+    .goods-accordion {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+    }
+
+    /* 카드 제목 및 상세 제품의 열 배치 */
+    .goods-summary,
+    .goods-detail-row {
       display: grid;
       grid-template-columns: 48px minmax(0, 1fr) 64px;
       align-items: center;
       gap: 12px;
       min-height: 80px;
+    }
+
+    .goods-summary {
       padding: 8px 12px 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background: #fff;
-      color: #000;
-      text-decoration: none;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .goods-summary::-webkit-details-marker {
+      display: none;
     }
 
     .goods-number {
@@ -228,30 +250,107 @@
       overflow-wrap: anywhere;
     }
 
-    /* 미리보기 */
-    .goods-preview {
+    .accordion-title {
+      font-weight: 700;
+    }
+
+    /* 화살표 */
+    .accordion-arrow {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 64px;
       height: 64px;
-      border-radius: 4px;
-      background: #f2f2f2;
-      color: #777;
-      font-size: 11px;
     }
 
-img.goods-preview {
-  object-fit: cover;
-  object-position: center;
-}
+    .accordion-arrow::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 10px solid var(--accent-color);
+    }
 
-    .home-link[href],
-    .goods-card[href] {
+    .goods-accordion[open] .accordion-arrow::before {
+      border-top: 0;
+      border-bottom: 10px solid var(--accent-color);
+    }
+
+    /* 펼친 상세 영역 */
+    .goods-detail {
+      padding-bottom: 4px;
+    }
+
+    .goods-detail-row {
+      padding: 12px 12px 12px 0;
+    }
+
+    /* 제품명 → 선 → 가로 버튼 */
+    .goods-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .goods-name-divider {
+      width: 100%;
+      margin: 0;
+      border: 0;
+      border-top: 1px solid #ddd;
+    }
+
+    .goods-info-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      gap: 6px;
+    }
+
+    .goods-action-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+      min-height: 30px;
+      padding: 6px 2px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      color: #333;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.5;
+      text-align: center;
+      text-decoration: none;
       cursor: pointer;
     }
 
-    /* 카테고리 */
+    /* 사진: 제품명과 버튼 전체 높이의 중앙 */
+    .goods-photo-link {
+      display: block;
+      align-self: center;
+      overflow: hidden;
+      width: 64px;
+      height: 64px;
+      border-radius: 4px;
+    }
+
+    .goods-preview {
+      display: block;
+      width: 64px;
+      height: 64px;
+      border-radius: 4px;
+      background: #f2f2f2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ====================
+       카테고리
+    ==================== */
     .category-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -261,7 +360,6 @@ img.goods-preview {
 
     .category-item {
       padding: 8px 4px;
-      cursor: pointer;
     }
 
     .category-all {
@@ -272,7 +370,9 @@ img.goods-preview {
       margin-top: 30px;
     }
 
-    /* 검색창 */
+    /* ====================
+       검색
+    ==================== */
     .search-input {
       width: 100%;
       margin: 0;
@@ -283,7 +383,6 @@ img.goods-preview {
       color: #333;
     }
 
-    /* 검색 영역 소제목 */
     .search-subtitle {
       margin: 0;
       color: #555;
@@ -364,7 +463,9 @@ img.goods-preview {
       color: var(--accent-color);
     }
 
-    /* 공통 제작자 표기 */
+    /* ====================
+       제작자 표기
+    ==================== */
     .site-credit {
       margin-top: auto;
       padding-top: 32px;
@@ -374,7 +475,9 @@ img.goods-preview {
       text-align: right;
     }
 
-    /* 하단 고정 메뉴 */
+    /* ====================
+       하단 메뉴
+    ==================== */
     .bottom-menu {
       position: fixed;
       bottom: 0;
@@ -435,201 +538,26 @@ img.goods-preview {
       background: var(--accent-color);
     }
 
-    /* 키보드 선택 표시 */
-    .home-link[href]:focus-visible,
-    .goods-card[href]:focus-visible,
-    .category-item:focus-visible,
-    .search-input:focus-visible,
-    .recent-keyword:focus-visible,
-    .related-keyword:focus-visible,
-    #clear-searches:focus-visible {
+    /* ====================
+       키보드 선택 표시
+    ==================== */
+    a[href]:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
       outline: 2px solid var(--accent-color);
       outline-offset: 3px;
     }
 
-    .menu-button:focus-visible {
+    .goods-summary:focus-visible,
+    .goods-photo-link:focus-visible {
       outline: 2px solid var(--accent-color);
+      outline-offset: -3px;
+    }
+
+    .menu-button:focus-visible {
       outline-offset: -5px;
       border-radius: 10px;
     }
-    /* 펼치기 카드 바깥 테두리 */
-.goods-accordion {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  color: #000;
-  overflow: hidden;
-}
-
-/* 제목 영역 전체를 눌러 펼치기 */
-.goods-summary {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 64px;
-  align-items: center;
-  gap: 12px;
-  min-height: 80px;
-  padding: 8px 12px 8px 0;
-  list-style: none;
-  cursor: pointer;
-}
-
-.goods-summary::-webkit-details-marker {
-  display: none;
-}
-
-/* 제목: G마켓 산스 Bold */
-.accordion-title {
-  font-weight: 700;
-}
-
-/* 기존 미리보기와 같은 위치에 화살표 배치 */
-.accordion-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-}
-
-/* 접힌 상태: 아래 방향 삼각형 */
-.accordion-arrow::before {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 10px solid #333;
-}
-
-/* 펼친 상태: 같은 크기·위치의 위 방향 삼각형 */
-.goods-accordion[open] .accordion-arrow::before {
-  border-top: 0;
-  border-bottom: 10px solid #333;
-}
-
-/* 펼쳐진 제품 목록 */
-.goods-detail {
-  padding-bottom: 4px;
-}
-
-.goods-detail-row {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 64px;
-  align-items: center;
-  gap: 12px;
-  min-height: 80px;
-  padding: 8px 12px 8px 0;
-}
-
-.goods-photo-link {
-  display: block;
-  width: 64px;
-  height: 64px;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.goods-photo-link .goods-preview {
-  object-fit: cover;
-  object-position: center;
-}
-
-/* 제품 아래 얇은 선 */
-.goods-detail-divider {
-  margin: 8px 12px 12px;
-  border: 0;
-  border-top: 1px solid #ddd;
-}
-
-.goods-summary:focus-visible,
-.goods-photo-link:focus-visible {
-  outline: 2px solid #3662ae;
-  outline-offset: -3px;
-}
-.goods-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.goods-action-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 32px;
-  padding: 6px 2px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-  color: #333;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.5;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-/* 연번 | 제품명·버튼 | 사진 */
-.goods-detail-row.goods-detail-with-actions {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 64px;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 12px 12px 0;
-}
-
-/* 제품명 아래에 버튼 배치 */
-.goods-info {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 0;
-}
-
-.goods-info-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-}
-
-.goods-info-buttons .goods-action-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  max-width: 100%;
-  min-height: 30px;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-  color: #333;
-  font: inherit;
-  font-size: 11px;
-  line-height: 1.5;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* 사진은 제품명부터 버튼까지의 높이 중앙에 배치 */
-.goods-detail-with-actions > .goods-photo-link {
-  align-self: center;
-}
-/* 접혔을 때 ▼ */
-.accordion-arrow::before {
-  border-top-color: #3662ae;
-}
-
-/* 펼쳤을 때 ▲ */
-.goods-accordion[open] .accordion-arrow::before {
-  border-bottom-color: #3662ae;
-}
   </style>
 </head>
 
@@ -666,74 +594,72 @@ img.goods-preview {
       </p>
 
       <div class="goods-news">
-<!-- 1번 굿즈: 펼치기 카드 -->
-<details class="goods-accordion">
-  <!-- 접힌 상태에서 보이는 영역 -->
-  <summary class="goods-summary">
-    <span class="goods-number">1</span>
+        <!-- 1번 굿즈 -->
+        <details class="goods-accordion">
+          <!-- 카드 제목: 누르면 펼치기 / 접기 -->
+          <summary class="goods-summary">
+            <span class="goods-number">1</span>
 
-    <span class="goods-name accordion-title">
-          [ 민규 ]<br>
-          2026 MONO DRAMA<br>
-          Sweet Escape MD
-    </span>
+            <span class="goods-name accordion-title">
+              [ 민규 ]<br>
+              2026 MONO DRAMA<br>
+              Sweet Escape MD
+            </span>
 
-    <span class="accordion-arrow" aria-hidden="true"></span>
-  </summary>
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
 
-  <!-- 펼쳐지는 상세 영역 -->
-  <div class="goods-detail">
- <div class="goods-detail-row goods-detail-with-actions">
-  <span class="goods-number">1</span>
+          <!-- 펼쳐지는 상세 목록 -->
+          <div class="goods-detail">
+            <!-- 상세 제품 1 -->
+            <div class="goods-detail-row">
+              <span class="goods-number">1</span>
 
-  <!-- 왼쪽: 제품명과 버튼 -->
-  <div class="goods-info">
-    <span class="goods-name">
-      MD
-    </span>
+              <div class="goods-info">
+                <span class="goods-name">MD</span>
 
-    <div class="goods-info-buttons">
-      <a
-        class="goods-action-button"
-        href="https://www.instagram.com/p/DdTkgByGnRB/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        공지글 보기
-      </a>
+                <hr class="goods-name-divider">
 
-      <button
-        class="goods-action-button"
-        type="button"
-        onclick="document.querySelector('.menu-button[data-page=list]').click()"
-      >
-        리스트 보기
-      </button>
-    </div>
-  </div>
+                <div class="goods-info-buttons">
+                  <a
+                    class="goods-action-button"
+                    href="https://www.instagram.com/p/DdTkgByGnRB/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    공지글 보기
+                  </a>
 
-  <!-- 오른쪽: 중앙 정렬된 사진 -->
-  <a
-    class="goods-photo-link"
-    href="https://www.instagram.com/p/DdTkgByGnRB/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="조민규 Sweet Escape MD 원본 게시글 보기 (새 탭)"
-  >
-    <img
-      class="goods-preview"
-      src="./Sweet-Escape-MD.png"
-      alt="조민규 Sweet Escape MD 미리보기"
-      loading="lazy"
-    >
-  </a>
-</div>
-    </div>
+                  <button
+                    class="goods-action-button"
+                    type="button"
+                    data-open-page="list"
+                  >
+                    리스트 보기
+                  </button>
+                </div>
+              </div>
 
-    <hr class="goods-detail-divider">
-  </div>
-</details>
-
+              <a
+                class="goods-photo-link"
+                href="https://www.instagram.com/p/DdTkgByGnRB/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="조민규 Sweet Escape MD 원본 게시글 보기 (새 탭)"
+              >
+                <img
+                  class="goods-preview"
+                  src="./Sweet-Escape-MD.png"
+                  alt="조민규 Sweet Escape MD 미리보기"
+                  loading="lazy"
+                >
+              </a>
+            </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -770,7 +696,7 @@ img.goods-preview {
       </h1>
 
       <p class="news-description">
-        찾고싶은 제품명을 입력해 주세요.<br>
+        找고싶은 제품명을 입력해 주세요.<br>
         (예. 2025 시그 / 시즌그리팅 / 레거시)
       </p>
 
@@ -874,7 +800,6 @@ img.goods-preview {
   <!-- 하단 메뉴: 메인 → 리스트 → 검색 → 카테고리 -->
   <nav class="bottom-menu" aria-label="하단 메뉴">
     <div class="menu-inner">
-      <!-- 메인 -->
       <button
         class="menu-button"
         type="button"
@@ -889,7 +814,6 @@ img.goods-preview {
         <span>메인</span>
       </button>
 
-      <!-- 리스트 -->
       <button
         class="menu-button"
         type="button"
@@ -909,7 +833,6 @@ img.goods-preview {
         <span>리스트</span>
       </button>
 
-      <!-- 검색 -->
       <button
         class="menu-button"
         type="button"
@@ -923,7 +846,6 @@ img.goods-preview {
         <span>검색</span>
       </button>
 
-      <!-- 카테고리 -->
       <button
         class="menu-button"
         type="button"
@@ -938,41 +860,60 @@ img.goods-preview {
     </div>
   </nav>
 
-  <!-- 화면이 만들어진 뒤 기능 실행 -->
   <script>
     (() => {
-      /* 하단 메뉴 전환 */
+      /* ====================
+         화면 전환
+      ==================== */
       const menuButtons = document.querySelectorAll(".menu-button");
       const pages = document.querySelectorAll("main > section");
 
+      function openPage(pageId) {
+        const targetPage = [...pages].find(
+          (page) => page.id === pageId
+        );
+
+        if (!targetPage) return;
+
+        pages.forEach((page) => {
+          page.hidden = page !== targetPage;
+        });
+
+        menuButtons.forEach((button) => {
+          if (button.dataset.page === pageId) {
+            button.setAttribute("aria-current", "page");
+          } else {
+            button.removeAttribute("aria-current");
+          }
+        });
+
+        window.scrollTo(0, 0);
+
+        // 검색창에는 자동으로 커서를 놓지 않음
+      }
+
       menuButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          const selectedPage = button.dataset.page;
-
-          pages.forEach((page) => {
-            page.hidden = page.id !== selectedPage;
-          });
-
-          menuButtons.forEach((item) => {
-            if (item === button) {
-              item.setAttribute("aria-current", "page");
-            } else {
-              item.removeAttribute("aria-current");
-            }
-          });
-
-          window.scrollTo(0, 0);
-
-          // 검색창 자동 포커스는 사용하지 않음
+          openPage(button.dataset.page);
         });
       });
 
-      /* 검색 기능 설정 */
+      // 굿즈 상세 영역의 '리스트 보기' 버튼
+      document.querySelectorAll("[data-open-page]").forEach((button) => {
+        button.addEventListener("click", () => {
+          openPage(button.dataset.openPage);
+        });
+      });
+
+      /* ====================
+         검색 설정
+      ==================== */
       const storageKey = "goodslist-recent-searches";
 
       /*
-        연관 검색어로 표시할 실제 제품명을 등록하세요.
-        예시 형식:
+        연관 검색어로 표시할 제품명을 여기에 등록하세요.
+
+        예:
         "2025 시즌그리팅",
         "레거시 포토카드",
       */
@@ -993,14 +934,25 @@ img.goods-preview {
         return text.replace(/\s+/g, "").toLowerCase();
       }
 
-      /* 저장된 검색 기록 읽기 */
+      /* 최근 검색 기록 읽기 */
       try {
         const saved = JSON.parse(localStorage.getItem(storageKey));
 
         if (Array.isArray(saved)) {
+          const seen = new Set();
+
           recentKeywords = saved
             .filter((item) => {
               return typeof item === "string" && item.trim();
+            })
+            .map((item) => item.trim())
+            .filter((item) => {
+              const key = normalize(item);
+
+              if (seen.has(key)) return false;
+
+              seen.add(key);
+              return true;
             })
             .slice(0, 5);
         }
@@ -1024,7 +976,7 @@ img.goods-preview {
         form.requestSubmit();
       }
 
-      /* 최근 검색어 최대 5개 표시 */
+      /* 최근 검색어 표시 */
       function renderRecent() {
         recentList.replaceChildren();
 
@@ -1048,7 +1000,7 @@ img.goods-preview {
         });
       }
 
-      /* 연관 검색어 최대 5개 표시 */
+      /* 연관 검색어 표시 */
       function renderRelated() {
         const keyword = normalize(input.value.trim());
 
@@ -1105,7 +1057,7 @@ img.goods-preview {
         }
       });
 
-      /* Enter 또는 검색 키를 누르면 기록 저장 */
+      /* 검색 실행 및 최근 검색어 저장 */
       form.addEventListener("submit", (event) => {
         event.preventDefault();
 
