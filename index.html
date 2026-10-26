@@ -216,6 +216,33 @@ h1,
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+/* 동일한 너비의 3열 배치 */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* 사각형 테두리와 검은색 글씨 */
+.category-item {
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 4px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* 전체 버튼은 3칸과 그 사이 간격까지 차지 */
+.category-all {
+  grid-column: 1 / -1;
+}
   </style>
 </head>
 
@@ -257,9 +284,15 @@ h1,
   </svg>
   <span>카테고리</span>
 </h1>
-      <p class="description">
-        사진을 분류할 카테고리가 여기에 표시돼요.
-      </p>
+<div class="category-grid">
+  <button type="button" class="category-item category-all">전체</button>
+  <button type="button" class="category-item">앨범</button>
+  <button type="button" class="category-item">MD</button>
+  <button type="button" class="category-item">시즌그리팅</button>
+  <button type="button" class="category-item">팬키트</button>
+  <button type="button" class="category-item">기타</button>
+  <button type="button" class="category-item">개인</button>
+</div>
     </section>
   </main>
 
