@@ -432,7 +432,7 @@ img.goods-preview {
 }
 
 .title-text {
-  font-size: 16px;
+  font-size: 25px;
   line-height: 1;
 }
 
@@ -453,10 +453,6 @@ img.goods-preview {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.6;
-}
-/* 메인 제목을 검색·카테고리 제목과 같은 크기로 */
-#home .title-text {
-  font-size: 26px;
 }
   </style>
   <link rel="manifest" href="./manifest.webmanifest">
@@ -591,7 +587,15 @@ img.goods-preview {
   <button type="button" class="category-item">개인</button>
 </div>
     </section>
-      <footer class="site-credit">
+<section id="list" hidden>
+  <h1 class="page-title">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+      <path d="m8 12 3 3 5-6"></path>
+    </svg>
+    <span>리스트</span>
+  </h1>
+</section>
     제작: X @ing_ddo_11
   </footer>
 </main>
@@ -629,7 +633,15 @@ img.goods-preview {
         </svg>
         <span>메인</span>
       </button>
-
+<section id="list" hidden>
+  <h1 class="page-title">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+      <path d="m8 12 3 3 5-6"></path>
+    </svg>
+    <span>리스트</span>
+  </h1>
+</section>
       <button
         class="menu-button"
         type="button"
