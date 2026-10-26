@@ -573,6 +573,54 @@ img.goods-preview {
   text-decoration: none;
   cursor: pointer;
 }
+/* 연번 | 제품명·버튼 | 사진 */
+.goods-detail-row.goods-detail-with-actions {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 0;
+}
+
+/* 제품명 아래에 버튼 배치 */
+.goods-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.goods-info-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.goods-info-buttons .goods-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 100%;
+  min-height: 30px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 사진은 제품명부터 버튼까지의 높이 중앙에 배치 */
+.goods-detail-with-actions > .goods-photo-link {
+  align-self: center;
+}
   </style>
 </head>
 
@@ -626,23 +674,42 @@ img.goods-preview {
 
   <!-- 펼쳐지는 상세 영역 -->
   <div class="goods-detail">
-    <div class="goods-detail-row">
-      <span class="goods-number">1</span>
+ <div class="goods-detail-row goods-detail-with-actions">
+  <span class="goods-number">1</span>
 
-      <span class="goods-name">
-          2026 MONO DRAMA<br>
-          Sweet Escape MD
-      </span>
+  <!-- 왼쪽: 제품명과 버튼 -->
+  <div class="goods-info">
+    <span class="goods-name">
+      MD
+    </span>
 
-      <!-- 사진을 누르면 게시글 열기 -->
-<div class="goods-actions">
-  <!-- 미리보기 사진 -->
+    <div class="goods-info-buttons">
+      <a
+        class="goods-action-button"
+        href="https://www.instagram.com/p/DdTkgByGnRB/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        원본 게시글 보러가기
+      </a>
+
+      <button
+        class="goods-action-button"
+        type="button"
+        onclick="document.querySelector('.menu-button[data-page=list]').click()"
+      >
+        리스트 보러가기
+      </button>
+    </div>
+  </div>
+
+  <!-- 오른쪽: 중앙 정렬된 사진 -->
   <a
     class="goods-photo-link"
     href="https://www.instagram.com/p/DdTkgByGnRB/"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="조민규 Sweet Escape MD 원본 게시글 보기"
+    aria-label="조민규 Sweet Escape MD 원본 게시글 보기 (새 탭)"
   >
     <img
       class="goods-preview"
@@ -651,25 +718,6 @@ img.goods-preview {
       loading="lazy"
     >
   </a>
-
-  <!-- 1번 버튼 -->
-  <a
-    class="goods-action-button"
-    href="https://www.instagram.com/p/DdTkgByGnRB/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    원본 게시글
-  </a>
-
-  <!-- 2번 버튼 -->
-  <button
-    class="goods-action-button"
-    type="button"
-    onclick="document.querySelector('.menu-button[data-page=list]').click()"
-  >
-    리스트 보기
-  </button>
 </div>
     </div>
 
