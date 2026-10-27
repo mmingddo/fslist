@@ -1449,13 +1449,41 @@
         });
       });
 
-// 주소 끝의 #list 등을 읽어 해당 화면 열기
+function openPage(pageId) {
+  const targetPage = [...pages].find(
+    (page) => page.id === pageId
+  );
+
+  if (!targetPage) return;
+
+  pages.forEach((page) => {
+    page.hidden = page !== targetPage;
+  });
+
+  menuButtons.forEach((button) => {
+    if (button.dataset.page === pageId) {
+      button.setAttribute("aria-current", "page");
+    } else {
+      button.removeAttribute("aria-current");
+    }
+  });
+
+  // 현재 탭을 주소에 기록
+  history.replaceState(null, "", `#${pageId}`);
+
+  window.scrollTo(0, 0);
+}
+// 주소에 기록된 탭 열기
 function openPageFromHash() {
-  const pageId = window.location.hash.slice(1) || "home";
-  openPage(pageId);
+  const pageId = window.location.hash.slice(1);
+  const validPage = [...pages].some(
+    (page) => page.id === pageId
+  );
+
+  openPage(validPage ? pageId : "home");
 }
 
-// 처음 접속했을 때 적용
+// 처음 접속하거나 새로고침했을 때 적용
 openPageFromHash();
 
 // 주소의 # 뒤 내용이 바뀌었을 때 적용
