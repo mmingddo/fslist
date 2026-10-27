@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>업데이트 소식 | 굿즈 리스트</title>
+
+  <style>
+    /* ========== 기본 설정 시작 ========== */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Gmarket Sans", sans-serif;
+      color: #222;
+      background-color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 20px 90px;
+    }
+
+    /* ========== 상단 로고 시작 ========== */
+    .site-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .site-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .site-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    /* ========== 페이지 메뉴 시작 ========== */
+    .page-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .page-navigation a {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 42px;
+      padding: 8px 18px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 15px;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .page-navigation a:hover {
+      border-color: #3662ae;
+      background-color: #f4f7fc;
+    }
+
+    .page-navigation .current-page {
+      border-color: #3662ae;
+      color: #3662ae;
+    }
+
+    /* ========== 페이지 제목 시작 ========== */
+    .page-heading {
+      margin: 30px 0 8px;
+      font-size: 23px;
+      font-weight: 500;
+    }
+
+    .page-description {
+      margin: 0 0 24px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* ========== 업데이트 목록 시작 ========== */
+    .update-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .update-item {
+      padding: 0 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .update-summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 58px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .update-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .update-number {
+      flex-shrink: 0;
+      color: #3662ae;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .update-title {
+      flex: 1;
+      min-width: 0;
+      font-size: 15px;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .update-arrow {
+      flex-shrink: 0;
+      width: 9px;
+      height: 9px;
+      border-right: 2px solid #3662ae;
+      border-bottom: 2px solid #3662ae;
+      transform: rotate(45deg);
+      transition: transform 0.2s;
+      margin: 0 4px 5px;
+    }
+
+    .update-item[open] .update-arrow {
+      transform: rotate(225deg);
+      margin-top: 8px;
+    }
+
+    .update-divider {
+      border: 0;
+      border-top: 1px solid #eee;
+      margin: 0;
+    }
+
+    .update-content {
+      padding: 18px 0 20px;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .update-date {
+      margin: 0 0 14px;
+    }
+
+    .update-body-label {
+      margin: 0 0 6px;
+      font-weight: 500;
+    }
+
+    .update-body {
+      margin: 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    /* ========== 하단 제작·도움 시작 ========== */
+    .site-footer {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 60px;
+      color: #555;
+      font-size: 12px;
+    }
+
+    .footer-divider {
+      color: #aaa;
+    }
+
+    .site-footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* ========== 모바일 화면 설정 ========== */
+    @media (max-width: 600px) {
+      .page-container {
+        padding: 18px 16px 80px;
+      }
+
+      .site-header {
+        margin-bottom: 24px;
+      }
+
+      .page-heading {
+        font-size: 21px;
+      }
+
+      .update-item {
+        padding: 0 12px;
+      }
+
+      .update-summary {
+        gap: 10px;
+      }
+
+      .site-footer {
+        margin-top: 45px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-container">
+
+    <!-- ========== 상단 로고·사이트 이름 ========== -->
+    <header class="site-header">
+      <a href="./index.html" aria-label="굿즈 리스트 홈">
+        <img
+          src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+          alt="굿즈 리스트 로고"
+          class="site-logo"
+        >
+      </a>
+
+      <a href="./index.html">
+        <p class="site-title">굿즈 리스트</p>
+      </a>
+    </header>
+
+    <!-- ========== 페이지 이동 메뉴 ========== -->
+    <nav class="page-navigation" aria-label="페이지 메뉴">
+      <a href="./update.html" class="current-page" aria-current="page">
+        업데이트 소식
+      </a>
+
+      <a href="./index.html">
+        홈 화면으로 이동
+      </a>
+    </nav>
+
+    <!-- ========== 페이지 제목 ========== -->
+    <main>
+      <h1 class="page-heading">굿즈리스트 오픈</h1>
+
+      <p class="page-description">
+        굿즈리스트가 오픈하였습니다!🎉<br>
+        활동마다 발매된 앨범이나 굿즈의 원가 및 구성품, 이미지 등을 확인할 수 있습니다.<br><br>
+        <strong>1. 홈 메뉴<br></strong>
+        업데이트 내용, 제보 및 오류 신고, 최근 발매된 굿즈 소식을 확인할 수 있습니다. <br>
+        - 업데이트 내용: 새로운 업데이트를 진행할 때마다 기능을 설명하는 글이 업데이트 됩니다. <br>
+        - 제보 및 오류 신고: 사이트 기능 향상 및 정확한 정보 제공을 위한 글을 작성할 수 있습니다. 문의 내용에 맞춰 구글 폼을 제출할 수 있습니다. <br>
+        - 최근 발매된 굿즈 소식: 가장 최근 발매된 굿즈 5개를 확인할 수 있습니다. 공식 공지글 및 굿즈리스트 내 정보 글을 확인할 수 있습니다. <br><br>
+        <strong>2. 리스트 메뉴<br></strong>
+        상품의 정보를 활동 별로 나누어 확인할 수 있습니다.<br><br>
+        <strong>3. 검색 메뉴<br></strong>
+        검색 기능을 활용하여 보다 편하게 상품 정보를 찾을 수 있습니다.<br>
+        - 검색 시 연관 검색어를 확인할 수 있습니다. <br>
+        - 최근 검색어 5개가 저장됩니다. <br><br>
+       <strong>4. 카테고리 메뉴<br></strong>
+        활동 별 분류가 아닌 다른 카테고리로 상품을 살펴볼 수 있습니다.<br>
+        - 포토카드만 보기: 이전에 운영하였던 포토카드 정리 시트처럼 포토카드만을 모아볼 수 있습니다. <br><br>
+        앞으로 편리한 굿즈 정보 탐색을 위해 노력하겠습니다.<br>
+        잘 부탁드립니다!
+
+      </p>
+
+      <!-- ========== 업데이트 목록 ========== -->
+      <div class="update-list" id="update-list">
+
+        <!-- ===== 업데이트 항목 1 시작 ===== -->
+        <details class="update-item">
+          <summary class="update-summary">
+            <span class="update-number"></span>
+
+            <span class="update-title">
+              업데이트 제목을 입력해 주세요.
+            </span>
+
+            <span class="update-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="update-divider">
+
+          <div class="update-content">
+            <p class="update-date">
+              <strong>업데이트 날짜:</strong>
+              <time datetime="2026-10-27">2026년 10월 27일</time>
+            </p>
+
+            <p class="update-body-label">업데이트 내용:</p>
+
+            <p class="update-body">업데이트 내용을 입력해 주세요.</p>
+          </div>
+        </details>
+        <!-- ===== 업데이트 항목 1 끝 ===== -->
+
+
+        <!--
+        ========== 새 업데이트 추가 방법 ==========
+
+        아래 예시의 주석을 해제하고 내용을 수정하세요.
+        update-item 블록을 복사해서 추가해도 됩니다.
+
+        <details class="update-item">
+          <summary class="update-summary">
+            <span class="update-number"></span>
+            <span class="update-title">새로운 업데이트 제목</span>
+            <span class="update-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="update-divider">
+
+          <div class="update-content">
+            <p class="update-date">
+              <strong>업데이트 날짜:</strong>
+              <time datetime="2026-10-28">2026년 10월 28일</time>
+            </p>
+
+            <p class="update-body-label">업데이트 내용:</p>
+            <p class="update-body">새로운 업데이트 내용을 입력하세요.</p>
+          </div>
+        </details>
+
+        ========== 새 업데이트 예시 끝 ==========
+        -->
+
+      </div>
+    </main>
+
+    <!-- ========== 하단 제작·도움 ========== -->
+    <footer class="site-footer">
+      <span>제작</span>
+      <a href="https://x.com/ing_ddo_11"
+         target="_blank"
+         rel="noopener noreferrer">@ing_ddo_11</a>
+
+      <span class="footer-divider">·</span>
+
+      <span>도움</span>
+      <a href="https://x.com/UrimThummim0505"
+         target="_blank"
+         rel="noopener noreferrer">@UrimThummim0505</a>
+      <a href="https://x.com/forkkeu"
+         target="_blank"
+         rel="noopener noreferrer">@forkkeu</a>
+    </footer>
+
+  </div>
+
+  <!-- ========== 업데이트 번호 자동 부여 ========== -->
+  <script>
+    function updateNumbers() {
+      const items = document.querySelectorAll(
+        "#update-list > .update-item"
+      );
+
+      items.forEach((item, index) => {
+        const number = item.querySelector(".update-number");
+
+        if (number) {
+          number.textContent = index + 1;
+        }
+      });
+    }
+
+    updateNumbers();
+  </script>
+</body>
+</html>
