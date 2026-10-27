@@ -566,9 +566,14 @@
 
       <div class="goods-list">
 
-        <!-- ========== 1번 상품 시작 ========== -->
-        <!-- data-category는 화면에 표시되지 않는 분류 정보 -->
-        <details class="goods-accordion" data-category="앨범">
+<!-- ========== 1번 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="앨범"
+  data-name="Evolution 앨범"
+  data-keywords="Evolution, 에볼루션, 에볼, 정규, 정규 1집, 1집, 음반"
+>
 
           <!-- ---------- 상품 제목 시작 ---------- -->
           <summary class="goods-summary">
@@ -721,5 +726,61 @@
     </footer>
     <!-- ========== 제작자 표기 끝 ========== -->
   </main>
+  <script>
+  (() => {
+    /*
+      검색 결과에서 전달한 상품 번호 또는
+      주소의 #상품아이디를 읽습니다.
+    */
+    const cards = document.querySelectorAll(
+      ".goods-accordion[data-category]"
+    );
+
+    const params = new URLSearchParams(location.search);
+    const productNumber = Number(params.get("product"));
+
+    let target = null;
+
+    /* 상품 id가 있으면 우선 사용 */
+    try {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const element = id ? document.getElementById(id) : null;
+
+      if (element?.matches(".goods-accordion[data-category]")) {
+        target = element;
+      }
+    } catch {
+      // 잘못된 주소 형식이면 상품 번호로 확인
+    }
+
+    /* id가 없는 상품은 번호로 찾기 */
+    if (
+      !target &&
+      Number.isInteger(productNumber) &&
+      productNumber >= 1
+    ) {
+      target = cards[productNumber - 1];
+    }
+
+    if (!target) return;
+
+    target.open = true;
+
+    function scrollToProduct() {
+      target.scrollIntoView({
+        block: "start"
+      });
+    }
+
+    /* 이미지 로딩 후 위치가 달라지는 경우까지 반영 */
+    if (document.readyState === "complete") {
+      scrollToProduct();
+    } else {
+      window.addEventListener("load", scrollToProduct, {
+        once: true
+      });
+    }
+  })();
+</script>
 </body>
 </html>

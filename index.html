@@ -644,6 +644,44 @@
         font-size: 11px;
       }
     }
+    /* ====================
+   실제 상품 검색 결과
+==================== */
+.search-results {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.search-result {
+  display: block;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+}
+
+.search-result:hover {
+  border-color: var(--accent-color);
+}
+
+.search-result-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.search-result-meta {
+  display: block;
+  margin-top: 6px;
+  color: #555;
+  font-size: var(--small-text-size);
+  line-height: 1.6;
+}
   </style>
 </head>
 
@@ -1414,290 +1452,459 @@
   </nav>
 
 
-  <script>
-    (() => {
-      /* ====================
-         화면 전환
-      ==================== */
-      const menuButtons = document.querySelectorAll(".menu-button");
-      const pages = document.querySelectorAll("main > section");
+<script>
+  (() => {
+    /* ====================
+       화면 전환
+    ==================== */
+    const menuButtons = document.querySelectorAll(".menu-button");
+    const pages = document.querySelectorAll("main > section");
 
-      function openPage(pageId) {
-        const targetPage = [...pages].find(
-          (page) => page.id === pageId
-        );
+    function openPage(pageId) {
+      const targetPage = [...pages].find(
+        (page) => page.id === pageId
+      );
 
-        if (!targetPage) return;
+      if (!targetPage) return;
 
-        /* 선택한 화면만 표시 */
-        pages.forEach((page) => {
-          page.hidden = page !== targetPage;
-        });
+      pages.forEach((page) => {
+        page.hidden = page !== targetPage;
+      });
 
-        /* 하단 메뉴 선택 표시 */
-        menuButtons.forEach((button) => {
-          if (button.dataset.page === pageId) {
-            button.setAttribute("aria-current", "page");
-          } else {
-            button.removeAttribute("aria-current");
-          }
-        });
-
-        /* 현재 탭을 주소에 기록 */
-        history.replaceState(null, "", `#${pageId}`);
-
-        window.scrollTo(0, 0);
-      }
-
-      /* 주소에 기록된 탭 열기 */
-      function openPageFromHash() {
-        const pageId = window.location.hash.slice(1);
-        const validPage = [...pages].some(
-          (page) => page.id === pageId
-        );
-
-        openPage(validPage ? pageId : "home");
-      }
-
-      /* 하단 메뉴 버튼 */
       menuButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          openPage(button.dataset.page);
-        });
+        if (button.dataset.page === pageId) {
+          button.setAttribute("aria-current", "page");
+        } else {
+          button.removeAttribute("aria-current");
+        }
       });
 
-      /* 상세 목록의 리스트 보기 버튼 */
-      document.querySelectorAll("[data-open-page]").forEach((button) => {
-        button.addEventListener("click", () => {
-          openPage(button.dataset.openPage);
-        });
+      history.replaceState(null, "", `#${pageId}`);
+      window.scrollTo(0, 0);
+    }
+
+    function openPageFromHash() {
+      const pageId = window.location.hash.slice(1);
+      const validPage = [...pages].some(
+        (page) => page.id === pageId
+      );
+
+      openPage(validPage ? pageId : "home");
+    }
+
+    menuButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openPage(button.dataset.page);
       });
+    });
 
-      /* 처음 접속하거나 새로고침했을 때 */
-      openPageFromHash();
+    document.querySelectorAll("[data-open-page]").forEach((button) => {
+      button.addEventListener("click", () => {
+        openPage(button.dataset.openPage);
+      });
+    });
 
-      /* 주소의 # 뒤 내용이 바뀌었을 때 */
-      window.addEventListener("hashchange", openPageFromHash);
+    openPageFromHash();
 
-
-      /* ====================
-         검색 설정
-      ==================== */
-      const storageKey = "goodslist-recent-searches";
-
-      /*
-        연관 검색어로 표시할 실제 제품명.
-        검색어 등록은 추후 진행합니다.
-      */
-      const productNames = [
-  "앨범", "정규", "미니", "싱글", "프로젝트", "프로젝트 싱글", "프로젝트싱글", "프싱", "참여", "OST", "ost", "스핀오프", "스핀오프싱글", "스핀오프 싱글", 
-  "디싱", "디지털싱글", "디지털 싱글", "방송",
-  "포카앨범", "포카 앨범", "포토카드 앨범", "포토카드앨범","실물앨범", "실물 앨범", "쥬얼", "쥬얼 앨범", "쥬얼앨범", "도슨트북", "도슨트", "디지팩", "스페셜",
-  "Evolution", "EVOLUTION", "evolution", "에볼루션", "에볼", "데뷔", "정규1집", "정규 1집", "1집",
-  "Mystiqe", "MYSTIQUE", "mystique", "미스티크", "정규2집", "정규 2집", "2집",
-  "The Forestella", "THE FORESTELLA", "the forestella", "더 포레스텔라", "더포레스텔라", "더 포레", "더포레", "정규3집", "정규 3집", "3집",
-  "The Legacy", "THE LEGACY", "the legacy", "더 레거시", "더레거시", "레거시", "정규4집", "정규 4집", "4집",
-  "The Beginning World Tree", "THE BEGINNING WORLD TREE", "the beginning world tree", "The Beginning", "THE BEGINNING", "the beginning", "World Tree", "world tree", 
-  "WORLD TREE", "비기닝", "월드트리", "더 비기닝", "더비기닝", "세계수", "미니1집", "미니 1집", "1집",
-  "Unfinished", "UNFINISHED", "unfinished", "언피니", "언피니시드", "미니2집", "미니 2집",
-  "The Bloom UTOPIA", "THE BLOOM UTOPIA", "the bloom utopia", "The Bloom", "THE BLOOM", "the bloom", "Utopia", "utopia", 
-  "UTOPIA", "더 블룸", "더블룸", "유토피아", "유톺퍄", "유토퍄", "싱글1집", "싱글 1집", "1집",
-  "KOOL", "Kool", "kool", "쿨", 
-  "Everything", "EVERYTHING", "everything", "에브리띵", "에블띵", "에브리띵", 
-  "팬텀싱어", "팬싱", "괜싱", "플북", "프로그램북", "프로그램 북",
-  "MD", "엠디", "컵", "유리컵", "글라스", "밀크 글라스", "밀크글라스", "고블렛 잔", "고블렛잔", "고블렛", "리유저블 컵", "리유저블컵", "스티커", "스카프", "반다나", "티켓북", "바인더", "핀", "집게핀", "썬캐처", "선캐처",
-  "잠옷", "왁스", "실링왁스", "후드집업", "가디건", "집업", "티셔츠", "셔츠", "스웨트 셔츠", "스웨트셔츠", "향초", "초", "뱃지", "핀뱃지", "파우치", "미니백", "미니 백",
-  "키링파우치", "키링 파우치", "포토카드 파우치", "포토카드파우치", "포카파우치", "포카 파우치", "미니 백 파우치", "미니백파우치", "양털 파우치", "양털파우치", "텀블러", "텀블럭백", "텀블러 백", "모자", "햇", "버킷햇", "버킷 햇1",
-  "지비츠", "지비츠 세트", "지비츠세트", "마테", "마스킹테이프", "마스킹 테이프", "콜렉트북", "콜렉트 북", "틴케", "틴케이스",
-  "우산", "우비", "우양산", "피크닉 매트", "매트", "피크닉매트", "돗자리", "목걸이", "키링", "메탈 키링", "메탈키링", "아크릴키링", "아크릴 키링", "거울 키링", "거울키링", "포토홀더키링", "포토홀더 키링",
-  ""
+    window.addEventListener("hashchange", openPageFromHash);
 
 
--  "2025 시즌그리팅",
-  "2026 시즌그리팅",
-  "레거시 포토카드",
-  "Sweet Escape MD",
-  "Sweet Escape TinCase ver."
-];
+    /* ====================
+       검색할 활동 페이지 목록
 
-      const form = document.getElementById("search-form");
-      const input = document.getElementById("search-input");
-      const relatedBox = document.getElementById("related-searches");
-      const relatedList = document.getElementById("related-list");
-      const recentList = document.getElementById("recent-list");
-      const emptyMessage = document.getElementById("recent-empty");
-      const clearButton = document.getElementById("clear-searches");
-      const searchMessage = document.getElementById("search-message");
+       활동 페이지가 늘어나면
+       여기에 한 줄씩 추가하세요.
+    ==================== */
+    const activityPages = [
+      { name: "Evolution", url: "./Evolution.html" }
+    ];
 
-      let recentKeywords = [];
 
-      /* 공백과 대소문자를 무시하고 비교 */
-      function normalize(text) {
-        return text.replace(/\s+/g, "").toLowerCase();
-      }
+    /* ====================
+       검색 화면 요소
+    ==================== */
+    const storageKey = "goodslist-recent-searches";
 
-      /* 저장된 최근 검색 기록 읽기 */
-      try {
-        const saved = JSON.parse(localStorage.getItem(storageKey));
+    const form = document.getElementById("search-form");
+    const input = document.getElementById("search-input");
+    const relatedBox = document.getElementById("related-searches");
+    const relatedList = document.getElementById("related-list");
+    const recentList = document.getElementById("recent-list");
+    const emptyMessage = document.getElementById("recent-empty");
+    const clearButton = document.getElementById("clear-searches");
+    const searchMessage = document.getElementById("search-message");
 
-        if (Array.isArray(saved)) {
-          const seen = new Set();
+    /* 검색 결과 영역을 안내 문구 아래에 생성 */
+    const results = document.createElement("div");
+    results.id = "search-results";
+    results.className = "search-results";
+    searchMessage.after(results);
 
-          recentKeywords = saved
-            .filter((item) => {
-              return typeof item === "string" && item.trim();
-            })
-            .map((item) => item.trim())
-            .filter((item) => {
-              const key = normalize(item);
+    let products = [];
+    let failedPageCount = 0;
+    let recentKeywords = [];
+    let searchRequestId = 0;
 
-              if (seen.has(key)) return false;
 
-              seen.add(key);
-              return true;
-            })
-            .slice(0, 5);
-        }
-      } catch {
-        recentKeywords = [];
-      }
+    /* ====================
+       검색어 비교 방식
 
-      /* 최근 검색 기록 저장 */
-      function saveHistory() {
-        try {
-          localStorage.setItem(
-            storageKey,
-            JSON.stringify(recentKeywords)
-          );
-        } catch {
-          // 저장이 제한되어도 현재 화면에서는 사용 가능
-        }
-      }
+       공백·대소문자 무시
+       시그 → 시즌그리팅
+    ==================== */
+    function normalize(text) {
+      return String(text)
+        .normalize("NFKC")
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/시그/g, "시즌그리팅");
+    }
 
-      /* 최근 검색어 또는 연관 검색어로 검색 실행 */
-      function runSearch(keyword) {
-        input.value = keyword;
-        form.requestSubmit();
-      }
 
-      /* 최근 검색어 최대 5개 표시 */
-      function renderRecent() {
-        recentList.replaceChildren();
+    /* ====================
+       활동 페이지에서 상품 읽기
+    ==================== */
+    async function loadProducts() {
+      const loaded = await Promise.all(
+        activityPages.map(async (activity) => {
+          try {
+            const response = await fetch(activity.url);
 
-        emptyMessage.hidden = recentKeywords.length > 0;
-        clearButton.hidden = recentKeywords.length === 0;
+            if (!response.ok) {
+              throw new Error("활동 페이지를 불러오지 못했습니다.");
+            }
 
-        recentKeywords.forEach((keyword) => {
-          const item = document.createElement("li");
-          const button = document.createElement("button");
-
-          button.type = "button";
-          button.className = "recent-keyword";
-          button.textContent = keyword;
-
-          button.addEventListener("click", () => {
-            runSearch(keyword);
-          });
-
-          item.append(button);
-          recentList.append(item);
-        });
-      }
-
-      /* 연관 검색어 최대 5개 표시 */
-      function renderRelated() {
-        const keyword = normalize(input.value.trim());
-
-        relatedList.replaceChildren();
-
-        if (!keyword) {
-          relatedBox.hidden = true;
-          return;
-        }
-
-        const expandedKeyword = keyword.replace(
-          /시그/g,
-          "시즌그리팅"
-        );
-
-        const matches = [...new Set(productNames)]
-          .filter((name) => {
-            const normalizedName = normalize(name);
-
-            return (
-              normalizedName.includes(keyword) ||
-              normalizedName.includes(expandedKeyword)
+            const html = await response.text();
+            const doc = new DOMParser().parseFromString(
+              html,
+              "text/html"
             );
+
+            const cards = doc.querySelectorAll(
+              ".goods-accordion[data-category]"
+            );
+
+            return [...cards].map((card, index) => {
+              const summaryName = card.querySelector(
+                ".goods-summary .goods-name"
+              );
+
+              const name =
+                card.dataset.name?.trim() ||
+                summaryName?.innerText?.trim() ||
+                summaryName?.textContent?.trim() ||
+                `${activity.name} 상품 ${index + 1}`;
+
+              const category = card.dataset.category || "";
+              const keywords = card.dataset.keywords || "";
+
+              /*
+                상품의 순서도 주소에 기록합니다.
+                id가 없는 상품도 이동할 수 있습니다.
+              */
+              const url = new URL(activity.url, location.href);
+              url.searchParams.set("product", index + 1);
+
+              if (card.id) {
+                url.hash = card.id;
+              }
+
+              return {
+                name,
+                category,
+                activity: activity.name,
+                url: url.href,
+
+                /*
+                  단어 사이를 구분해 두고,
+                  검색할 때 각각 비교합니다.
+                */
+                searchFields: [
+                  name,
+                  category,
+                  activity.name,
+                  ...keywords.split(/[,，\n]/)
+                ].map(normalize)
+              };
+            });
+          } catch {
+            failedPageCount += 1;
+            return [];
+          }
+        })
+      );
+
+      products = loaded.flat();
+    }
+
+    const productsReady = loadProducts();
+
+
+    /* ====================
+       검색 조건
+
+       여러 단어를 입력하면
+       모든 단어가 포함된 상품 검색
+    ==================== */
+    function findProducts(keyword) {
+      const terms = keyword
+        .trim()
+        .split(/\s+/)
+        .map(normalize)
+        .filter(Boolean);
+
+      if (terms.length === 0) return [];
+
+      return products.filter((product) => {
+        /*
+          Sweet Escape처럼 띄어 쓴 이름도
+          SweetEscape로 찾을 수 있게 연결합니다.
+        */
+        const combined = product.searchFields.join("");
+
+        return terms.every((term) => combined.includes(term));
+      });
+    }
+
+
+    /* ====================
+       최근 검색 기록 읽기
+    ==================== */
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey));
+
+      if (Array.isArray(saved)) {
+        const seen = new Set();
+
+        recentKeywords = saved
+          .filter((item) => {
+            return typeof item === "string" && item.trim();
+          })
+          .map((item) => item.trim())
+          .filter((item) => {
+            const key = normalize(item);
+
+            if (seen.has(key)) return false;
+
+            seen.add(key);
+            return true;
           })
           .slice(0, 5);
+      }
+    } catch {
+      recentKeywords = [];
+    }
 
-        relatedBox.hidden = matches.length === 0;
+    function saveHistory() {
+      try {
+        localStorage.setItem(
+          storageKey,
+          JSON.stringify(recentKeywords)
+        );
+      } catch {
+        // 저장이 제한되어도 현재 화면에서는 사용 가능
+      }
+    }
 
-        matches.forEach((name) => {
-          const item = document.createElement("li");
-          const button = document.createElement("button");
+    function rememberKeyword(keyword) {
+      recentKeywords = [
+        keyword,
+        ...recentKeywords.filter((item) => {
+          return normalize(item) !== normalize(keyword);
+        })
+      ].slice(0, 5);
 
-          button.type = "button";
-          button.className = "related-keyword";
-          button.textContent = name;
+      saveHistory();
+      renderRecent();
+    }
 
-          button.addEventListener("click", () => {
-            runSearch(name);
-          });
+    function runSearch(keyword) {
+      input.value = keyword;
+      form.requestSubmit();
+    }
 
-          item.append(button);
-          relatedList.append(item);
+    function renderRecent() {
+      recentList.replaceChildren();
+
+      emptyMessage.hidden = recentKeywords.length > 0;
+      clearButton.hidden = recentKeywords.length === 0;
+
+      recentKeywords.forEach((keyword) => {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "recent-keyword";
+        button.textContent = keyword;
+
+        button.addEventListener("click", () => {
+          runSearch(keyword);
         });
+
+        item.append(button);
+        recentList.append(item);
+      });
+    }
+
+
+    /* ====================
+       연관 검색어 최대 5개
+
+       별명으로 검색해도
+       실제 상품명을 표시
+    ==================== */
+    function renderRelated() {
+      relatedList.replaceChildren();
+
+      const keyword = input.value.trim();
+
+      if (!keyword) {
+        relatedBox.hidden = true;
+        return;
       }
 
-      /* 검색창 입력 */
-      input.addEventListener("input", () => {
-        searchMessage.textContent = "";
-        renderRelated();
+      const matches = findProducts(keyword).slice(0, 5);
+
+      relatedBox.hidden = matches.length === 0;
+
+      matches.forEach((product) => {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "related-keyword";
+        button.textContent =
+          `${product.name} · ${product.activity}`;
+
+        button.addEventListener("click", () => {
+          /*
+            같은 이름을 가진 다른 상품과
+            혼동하지 않도록 해당 상품으로 바로 이동
+          */
+          rememberKeyword(keyword);
+          location.href = product.url;
+        });
+
+        item.append(button);
+        relatedList.append(item);
       });
+    }
 
-      /* Escape 키로 연관 검색어 닫기 */
-      input.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          relatedBox.hidden = true;
-        }
+
+    /* ====================
+       검색 결과 표시
+    ==================== */
+    function renderResults(matches) {
+      results.replaceChildren();
+
+      matches.forEach((product) => {
+        const link = document.createElement("a");
+        const name = document.createElement("span");
+        const meta = document.createElement("span");
+
+        link.className = "search-result";
+        link.href = product.url;
+
+        name.className = "search-result-name";
+        name.textContent = product.name;
+
+        meta.className = "search-result-meta";
+        meta.textContent =
+          `${product.activity} · ${product.category}`;
+
+        link.append(name, meta);
+        results.append(link);
       });
+    }
 
-      /* Enter 또는 검색 키로 검색 기록 저장 */
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
 
-        const keyword = input.value.trim();
+    /* ====================
+       검색창 입력
+    ==================== */
+    input.addEventListener("input", () => {
+      /* 이전 검색 작업의 결과 표시 취소 */
+      searchRequestId += 1;
 
-        if (!keyword) return;
+      searchMessage.textContent = "";
+      results.replaceChildren();
+      renderRelated();
+    });
 
-        recentKeywords = [
-          keyword,
-          ...recentKeywords.filter((item) => {
-            return normalize(item) !== normalize(keyword);
-          })
-        ].slice(0, 5);
-
-        saveHistory();
-        renderRecent();
-
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
         relatedBox.hidden = true;
-        input.blur();
+      }
+    });
 
-        // 실제 제품 검색 결과는 추후 연결
+    /*
+      상품 로딩이 끝나면 현재 입력어의
+      연관 검색어를 다시 표시
+    */
+    productsReady.then(() => {
+      if (document.activeElement === input) {
+        renderRelated();
+      }
+    });
+
+
+    /* ====================
+       Enter 또는 검색 키로 검색
+    ==================== */
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const keyword = input.value.trim();
+
+      if (!keyword) return;
+
+      const requestId = ++searchRequestId;
+
+      rememberKeyword(keyword);
+
+      relatedBox.hidden = true;
+      results.replaceChildren();
+      input.blur();
+
+      searchMessage.textContent = "상품을 검색하고 있어요.";
+
+      await productsReady;
+
+      if (requestId !== searchRequestId) return;
+
+      /* 모든 활동 페이지를 불러오지 못한 경우 */
+      if (failedPageCount === activityPages.length) {
         searchMessage.textContent =
-          "제품 목록을 준비 중이에요. 검색어는 최근 검색어에 추가했어요.";
-      });
+          "상품 정보를 불러오지 못했어요. 잠시 후 새로고침해 주세요.";
+        return;
+      }
 
-      /* 최근 검색어 전체 삭제 */
-      clearButton.addEventListener("click", () => {
-        recentKeywords = [];
-        saveHistory();
-        renderRecent();
-      });
+      const matches = findProducts(keyword);
 
+      renderResults(matches);
+
+      searchMessage.textContent = matches.length > 0
+        ? `검색 결과 ${matches.length}개`
+        : "검색 결과가 없어요. 다른 검색어를 입력해 주세요.";
+
+      /* 일부 페이지에 문제가 있으면 누락 가능성을 안내 */
+      if (failedPageCount > 0) {
+        searchMessage.textContent +=
+          " 일부 활동 페이지를 불러오지 못해 결과가 누락될 수 있어요.";
+      }
+    });
+
+
+    /* ====================
+       최근 검색어 전체 삭제
+    ==================== */
+    clearButton.addEventListener("click", () => {
+      recentKeywords = [];
+      saveHistory();
       renderRecent();
-    })();
-  </script>
+    });
+
+    renderRecent();
+  })();
+</script>
 </body>
 </html>
