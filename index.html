@@ -1457,6 +1457,10 @@
     /* ====================
        화면 전환
     ==================== */
+    /* 브라우저의 이전 스크롤 위치 자동 복원 해제 */
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
     const menuButtons = document.querySelectorAll(".menu-button");
     const pages = document.querySelectorAll("main > section");
 
@@ -1507,6 +1511,19 @@
     openPageFromHash();
 
     window.addEventListener("hashchange", openPageFromHash);
+    /* 페이지 복원 및 이미지 로딩 후에도 맨 위에서 표시 */
+function resetPageScroll() {
+  requestAnimationFrame(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant"
+    });
+  });
+}
+
+window.addEventListener("pageshow", resetPageScroll);
+window.addEventListener("load", resetPageScroll);
 
 
     /* ====================
