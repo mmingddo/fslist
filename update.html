@@ -35,12 +35,13 @@
     }
 
     /* ========== 상단 로고 시작 ========== */
-    .site-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 30px;
-    }
+   
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
 
     .site-logo {
       width: 42px;
@@ -237,31 +238,27 @@
 <body>
   <div class="page-container">
 
-    <!-- ========== 상단 로고·사이트 이름 ========== -->
-    <header class="site-header">
-      <a href="./index.html" aria-label="굿즈 리스트 홈">
-        <img
-          src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
-          alt="굿즈 리스트 로고"
-          class="site-logo"
-        >
-      </a>
 
-      <a href="./index.html">
-        <p class="site-title">굿즈 리스트</p>
-      </a>
-    </header>
+<!-- ========== 상단 로고·사이트 이름 ========== -->
+<header class="site-header">
+  <a href="./index.html" aria-label="굿즈 리스트 홈">
+    <img
+      src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&sz=w1600"
+      alt="굿즈 리스트 로고"
+      class="site-logo"
+    >
+  </a>
 
-    <!-- ========== 페이지 이동 메뉴 ========== -->
-    <nav class="page-navigation" aria-label="페이지 메뉴">
-      <a href="./update.html" class="current-page" aria-current="page">
-        업데이트 소식
-      </a>
+  <a href="./index.html">
+    <p class="site-title">굿즈리스트</p>
+  </a>
+</header>
 
-      <a href="./index.html">
-        홈 화면으로 이동
-      </a>
-    </nav>
+<!-- ========== 리스트로 돌아가기 ========== -->
+<nav class="page-navigation" aria-label="페이지 이동">
+  <a href="./index.html">← 리스트로 돌아가기</a>
+</nav>
+
 
     <!-- ========== 페이지 제목 ========== -->
     <main>
