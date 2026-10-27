@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#3662ae">
+
+  <title>앨범 | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+
+  <style>
+    /* ====================
+       폰트
+    ==================== */
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+        format("woff");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+        format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ====================
+       공통 설정
+    ==================== */
+    :root {
+      --accent-color: #3662ae;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fafafa;
+      color: #333;
+      font-family: "GmarketSans", "맑은 고딕", sans-serif;
+      font-weight: 500;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 32px 24px;
+      padding-bottom: calc(
+        32px + env(safe-area-inset-bottom, 0px)
+      );
+    }
+
+    /* ====================
+       로고·사이트명
+    ==================== */
+    .site-brand {
+      display: flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .site-logo {
+      display: block;
+      flex-shrink: 0;
+      width: auto;
+      height: 40px;
+    }
+
+    .site-brand-text {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    /* ====================
+       카테고리 제목·설명
+    ==================== */
+
+    /* 메인의 '최근 발매된 굿즈 소식'과 동일 */
+    .category-title {
+      margin: 0 0 6px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    /* 메인의 공지 안내 문구와 동일 */
+    .category-description {
+      margin: 10px 0 16px;
+      color: #555;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* Evolution의 돌아가기 링크와 동일 */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--accent-color);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ====================
+       앨범 상품 목록
+    ==================== */
+    .album-products {
+      display: grid;
+      gap: 12px;
+    }
+
+    /* ====================
+       제작자·도움
+    ==================== */
+    .site-credit {
+      margin-top: auto;
+      padding-top: 40px;
+      color: #555;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .credit-divider {
+      width: 140px;
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px dashed #999;
+    }
+
+    /* 링크 색깔과 연결은 유지하고 밑줄만 제거 */
+    .site-credit a,
+    .site-credit a:hover,
+    .site-credit a:focus,
+    .site-credit a:active {
+      text-decoration: none;
+    }
+
+    /* 키보드 선택 표시 */
+    a:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html">
+      <img
+        class="site-logo"
+        src="./logo.png"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+
+    <!-- ========== 앨범 카테고리 시작 ========== -->
+    <section aria-labelledby="album-title">
+
+      <h1 id="album-title" class="category-title">
+        카테고리 → 앨범
+      </h1>
+
+      <p class="category-description">
+        음반, LP 등
+      </p>
+
+      <a class="back-link" href="./index.html#category">
+        ← 카테고리로 이동하기
+      </a>
+
+      <!-- 앨범 상품 목록 시작 -->
+      <div id="album-products" class="album-products">
+        <!-- 앨범으로 분류된 상품이 들어갈 자리 -->
+      </div>
+      <!-- 앨범 상품 목록 끝 -->
+
+    </section>
+    <!-- ========== 앨범 카테고리 끝 ========== -->
+
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+</body>
+</html>

@@ -12,8 +12,11 @@
 
   <!-- 앱 설치 설정 및 브라우저 아이콘 -->
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1BhDYJ8C4ic59AWids_NZxEaqMQHuUTJV&sz=w1600
-">
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://drive.google.com/thumbnail?id=1BhDYJ8C4ic59AWids_NZxEaqMQHuUTJV&amp;sz=w1600"
+  >
 
   <style>
     /* ====================
@@ -272,7 +275,7 @@
       border-top: 10px solid var(--accent-color);
     }
 
-    .goods-accordion[open] .accordion-arrow::before {
+    .goods-accordion[open] > .goods-summary .accordion-arrow::before {
       border-top: 0;
       border-bottom: 10px solid var(--accent-color);
     }
@@ -528,6 +531,14 @@
       text-align: left;
     }
 
+    /* 링크 색깔과 연결은 유지하고 밑줄만 제거 */
+    .site-credit a,
+    .site-credit a:hover,
+    .site-credit a:focus,
+    .site-credit a:active {
+      text-decoration: none;
+    }
+
     .credit-divider {
       width: 140px;
       margin: 10px 0;
@@ -608,8 +619,7 @@
       outline-offset: 3px;
     }
 
-    .goods-summary:focus-visible,
-    .goods-photo-link:focus-visible {
+    .goods-summary:focus-visible {
       outline: 2px solid var(--accent-color);
       outline-offset: -3px;
     }
@@ -646,8 +656,7 @@
       <h1 class="site-title">
         <img
           class="site-logo"
-          src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&sz=w1600
-"
+          src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
           alt="FS LIST"
         >
         <span class="title-text">굿즈리스트</span>
@@ -727,8 +736,7 @@
               <div class="goods-photo-link">
                 <img
                   class="goods-preview"
-                  src="https://drive.google.com/thumbnail?id=1EEnQ61wv3VtVdp4JU-vvjq0DpqG17iHH&sz=w1600
-"
+                  src="https://drive.google.com/thumbnail?id=1EEnQ61wv3VtVdp4JU-vvjq0DpqG17iHH&amp;sz=w1600"
                   alt="조민규 Sweet Escape MD 미리보기"
                   loading="lazy"
                 >
@@ -794,8 +802,7 @@
               <div class="goods-photo-link">
                 <img
                   class="goods-preview"
-                  src="https://drive.google.com/thumbnail?id=1NtxfJFTuFj5QAS-f_t9GPHUhtDO1wLSG&sz=w1600
-"
+                  src="https://drive.google.com/thumbnail?id=1NtxfJFTuFj5QAS-f_t9GPHUhtDO1wLSG&amp;sz=w1600"
                   alt="조민규 두 번째 미니앨범 스윗 이스케이프 틴케이스 미리보기"
                   loading="lazy"
                 >
@@ -834,8 +841,7 @@
               <div class="goods-photo-link">
                 <img
                   class="goods-preview"
-                  src="https://drive.google.com/thumbnail?id=1f49zjGsDGL2DwonDSJbWd7G_w5baLLMx&sz=w1600
-"
+                  src="https://drive.google.com/thumbnail?id=1f49zjGsDGL2DwonDSJbWd7G_w5baLLMx&amp;sz=w1600"
                   alt="조민규 두 번째 미니앨범 스윗 이스케이프 키트 미리보기"
                   loading="lazy"
                 >
@@ -940,8 +946,7 @@
               <div class="goods-photo-link">
                 <img
                   class="goods-preview"
-                  src="https://drive.google.com/thumbnail?id=1ar5o-8hZo5SAyBtp8SLDDv6eH6H_EaCF&sz=w1600
-"
+                  src="https://drive.google.com/thumbnail?id=1ar5o-8hZo5SAyBtp8SLDDv6eH6H_EaCF&amp;sz=w1600"
                   alt="조민규 스윗 이스케이프 청음회 포스터 미리보기"
                   loading="lazy"
                 >
@@ -1129,7 +1134,7 @@
           >
             <img
               class="activity-image"
-              src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&sz=w1600"
+              src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&amp;sz=w1600"
               alt="Evolution"
               loading="lazy"
             >
@@ -1264,9 +1269,9 @@
           포토카드만 보기
         </button>
 
-        <button class="category-item" type="button">
+        <a class="category-item" href="./album.html">
           앨범
-        </button>
+        </a>
 
         <button class="category-item" type="button">
           MD
@@ -1424,10 +1429,12 @@
 
         if (!targetPage) return;
 
+        /* 선택한 화면만 표시 */
         pages.forEach((page) => {
           page.hidden = page !== targetPage;
         });
 
+        /* 하단 메뉴 선택 표시 */
         menuButtons.forEach((button) => {
           if (button.dataset.page === pageId) {
             button.setAttribute("aria-current", "page");
@@ -1436,9 +1443,20 @@
           }
         });
 
-        window.scrollTo(0, 0);
+        /* 현재 탭을 주소에 기록 */
+        history.replaceState(null, "", `#${pageId}`);
 
-        // 검색창에 자동으로 커서를 놓지 않음
+        window.scrollTo(0, 0);
+      }
+
+      /* 주소에 기록된 탭 열기 */
+      function openPageFromHash() {
+        const pageId = window.location.hash.slice(1);
+        const validPage = [...pages].some(
+          (page) => page.id === pageId
+        );
+
+        openPage(validPage ? pageId : "home");
       }
 
       /* 하단 메뉴 버튼 */
@@ -1455,45 +1473,12 @@
         });
       });
 
-function openPage(pageId) {
-  const targetPage = [...pages].find(
-    (page) => page.id === pageId
-  );
+      /* 처음 접속하거나 새로고침했을 때 */
+      openPageFromHash();
 
-  if (!targetPage) return;
+      /* 주소의 # 뒤 내용이 바뀌었을 때 */
+      window.addEventListener("hashchange", openPageFromHash);
 
-  pages.forEach((page) => {
-    page.hidden = page !== targetPage;
-  });
-
-  menuButtons.forEach((button) => {
-    if (button.dataset.page === pageId) {
-      button.setAttribute("aria-current", "page");
-    } else {
-      button.removeAttribute("aria-current");
-    }
-  });
-
-  // 현재 탭을 주소에 기록
-  history.replaceState(null, "", `#${pageId}`);
-
-  window.scrollTo(0, 0);
-}
-// 주소에 기록된 탭 열기
-function openPageFromHash() {
-  const pageId = window.location.hash.slice(1);
-  const validPage = [...pages].some(
-    (page) => page.id === pageId
-  );
-
-  openPage(validPage ? pageId : "home");
-}
-
-// 처음 접속하거나 새로고침했을 때 적용
-openPageFromHash();
-
-// 주소의 # 뒤 내용이 바뀌었을 때 적용
-window.addEventListener("hashchange", openPageFromHash);
 
       /* ====================
          검색 설정
@@ -1501,13 +1486,39 @@ window.addEventListener("hashchange", openPageFromHash);
       const storageKey = "goodslist-recent-searches";
 
       /*
-        연관 검색어로 표시할 실제 제품명을 등록하세요.
-
-        예:
-        "2025 시즌그리팅",
-        "레거시 포토카드",
+        연관 검색어로 표시할 실제 제품명.
+        검색어 등록은 추후 진행합니다.
       */
-      const productNames = [];
+      const productNames = [
+  "앨범", "정규", "미니", "싱글", "프로젝트", "프로젝트 싱글", "프로젝트싱글", "프싱", "참여", "OST", "ost", "스핀오프", "스핀오프싱글", "스핀오프 싱글", 
+  "디싱", "디지털싱글", "디지털 싱글", "방송",
+  "포카앨범", "포카 앨범", "포토카드 앨범", "포토카드앨범","실물앨범", "실물 앨범", "쥬얼", "쥬얼 앨범", "쥬얼앨범", "도슨트북", "도슨트", "디지팩", "스페셜",
+  "Evolution", "EVOLUTION", "evolution", "에볼루션", "에볼", "데뷔", "정규1집", "정규 1집", "1집",
+  "Mystiqe", "MYSTIQUE", "mystique", "미스티크", "정규2집", "정규 2집", "2집",
+  "The Forestella", "THE FORESTELLA", "the forestella", "더 포레스텔라", "더포레스텔라", "더 포레", "더포레", "정규3집", "정규 3집", "3집",
+  "The Legacy", "THE LEGACY", "the legacy", "더 레거시", "더레거시", "레거시", "정규4집", "정규 4집", "4집",
+  "The Beginning World Tree", "THE BEGINNING WORLD TREE", "the beginning world tree", "The Beginning", "THE BEGINNING", "the beginning", "World Tree", "world tree", 
+  "WORLD TREE", "비기닝", "월드트리", "더 비기닝", "더비기닝", "세계수", "미니1집", "미니 1집", "1집",
+  "Unfinished", "UNFINISHED", "unfinished", "언피니", "언피니시드", "미니2집", "미니 2집",
+  "The Bloom UTOPIA", "THE BLOOM UTOPIA", "the bloom utopia", "The Bloom", "THE BLOOM", "the bloom", "Utopia", "utopia", 
+  "UTOPIA", "더 블룸", "더블룸", "유토피아", "유톺퍄", "유토퍄", "싱글1집", "싱글 1집", "1집",
+  "KOOL", "Kool", "kool", "쿨", 
+  "Everything", "EVERYTHING", "everything", "에브리띵", "에블띵", "에브리띵", 
+  "팬텀싱어", "팬싱", "괜싱", "플북", "프로그램북", "프로그램 북",
+  "MD", "엠디", "컵", "유리컵", "글라스", "밀크 글라스", "밀크글라스", "고블렛 잔", "고블렛잔", "고블렛", "리유저블 컵", "리유저블컵", "스티커", "스카프", "반다나", "티켓북", "바인더", "핀", "집게핀", "썬캐처", "선캐처",
+  "잠옷", "왁스", "실링왁스", "후드집업", "가디건", "집업", "티셔츠", "셔츠", "스웨트 셔츠", "스웨트셔츠", "향초", "초", "뱃지", "핀뱃지", "파우치", "미니백", "미니 백",
+  "키링파우치", "키링 파우치", "포토카드 파우치", "포토카드파우치", "포카파우치", "포카 파우치", "미니 백 파우치", "미니백파우치", "양털 파우치", "양털파우치", "텀블러", "텀블럭백", "텀블러 백", "모자", "햇", "버킷햇", "버킷 햇1",
+  "지비츠", "지비츠 세트", "지비츠세트", "마테", "마스킹테이프", "마스킹 테이프", "콜렉트북", "콜렉트 북", "틴케", "틴케이스",
+  "우산", "우비", "우양산", "피크닉 매트", "매트", "피크닉매트", "돗자리", "목걸이", "키링", "메탈 키링", "메탈키링", "아크릴키링", "아크릴 키링", "거울 키링", "거울키링", "포토홀더키링", "포토홀더 키링",
+  ""
+
+
+-  "2025 시즌그리팅",
+  "2026 시즌그리팅",
+  "레거시 포토카드",
+  "Sweet Escape MD",
+  "Sweet Escape TinCase ver."
+];
 
       const form = document.getElementById("search-form");
       const input = document.getElementById("search-input");
@@ -1563,6 +1574,7 @@ window.addEventListener("hashchange", openPageFromHash);
         }
       }
 
+      /* 최근 검색어 또는 연관 검색어로 검색 실행 */
       function runSearch(keyword) {
         input.value = keyword;
         form.requestSubmit();

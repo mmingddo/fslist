@@ -68,7 +68,6 @@
       );
     }
 
-    /* 화면 읽기 프로그램용 제목 */
     .visually-hidden {
       position: absolute;
       width: 1px;
@@ -82,7 +81,7 @@
     }
 
     /* ====================
-       로고·サイト名
+       ロゴ・サイト名
     ==================== */
     .site-brand {
       display: flex;
@@ -130,12 +129,10 @@
       gap: 20px;
     }
 
-    /* 활동 정보: 좌우 절반 */
     .album-header {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    /* 상품 이미지: 최대 220px */
     .product-header {
       grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
     }
@@ -151,6 +148,7 @@
       width: 100%;
       height: auto;
       aspect-ratio: 1 / 1;
+      border: 1px solid var(--accent-color);
       border-radius: 12px;
       background: #f2f2f2;
       object-fit: cover;
@@ -158,7 +156,7 @@
     }
 
     /* ====================
-       활동·상품 표 공통
+       활동·상품 정보 표
     ==================== */
     .info-table,
     .product-table {
@@ -207,25 +205,22 @@
       border-top: 0;
     }
 
-    /* 왼쪽 위 모서리 */
+    /* 표 바깥 모서리 */
     .info-table tr:first-child th,
     .product-table tr:first-child th {
       border-top-left-radius: var(--table-radius);
     }
 
-    /* 왼쪽 아래 모서리 */
     .info-table tr:last-child th,
     .product-table tr:last-child th {
       border-bottom-left-radius: var(--table-radius);
     }
 
-    /* 오른쪽 위 모서리 */
     .info-table tr:first-child td,
     .product-table tr:first-child td {
       border-top-right-radius: var(--table-radius);
     }
 
-    /* 오른쪽 아래 모서리 */
     .info-table tr:last-child td,
     .product-table tr:last-child td {
       border-bottom-right-radius: var(--table-radius);
@@ -261,7 +256,7 @@
     }
 
     /* ====================
-       굿즈 목록
+       굿즈 목록·상품 카드
     ==================== */
     .goods-section {
       margin-top: 32px;
@@ -296,7 +291,7 @@
       padding: 8px 12px 8px 0;
     }
 
-    /* 기본 화살표 제거 */
+    /* 기본 펼치기 표시 제거 */
     .goods-summary,
     .photocard-toggle {
       list-style: none;
@@ -383,8 +378,14 @@
     /* ====================
        포토카드 펼치기
     ==================== */
+
+    /* 버튼·사진을 하나의 둥근 상자로 연결 */
     .photocard-section {
       margin-top: 20px;
+      overflow: hidden;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #fff;
     }
 
     .photocard-toggle {
@@ -422,23 +423,23 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 0;
       width: 100%;
-      padding: 20px 0;
+      padding: 0;
     }
 
-    /* 버튼과 같은 너비·표와 같은 1px 테두리 */
+    /* 공통 상자의 테두리를 사용 */
     .photocard-image {
       display: block;
       width: 100%;
       max-width: 100%;
       height: auto;
-      border: 1px solid var(--accent-color);
-      border-radius: 12px;
+      border: 0;
+      border-radius: 0;
     }
 
     /* ====================
-       제작자 표기
+       제작자·도움
     ==================== */
     .site-credit {
       margin-top: auto;
@@ -454,6 +455,14 @@
       margin: 10px 0;
       border: 0;
       border-top: 1px dashed #999;
+    }
+
+    /* 링크 색깔과 연결은 유지하고 밑줄만 제거 */
+    .site-credit a,
+    .site-credit a:hover,
+    .site-credit a:focus,
+    .site-credit a:active {
+      text-decoration: none;
     }
 
     /* 키보드 선택 표시 */
@@ -489,41 +498,6 @@
         width: 40%;
       }
     }
-    /* 포토카드 보기 상자 모서리 */
-.photocard-toggle {
-  border-radius: 12px;
-}
-/* 포토카드 버튼과 사진 영역을 하나의 상자로 연결 */
-.photocard-section {
-  overflow: hidden;
-  border: 1px solid #3662ae;
-  border-radius: 12px;
-  background: #fff;
-}
-
-/* 위쪽 파란 버튼 */
-.photocard-toggle {
-  border: 0;
-  border-radius: 0;
-}
-
-/* 버튼 바로 아래에 사진 영역 연결 */
-.photocard-content {
-  gap: 0;
-  padding: 0;
-}
-
-/* 사진은 공통 바깥 테두리를 사용 */
-.photocard-image {
-  width: 100%;
-  height: auto;
-  border: 0;
-  border-radius: 0;
-}
-.album-image,
-.product-image {
-  border: 1px solid #3662ae;
-}
   </style>
 </head>
 
@@ -533,7 +507,7 @@
     <a class="site-brand" href="./index.html">
       <img
         class="site-logo"
-        src="./logo.png"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
         alt="FS LIST"
       >
       <span class="site-brand-text">굿즈리스트</span>
@@ -556,7 +530,7 @@
       <!-- 왼쪽: 앨범 이미지 -->
       <img
         class="album-image"
-        src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&sz=w1600"
+        src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&amp;sz=w1600"
         alt="Evolution 앨범"
       >
 
@@ -599,7 +573,7 @@
           <!-- ---------- 상품 제목 시작 ---------- -->
           <summary class="goods-summary">
             <span class="goods-number">1</span>
-            <span class="goods-name">앨범</span>
+            <span class="goods-name">Evolution 앨범</span>
 
             <span
               class="accordion-arrow"
@@ -613,25 +587,24 @@
           <!-- ---------- 상품 상세 정보 시작 ---------- -->
           <div class="goods-content">
 
-            <!-- ===== 이미지·제품명 시작 ===== -->
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
             <div class="product-header">
-
-              <!-- 왼쪽: 상품 이미지 -->
               <img
                 class="product-image"
-                src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&sz=w1600"
+                src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&amp;sz=w1600"
                 alt="Evolution 앨범"
                 loading="lazy"
               >
 
-              <!-- 오른쪽: 제품명·설명 -->
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
               <div class="product-description">
-                <h3 class="product-name">Evolution 앨범</h3>
-                </p>
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
               </div>
-
             </div>
-            <!-- ===== 이미지·제품명 끝 ===== -->
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
 
 
             <!-- ===== 원가·구성품·비고 시작 ===== -->
@@ -669,7 +642,7 @@
 
               <div class="photocard-content">
 
-                <!-- 포토카드 이미지 1 -->
+                <!-- src를 실제 이미지 주소로 변경해 주세요 -->
                 <img
                   class="photocard-image"
                   src="ㅁ"
@@ -697,14 +670,14 @@
         <!--
           2번 상품 추가 위치
 
-          '1번 상품 시작'부터 '1번 상품 끝'까지 복사한 뒤
+          '1번 상품 시작'부터 '1번 상품 끝'까지 복사해서
           여기에 붙여 넣어 주세요.
 
           수정할 내용:
           - 상품 연번과 제목
           - data-category
           - 제품명과 설명
-          - 이미지 파일명과 alt
+          - 이미지 주소와 alt
           - 원가·구성품·비고
           - 포토카드 유무와 이미지
         -->
