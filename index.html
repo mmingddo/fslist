@@ -1449,6 +1449,18 @@
         });
       });
 
+// 주소 끝의 #list 등을 읽어 해당 화면 열기
+function openPageFromHash() {
+  const pageId = window.location.hash.slice(1) || "home";
+  openPage(pageId);
+}
+
+// 처음 접속했을 때 적용
+openPageFromHash();
+
+// 주소의 # 뒤 내용이 바뀌었을 때 적용
+window.addEventListener("hashchange", openPageFromHash);
+
       /* ====================
          검색 설정
       ==================== */

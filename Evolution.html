@@ -40,6 +40,7 @@
     ==================== */
     :root {
       --accent-color: #3662ae;
+      --table-radius: 12px;
     }
 
     * {
@@ -80,6 +81,32 @@
       border: 0;
     }
 
+    /* ====================
+       로고·サイト名
+    ==================== */
+    .site-brand {
+      display: flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .site-logo {
+      display: block;
+      flex-shrink: 0;
+      width: auto;
+      height: 40px;
+    }
+
+    .site-brand-text {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
     /* 리스트로 돌아가기 */
     .back-link {
       align-self: flex-start;
@@ -94,21 +121,23 @@
     }
 
     /* ====================
-       이미지·정보 좌우 배치
+       이미지·정보 배치
     ==================== */
     .album-header,
     .product-header {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: center;
-    }
-
-    .album-header {
       gap: 20px;
     }
 
+    /* 활동 정보: 좌우 절반 */
+    .album-header {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* 상품 이미지: 최대 220px */
     .product-header {
-      gap: 16px;
+      grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
     }
 
     .album-info,
@@ -116,11 +145,11 @@
       min-width: 0;
     }
 
-    /* 앨범·상품 이미지 공통 */
     .album-image,
     .product-image {
       display: block;
       width: 100%;
+      height: auto;
       aspect-ratio: 1 / 1;
       border-radius: 12px;
       background: #f2f2f2;
@@ -129,13 +158,14 @@
     }
 
     /* ====================
-       정보 표 공통
+       활동·상품 표 공통
     ==================== */
     .info-table,
     .product-table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
+      border-radius: var(--table-radius);
       table-layout: fixed;
       line-height: 1.6;
     }
@@ -148,7 +178,7 @@
       text-align: center;
     }
 
-    /* 왼쪽 항목 */
+    /* 왼쪽: 파란 배경·흰 글씨 */
     .info-table th,
     .product-table th {
       border: 0;
@@ -157,7 +187,7 @@
       font-weight: 500;
     }
 
-    /* 오른쪽 내용 */
+    /* 오른쪽: 파란 테두리·흰 배경·검정 글씨 */
     .info-table td,
     .product-table td {
       border: 1px solid var(--accent-color);
@@ -165,10 +195,40 @@
       color: #000;
     }
 
-    /* 행 사이 테두리 겹침 방지 */
+    /* 왼쪽 항목 사이 흰색 선 */
+    .info-table tr + tr th,
+    .product-table tr + tr th {
+      border-top: 1px solid #fff;
+    }
+
+    /* 오른쪽 행 사이 테두리 겹침 방지 */
     .info-table tr + tr td,
     .product-table tr + tr td {
       border-top: 0;
+    }
+
+    /* 왼쪽 위 모서리 */
+    .info-table tr:first-child th,
+    .product-table tr:first-child th {
+      border-top-left-radius: var(--table-radius);
+    }
+
+    /* 왼쪽 아래 모서리 */
+    .info-table tr:last-child th,
+    .product-table tr:last-child th {
+      border-bottom-left-radius: var(--table-radius);
+    }
+
+    /* 오른쪽 위 모서리 */
+    .info-table tr:first-child td,
+    .product-table tr:first-child td {
+      border-top-right-radius: var(--table-radius);
+    }
+
+    /* 오른쪽 아래 모서리 */
+    .info-table tr:last-child td,
+    .product-table tr:last-child td {
+      border-bottom-right-radius: var(--table-radius);
     }
 
     /* 활동 정보 표 */
@@ -219,7 +279,6 @@
       gap: 12px;
     }
 
-    /* 상품 카드 */
     .goods-accordion {
       overflow: hidden;
       border: 1px solid #ccc;
@@ -237,7 +296,7 @@
       padding: 8px 12px 8px 0;
     }
 
-    /* 기본 펼치기 표시 제거 */
+    /* 기본 화살표 제거 */
     .goods-summary,
     .photocard-toggle {
       list-style: none;
@@ -282,20 +341,17 @@
       border-top: 10px solid var(--accent-color);
     }
 
-    .goods-accordion[open] > .goods-summary
-    .accordion-arrow::before {
+    .goods-accordion[open] > .goods-summary .accordion-arrow::before {
       border-top: 0;
       border-bottom: 10px solid var(--accent-color);
     }
 
-    /* 제목 아래 구분선 */
     .goods-divider {
       margin: 0 12px;
       border: 0;
       border-top: 1px solid #ddd;
     }
 
-    /* 펼쳐지는 내용 */
     .goods-content {
       padding: 16px;
       font-size: 13px;
@@ -346,7 +402,7 @@
       line-height: 1.6;
     }
 
-    /* 접힌 상태: 흰색 ▼ */
+    /* 접힌 상태 ▼ */
     .photocard-arrow {
       flex-shrink: 0;
       width: 0;
@@ -356,31 +412,29 @@
       border-top: 9px solid #fff;
     }
 
-    /* 펼친 상태: 흰색 ▲ */
-    .photocard-section[open] > .photocard-toggle
-    .photocard-arrow {
+    /* 펼친 상태 ▲ */
+    .photocard-section[open] > .photocard-toggle .photocard-arrow {
       border-top: 0;
       border-bottom: 9px solid #fff;
     }
 
-    /* 포토카드 중앙 배치 */
     .photocard-content {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 16px;
+      width: 100%;
       padding: 20px 0;
     }
 
-    /* 원본 비율 유지 */
+    /* 버튼과 같은 너비·표와 같은 1px 테두리 */
     .photocard-image {
       display: block;
-      width: auto;
+      width: 100%;
       max-width: 100%;
       height: auto;
-      max-height: 70vh;
-      border-radius: 8px;
-      object-fit: contain;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
     }
 
     /* ====================
@@ -413,8 +467,13 @@
        모바일
     ==================== */
     @media (max-width: 480px) {
-      .album-header {
+      .album-header,
+      .product-header {
         gap: 12px;
+      }
+
+      .product-header {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .info-table {
@@ -430,34 +489,23 @@
         width: 40%;
       }
     }
-/* 로고·사이트명 */
-.site-brand {
-  display: flex;
-  align-items: center;
-  align-self: flex-start;
-  gap: 12px;
-  margin-bottom: 24px;
-  color: #333;
-  text-decoration: none;
-}
-
-.site-logo {
-  display: block;
-  flex-shrink: 0;
-  width: auto;
-  height: 40px;
-}
-
-.site-brand-text {
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 1;
-}
   </style>
 </head>
 
 <body>
   <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html">
+      <img
+        class="site-logo"
+        src="./logo.png"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+
     <!-- 리스트로 돌아가기 -->
     <a class="back-link" href="./index.html#list">
       ← 리스트로 돌아가기
@@ -477,7 +525,7 @@
         alt="Evolution 앨범"
       >
 
-      <!-- 오른쪽: 활동 정보 -->
+      <!-- 오른쪽: 활동 정보 표 -->
       <div class="album-info">
         <h1 id="activity-title" class="visually-hidden">
           Evolution
@@ -510,7 +558,7 @@
       <div class="goods-list">
 
         <!-- ========== 1번 상품 시작 ========== -->
-        <!-- 분류 정보: 화면에는 표시되지 않음 -->
+        <!-- data-category는 화면에 표시되지 않는 분류 정보 -->
         <details class="goods-accordion" data-category="앨범">
 
           <!-- ---------- 상품 제목 시작 ---------- -->
@@ -557,19 +605,16 @@
             <!-- ===== 원가·구성품·비고 시작 ===== -->
             <table class="product-table">
               <tbody>
-                <!-- 원가 -->
                 <tr>
                   <th scope="row">원가</th>
                   <td>00,000원</td>
                 </tr>
 
-                <!-- 구성품 -->
                 <tr>
                   <th scope="row">구성품</th>
                   <td>00, 00, 00, 00</td>
                 </tr>
 
-                <!-- 비고 -->
                 <tr>
                   <th scope="row">비고</th>
                   <td>-</td>
@@ -602,7 +647,7 @@
 
                 <!--
                   사진 추가:
-                  위 img 태그 전체를 복사하고
+                  위 img 태그 전체를 복사한 뒤
                   src와 alt를 변경해 주세요.
                 -->
 
@@ -624,13 +669,12 @@
           여기에 붙여 넣어 주세요.
 
           수정할 내용:
-          - 상품 연번
-          - 상품 제목
+          - 상품 연번과 제목
           - data-category
           - 제품명과 설명
-          - 사진 파일명과 alt
+          - 이미지 파일명과 alt
           - 원가·구성품·비고
-          - 포토카드 유무와 사진
+          - 포토카드 유무와 이미지
         -->
 
       </div>
@@ -671,17 +715,6 @@
       >@forkkeu</a>
     </footer>
     <!-- ========== 제작자 표기 끝 ========== -->
-
   </main>
-<!-- 로고·사이트명: 누르면 메인으로 이동 -->
-<a class="site-brand" href="./index.html">
-  <img
-    class="site-logo"
-    src="./logo.png"
-    alt="FS LIST"
-  >
-  <span class="site-brand-text">굿즈리스트</span>
-</a>
-
 </body>
 </html>
