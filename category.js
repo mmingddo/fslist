@@ -5,9 +5,10 @@
      새로운 활동 페이지가 생기면
      이 목록에 한 줄씩 추가하세요.
   ==================== */
-  const activityPages = [
-    { name: "Evolution", url: "./Evolution.html" }
-  ];
+const activityPages = [
+  { name: "Evolution", url: "./Evolution.html" },
+  { name: "Mystique", url: "./Mystique.html" }
+];
 
   const category = document.body.dataset.category;
   const description = document.body.dataset.description || "";
