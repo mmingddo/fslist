@@ -643,35 +643,15 @@
               </tbody>
             </table>
 
-<!-- ===== 포토카드 시작 ===== -->
-<div class="photocard-section">
+<!-- 포토카드 영역 시작 -->
+<details class="photocard-section photocard-details">
+  <summary class="photocard-toggle">
+    <span>포토카드 보기</span>
+    <span class="photocard-arrow" aria-hidden="true"></span>
+  </summary>
 
-  <details class="photocard-details">
-    <summary class="photocard-toggle">
-      <span>포토카드 보기</span>
-
-      <span
-        class="photocard-arrow"
-        aria-hidden="true"
-      ></span>
-    </summary>
-
-    <div class="photocard-content">
-
-      <img
-        class="photocard-image"
-        src="https://drive.google.com/thumbnail?id=1eRjolWZ6tect0Wo6uGDwCGy7opGhchyk&amp;sz=w1600"
-        alt="Mystique 앨범 포토카드"
-        loading="lazy"
-      >
-
-      <!-- 사진 추가 시 img 태그를 복사해 주세요 -->
-
-    </div>
-  </details>
-
-  <!-- ===== 포토카드 유형 표시 ===== -->
-  <div class="photocard-types">
+  <!-- 펼쳤을 때만 보이는 타입 표시 -->
+  <div class="photocard-types" aria-label="포토카드 유형">
     <span class="photocard-type type-personal active">
       개인
     </span>
@@ -680,17 +660,22 @@
       유닛
     </span>
 
-    <span class="photocard-type type-group">
+    <span class="photocard-type type-group active">
       단체
     </span>
   </div>
 
-</div>
-<!-- ===== 포토카드 끝 ===== -->
-
-
-            </details>
-            <!-- ===== 포토카드 전체 영역 끝 ===== -->
+  <!-- 펼쳤을 때만 보이는 사진 -->
+  <div class="photocard-content">
+    <img
+      class="photocard-image"
+      src="여기에 기존 이미지 주소"
+      alt="포토카드"
+      loading="lazy"
+    >
+  </div>
+</details>
+<!-- 포토카드 영역 끝 -->
 
           </div>
           <!-- ---------- 상품 상세 끝 ---------- -->
