@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#3662ae">
+
+  <title>Evolution | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+
+  <style>
+    /* ====================
+       폰트
+    ==================== */
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+        format("woff");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+        format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ====================
+       공통 설정
+    ==================== */
+    :root {
+      --accent-color: #3662ae;
+      --table-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fafafa;
+      color: #333;
+      font-family: "GmarketSans", "맑은 고딕", sans-serif;
+      font-weight: 500;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 32px 24px;
+      padding-bottom: calc(
+        32px + env(safe-area-inset-bottom, 0px)
+      );
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ====================
+       ロゴ・サイト名
+    ==================== */
+    .site-brand {
+      display: flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .site-logo {
+      display: block;
+      flex-shrink: 0;
+      width: auto;
+      height: 40px;
+    }
+
+    .site-brand-text {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    /* 리스트로 돌아가기 */
+    .back-link {
+      align-self: flex-start;
+      margin-bottom: 24px;
+      color: var(--accent-color);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ====================
+       이미지·정보 배치
+    ==================== */
+    .album-header,
+    .product-header {
+      display: grid;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .album-header {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-header {
+      grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+    }
+
+    .album-info,
+    .product-description {
+      min-width: 0;
+    }
+
+    .album-image,
+    .product-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #f2f2f2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ====================
+       활동·상품 정보 표
+    ==================== */
+    .info-table,
+    .product-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--table-radius);
+      table-layout: fixed;
+      line-height: 1.6;
+    }
+
+    .info-table th,
+    .info-table td,
+    .product-table th,
+    .product-table td {
+      overflow-wrap: anywhere;
+      text-align: center;
+    }
+
+    /* 왼쪽: 파란 배경·흰 글씨 */
+    .info-table th,
+    .product-table th {
+      border: 0;
+      background: var(--accent-color);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* 오른쪽: 파란 테두리·흰 배경·검정 글씨 */
+    .info-table td,
+    .product-table td {
+      border: 1px solid var(--accent-color);
+      background: #fff;
+      color: #000;
+    }
+
+    /* 왼쪽 항목 사이 흰색 선 */
+    .info-table tr + tr th,
+    .product-table tr + tr th {
+      border-top: 1px solid #fff;
+    }
+
+    /* 오른쪽 행 사이 테두리 겹침 방지 */
+    .info-table tr + tr td,
+    .product-table tr + tr td {
+      border-top: 0;
+    }
+
+    /* 표 바깥 모서리 */
+    .info-table tr:first-child th,
+    .product-table tr:first-child th {
+      border-top-left-radius: var(--table-radius);
+    }
+
+    .info-table tr:last-child th,
+    .product-table tr:last-child th {
+      border-bottom-left-radius: var(--table-radius);
+    }
+
+    .info-table tr:first-child td,
+    .product-table tr:first-child td {
+      border-top-right-radius: var(--table-radius);
+    }
+
+    .info-table tr:last-child td,
+    .product-table tr:last-child td {
+      border-bottom-right-radius: var(--table-radius);
+    }
+
+    /* 활동 정보 표 */
+    .info-table {
+      font-size: 14px;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 14px 10px;
+    }
+
+    .info-table th {
+      width: 36%;
+    }
+
+    /* 상품 정보 표 */
+    .product-table {
+      margin-top: 20px;
+      font-size: 13px;
+    }
+
+    .product-table th,
+    .product-table td {
+      padding: 12px 10px;
+    }
+
+    .product-table th {
+      width: 30%;
+    }
+
+    /* ====================
+       굿즈 목록·상품 카드
+    ==================== */
+    .goods-section {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .goods-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .goods-accordion {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+    }
+
+    .goods-summary {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: 12px;
+      min-height: 72px;
+      padding: 8px 12px 8px 0;
+    }
+
+    /* 기본 펼치기 표시 제거 */
+    .goods-summary,
+    .photocard-toggle {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .goods-summary::-webkit-details-marker,
+    .photocard-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .goods-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      border-right: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    .goods-name {
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    /* 상품 카드 화살표 */
+    .accordion-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+    }
+
+    .accordion-arrow::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 10px solid var(--accent-color);
+    }
+
+    .goods-accordion[open] > .goods-summary .accordion-arrow::before {
+      border-top: 0;
+      border-bottom: 10px solid var(--accent-color);
+    }
+
+    .goods-divider {
+      margin: 0 12px;
+      border: 0;
+      border-top: 1px solid #ddd;
+    }
+
+    .goods-content {
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* ====================
+       제품명·설명
+    ==================== */
+    .product-description {
+      overflow-wrap: anywhere;
+    }
+
+    .product-name {
+      margin: 0 0 8px;
+      color: #000;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .product-subtext {
+      margin: 0;
+      color: #555;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ====================
+       포토카드 펼치기
+    ==================== */
+
+    /* 버튼·사진을 하나의 둥근 상자로 연결 */
+    .photocard-section {
+      margin-top: 20px;
+      overflow: hidden;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .photocard-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 12px 16px;
+      border: 0;
+      background: var(--accent-color);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* 접힌 상태 ▼ */
+    .photocard-arrow {
+      flex-shrink: 0;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 9px solid #fff;
+    }
+
+    /* 펼친 상태 ▲ */
+    .photocard-section[open] > .photocard-toggle .photocard-arrow {
+      border-top: 0;
+      border-bottom: 9px solid #fff;
+    }
+
+    .photocard-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      padding: 0;
+    }
+
+    /* 공통 상자의 테두리를 사용 */
+    .photocard-image {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border: 0;
+      border-radius: 0;
+    }
+
+    /* ====================
+       제작자·도움
+    ==================== */
+    .site-credit {
+      margin-top: auto;
+      padding-top: 40px;
+      color: #555;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .credit-divider {
+      width: 140px;
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px dashed #999;
+    }
+
+    /* 링크 색깔과 연결은 유지하고 밑줄만 제거 */
+    .site-credit a,
+    .site-credit a:hover,
+    .site-credit a:focus,
+    .site-credit a:active {
+      text-decoration: none;
+    }
+
+    /* 키보드 선택 표시 */
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 3px;
+    }
+
+    /* ====================
+       모바일
+    ==================== */
+    @media (max-width: 480px) {
+      .album-header,
+      .product-header {
+        gap: 12px;
+      }
+
+      .product-header {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-table {
+        font-size: 11px;
+      }
+
+      .info-table th,
+      .info-table td {
+        padding: 10px 4px;
+      }
+
+      .info-table th {
+        width: 40%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+<a class="site-brand" href="./index.html#home">
+      <img
+        class="site-logo"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+
+    <!-- 리스트로 돌아가기 -->
+    <a class="back-link" href="./index.html#list">
+      ← 리스트로 돌아가기
+    </a>
+
+
+    <!-- ========== 활동 정보 시작 ========== -->
+    <section
+      class="album-header"
+      aria-labelledby="activity-title"
+      data-category="앨범"
+    >
+      <!-- 왼쪽: 앨범 이미지 -->
+      <img
+        class="album-image"
+        src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&amp;sz=w1600"
+        alt="Evolution 앨범"
+      >
+
+      <!-- 오른쪽: 활동 정보 표 -->
+      <div class="album-info">
+        <h1 id="activity-title" class="visually-hidden">
+          Evolution
+        </h1>
+
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th scope="row">활동명</th>
+              <td>Evolution</td>
+            </tr>
+
+            <tr>
+              <th scope="row">발매일</th>
+              <td>2018.03.14</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- ========== 활동 정보 끝 ========== -->
+
+
+    <!-- ========== 굿즈 목록 시작 ========== -->
+    <section class="goods-section" aria-labelledby="goods-title">
+      <h2 id="goods-title" class="section-title">
+        굿즈 보기
+      </h2>
+
+      <div class="goods-list">
+
+<!-- ========== 1번 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="앨범"
+  data-name="Evolution 앨범"
+  data-keywords="Evolution, 에볼루션, 정규 1집, 음반, 앨범"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">1</span>
+            <span class="goods-name">Evolution 앨범</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&amp;sz=w1600"
+                alt="Evolution 앨범"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>18,800원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>CD / 북클릿</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>초도 한정 포스터 증정 이벤트</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 1번 상품 끝 ========== -->
+
+<!-- ========== 2번 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="앨범"
+  data-name="Evolution LP"
+  data-keywords="Evolution, 에볼루션, 정규 1집, 음반, 앨범, LP, 엘피, 민트마블"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">2</span>
+            <span class="goods-name">Evolution LP<br>민트 마블</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1J7PdUEJYoud9M_5GZ4Qh2eQHtdP4k_JJ&amp;sz=w1600"
+                alt="Evolution LP 마블 그린"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>34,200원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>LP</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 180g 녹색 바이닐<br>- 싸인반 100세트 랜덤 배부</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 2번 상품 끝 ========== -->
+
+         <!-- ========== 3번 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="앨범"
+  data-name="Evolution LP"
+  data-keywords="Evolution, 에볼루션, 정규 1집, 음반, 앨범, LP, 엘피, 화이트"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">3</span>
+            <span class="goods-name">Evolution LP<br>화이트</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=14qm_ZqSwklimev654tmMa3d_BSyEZtWL&amp;sz=w1600"
+                alt="Evolution LP 화이트"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>34,200원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>LP</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>180g 흰색 바이닐</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 3번 상품 끝 ========== -->
+
+         <!-- ========== 4번 포토북 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="MD"
+  data-name="Evolution MD 포토북"
+  data-keywords="Evolution, 에볼루션, 정규 1집, md, 엠디, 포토북"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">4</span>
+            <span class="goods-name">Evolution 콘서트 MD<br>포토북</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1wo7vaWB-24PyOaKk6IDXpuSws0YOoQDX&amp;sz=w1600"
+                alt="Evolution 콘서트 MD 포토북"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>5,0000원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토북</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 4번 상품 끝 ========== --> 
+
+         <!-- ========== 5번 포스터 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="MD"
+  data-name="Evolution MD 포스터"
+  data-keywords="Evolution, 에볼루션, 정규 1집, md, 엠디, 포스터"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">5</span>
+            <span class="goods-name">Evolution 콘서트 MD<br>포스터</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1awB8BXUDunn69Zt0L5Ok2wXsaZmuTC00&amp;sz=w1600"
+                alt="Evolution 콘서트 MD 포스터"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>2,0000원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포스터</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 5번 상품 끝 ========== --> 
+        
+         <!-- ========== 6번 미니수첩 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="MD"
+  data-name="Evolution MD 미니수첩"
+  data-keywords="Evolution, 에볼루션, 정규 1집, md, 엠디, 수첩"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">6</span>
+            <span class="goods-name">Evolution 콘서트 MD<br>미니수첩</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1OSi7pZuhRn2C0OETaDwtZYBTZ8gSC3bR&amp;sz=w1600"
+                alt="Evolution 콘서트 MD 미니수첩"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>3,0000원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>미니수첩</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>멤버 개별</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 6번 미니수첩 상품 끝 ========== -->
+
+           <!-- ========== 7번 엘홀더 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="MD"
+  data-name="Evolution MD L홀더"
+  data-keywords="Evolution, 에볼루션, 정규 1집, md, 엠디, L홀더, 엘홀더"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">7</span>
+            <span class="goods-name">Evolution 콘서트 MD<br>L홀더</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1K7RdD9WjxVV-fb164cT57jDnocb9_2Mc&amp;sz=w1600"
+                alt="Evolution 콘서트 MD L홀더"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>6,0000원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>L홀더</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>멤버 개별</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 7번 상품 끝 ========== --> 
+
+           <!-- ========== 8번 타올 상품 시작 ========== -->
+<details
+  id="evolution-album"
+  class="goods-accordion"
+  data-category="MD"
+  data-name="Evolution MD 타올"
+  data-keywords="Evolution, 에볼루션, 정규 1집, md, 엠디, 타올"
+>
+
+          <!-- ---------- 상품 제목 시작 ---------- -->
+          <summary class="goods-summary">
+            <span class="goods-number">8</span>
+            <span class="goods-name">Evolution 콘서트 MD<br>타올</span>
+
+            <span
+              class="accordion-arrow"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <!-- ---------- 상품 제목 끝 ---------- -->
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 정보 시작 ---------- -->
+          <div class="goods-content">
+
+            <!-- ===== 이미지·제품명 영역 시작 ===== -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1UYqGyc1PVDZm3RgDFEqdI7BylZ2lWb90&amp;sz=w1600"
+                alt="Evolution 콘서트 MD 타올"
+                loading="lazy"
+              >
+
+              <!-- 제품명·설명이 필요하면 여기에 추가 -->
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <!-- ===== 이미지·제품명 영역 끝 ===== -->
+
+
+            <!-- ===== 원가·구성품·비고 시작 ===== -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>4,0000원</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>타올</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 색깔 개별(분홍/초록)<br>- 변경 전 로고(척척이 완구 모양)가 새겨져 있어 척척이 수건이라고도 불린다.<br>- 타올이지만 방수력이 좋다.</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- ===== 원가·구성품·비고 끝 ===== -->
+
+          </div>
+          <!-- ---------- 상품 상세 정보 끝 ---------- -->
+
+        </details>
+        <!-- ========== 8번 상품 끝 ========== --> 
+
+      </div>
+    </section>
+    <!-- ========== 굿즈 목록 끝 ========== -->
+
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+  <script>
+  (() => {
+    /*
+      검색 결과에서 전달한 상품 번호 또는
+      주소의 #상품아이디를 읽습니다.
+    */
+    const cards = document.querySelectorAll(
+      ".goods-accordion[data-category]"
+    );
+
+    const params = new URLSearchParams(location.search);
+    const productNumber = Number(params.get("product"));
+
+    let target = null;
+
+    /* 상품 id가 있으면 우선 사용 */
+    try {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const element = id ? document.getElementById(id) : null;
+
+      if (element?.matches(".goods-accordion[data-category]")) {
+        target = element;
+      }
+    } catch {
+      // 잘못된 주소 형식이면 상품 번호로 확인
+    }
+
+    /* id가 없는 상품은 번호로 찾기 */
+    if (
+      !target &&
+      Number.isInteger(productNumber) &&
+      productNumber >= 1
+    ) {
+      target = cards[productNumber - 1];
+    }
+
+    if (!target) return;
+
+    target.open = true;
+
+    function scrollToProduct() {
+      target.scrollIntoView({
+        block: "start"
+      });
+    }
+
+    /* 이미지 로딩 후 위치가 달라지는 경우까지 반영 */
+    if (document.readyState === "complete") {
+      scrollToProduct();
+    } else {
+      window.addEventListener("load", scrollToProduct, {
+        once: true
+      });
+    }
+  })();
+</script>
+</body>
+</html>
