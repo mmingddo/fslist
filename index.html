@@ -682,6 +682,37 @@
   font-size: var(--small-text-size);
   line-height: 1.6;
 }
+/* ====================
+   리스트 정렬
+==================== */
+.activity-sort {
+  margin-top: 24px;
+}
+
+.activity-sort-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.activity-sort-button {
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.activity-sort-button[aria-pressed="true"] {
+  border-color: #3662ae;
+  background: #3662ae;
+  color: #fff;
+}
   </style>
 </head>
 
@@ -1192,6 +1223,34 @@
         활동 별로 분류되어 있어요.<br>
         다른 카테고리로 보고 싶다면, 하단 카테고리 메뉴를 이용해 주세요!
       </p>
+
+<!-- 정렬순 변경 시작 -->
+<div class="activity-sort">
+  <h2 class="news-title">정렬순 변경</h2>
+
+  <div class="activity-sort-buttons" role="group" aria-label="리스트 정렬">
+    <button
+      class="activity-sort-button"
+      type="button"
+      data-sort="original"
+      aria-pressed="true"
+    >
+      날짜순
+    </button>
+
+    <button
+      class="activity-sort-button"
+      type="button"
+      data-sort="reverse"
+      aria-pressed="false"
+    >
+      최신순
+    </button>
+  </div>
+</div>
+<!-- 정렬순 변경 끝 -->
+
+<!-- 이 아래에 기존 활동 카드 목록 -->
 
       <!-- 활동 카드 목록 시작 -->
       <div class="activity-grid">
@@ -2165,6 +2224,41 @@ const activityPages = [
     });
 
     renderRecent();
+  })();
+</script>
+<script>
+  (() => {
+    const grid = document.querySelector("#list .activity-grid");
+    const buttons = document.querySelectorAll(
+      "#list .activity-sort-button"
+    );
+
+    if (!grid) return;
+
+    /* HTML에 작성한 최초 순서를 기억 */
+    const originalCards = [...grid.children].filter((element) => {
+      return element.classList.contains("activity-card");
+    });
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const cards = button.dataset.sort === "reverse"
+          ? [...originalCards].reverse()
+          : [...originalCards];
+
+        /* 기존 카드를 선택한 순서로 이동 */
+        cards.forEach((card) => {
+          grid.append(card);
+        });
+
+        buttons.forEach((item) => {
+          item.setAttribute(
+            "aria-pressed",
+            String(item === button)
+          );
+        });
+      });
+    });
   })();
 </script>
 </body>
