@@ -9,7 +9,8 @@
     { name: "NEW AGE", url: "./newage.html" },
     { name: "시간여행", url: "./time.html" },
     { name: "바람", url: "./wind.html" },
-    { name: "The Forestella", url: "./TheFore.html" }
+    { name: "The Forestella", url: "./TheFore.html" },
+    { name: "ID: PITTA", url: "./idpitta.html" }
   ];
 
   const validTypes = ["personal", "unit", "group"];
