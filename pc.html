@@ -61,6 +61,18 @@
       outline: 2px solid var(--accent-color);
       outline-offset: 3px;
     }
+/* 포토카드 모아보기에서 제목 박스 숨기기 */
+#pc-products [data-photocard] > .photocard-toggle {
+  display: none;
+}
+
+/* 포토카드 영역의 바깥 테두리와 여백 제거 */
+#pc-products [data-photocard] {
+  margin-top: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
   </style>
 
   <script src="./pc.js" defer></script>
