@@ -7,7 +7,8 @@
   ==================== */
 const activityPages = [
   { name: "Evolution", url: "./Evolution.html" },
-  { name: "Mystique", url: "./mystique.html" }
+  { name: "Mystique", url: "./mystique.html" },
+  { name: "MY YOUTH", url: "./MyYouth.html" }
 ];
 
   const category = document.body.dataset.category;
