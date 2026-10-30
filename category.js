@@ -135,7 +135,10 @@ const activityPages = [
 
     return [...products]
       .filter((product) => {
-        return product.dataset.category.trim() === category;
+return product.dataset.category
+  .split(",")
+  .map((name) => name.trim())
+  .includes(category.trim());
       })
       .map((product, productIndex) => {
         /* 상품 전체 복사 */
