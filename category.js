@@ -18,7 +18,8 @@ const activityPages = [
   { name: "The Forestella", url: "./TheFore.html" },
   { name: "ID: PITTA", url: "./idpitta.html" },
   { name: "PARANA", url: "./parana.html" },
-  { name: "숲별 1기", url: "./sb1.html" }
+  { name: "숲별 1기", url: "./sb1.html" },
+  { name: "21-22 The Royal", url: "./royal21.html" }
 ];
 
   const category = document.body.dataset.category;

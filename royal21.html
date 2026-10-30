@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#3662ae">
+
+  <title>21-22 The Royal | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+
+  <style>
+    /* ====================
+       폰트
+    ==================== */
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+        format("woff");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "GmarketSans";
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+        format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ====================
+       공통 설정
+    ==================== */
+    :root {
+      --accent-color: #3662ae;
+      --table-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fafafa;
+      color: #333;
+      font-family: "GmarketSans", "맑은 고딕", sans-serif;
+      font-weight: 500;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 32px 24px;
+      padding-bottom: calc(
+        32px + env(safe-area-inset-bottom, 0px)
+      );
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ====================
+       로고·사이트명
+    ==================== */
+    .site-brand {
+      display: flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .site-logo {
+      display: block;
+      flex-shrink: 0;
+      width: auto;
+      height: 40px;
+    }
+
+    .site-brand-text {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .back-link {
+      align-self: flex-start;
+      margin-bottom: 24px;
+      color: var(--accent-color);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ====================
+       이미지·정보 배치
+    ==================== */
+    .album-header,
+    .product-header {
+      display: grid;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .album-header {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-header {
+      grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+    }
+
+    .album-info,
+    .product-description {
+      min-width: 0;
+    }
+
+    .album-image,
+    .product-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #f2f2f2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ====================
+       활동·상품 정보 표
+    ==================== */
+    .info-table,
+    .product-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--table-radius);
+      table-layout: fixed;
+      line-height: 1.6;
+    }
+
+    .info-table th,
+    .info-table td,
+    .product-table th,
+    .product-table td {
+      overflow-wrap: anywhere;
+      text-align: center;
+    }
+
+    .info-table th,
+    .product-table th {
+      border: 0;
+      background: var(--accent-color);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .info-table td,
+    .product-table td {
+      border: 1px solid var(--accent-color);
+      background: #fff;
+      color: #000;
+    }
+
+    /* 왼쪽 항목 사이 흰색 구분선 */
+    .info-table tr + tr th,
+    .product-table tr + tr th {
+      border-top: 1px solid #fff;
+    }
+
+    /* 오른쪽 테두리 겹침 방지 */
+    .info-table tr + tr td,
+    .product-table tr + tr td {
+      border-top: 0;
+    }
+
+    .info-table tr:first-child th,
+    .product-table tr:first-child th {
+      border-top-left-radius: var(--table-radius);
+    }
+
+    .info-table tr:last-child th,
+    .product-table tr:last-child th {
+      border-bottom-left-radius: var(--table-radius);
+    }
+
+    .info-table tr:first-child td,
+    .product-table tr:first-child td {
+      border-top-right-radius: var(--table-radius);
+    }
+
+    .info-table tr:last-child td,
+    .product-table tr:last-child td {
+      border-bottom-right-radius: var(--table-radius);
+    }
+
+    .info-table {
+      font-size: 14px;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 14px 10px;
+    }
+
+    .info-table th {
+      width: 36%;
+    }
+
+    .product-table {
+      margin-top: 20px;
+      font-size: 13px;
+    }
+
+    .product-table th,
+    .product-table td {
+      padding: 12px 10px;
+    }
+
+    .product-table th {
+      width: 30%;
+    }
+
+    /* ====================
+       굿즈 목록·상품 카드
+    ==================== */
+    .goods-section {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .goods-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .goods-accordion {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+    }
+
+    .goods-summary {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      gap: 12px;
+      min-height: 72px;
+      padding: 8px 12px 8px 0;
+    }
+
+    .goods-summary,
+    .photocard-toggle {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .goods-summary::-webkit-details-marker,
+    .photocard-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .goods-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      border-right: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    .goods-name {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .accordion-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+    }
+
+    .accordion-arrow::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 10px solid var(--accent-color);
+    }
+
+    .goods-accordion[open] > .goods-summary .accordion-arrow::before {
+      border-top: 0;
+      border-bottom: 10px solid var(--accent-color);
+    }
+
+    .goods-divider {
+      margin: 0 12px;
+      border: 0;
+      border-top: 1px solid #ddd;
+    }
+
+    .goods-content {
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* ====================
+       제품명·설명
+    ==================== */
+    .product-description {
+      overflow-wrap: anywhere;
+    }
+
+    .product-name {
+      margin: 0 0 8px;
+      color: #000;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .product-subtext {
+      margin: 0;
+      color: #555;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ====================
+       포토카드 펼치기
+    ==================== */
+    .photocard-section {
+      width: 100%;
+      min-width: 0;
+      margin-top: 20px;
+      overflow: hidden;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .photocard-details {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .photocard-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 12px 16px;
+      border: 0;
+      background: var(--accent-color);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .photocard-arrow {
+      flex-shrink: 0;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 9px solid #fff;
+    }
+
+    .photocard-section[open] > .photocard-toggle .photocard-arrow {
+      border-top: 0;
+      border-bottom: 9px solid #fff;
+    }
+
+    /* ====================
+       포토카드 유형 표시
+    ==================== */
+.photocard-types {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+}
+
+    .photocard-type {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+      padding: 3px 2px;
+      border-radius: 20px;
+      background-color: #b5b5b5;
+      color: #333;
+      font-size: 13px;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .type-personal.active {
+      background-color: #dfb2fa;
+    }
+
+    .type-unit.active {
+      background-color: #ffd18b;
+    }
+
+    .type-group.active {
+      background-color: #a8e8e8;
+    }
+
+    /* 포토카드 이미지 */
+    .photocard-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      padding: 0;
+    }
+
+    .photocard-image {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border: 0;
+      border-radius: 0;
+    }
+
+    /* ====================
+       제작자·도움
+    ==================== */
+    .site-credit {
+      margin-top: auto;
+      padding-top: 40px;
+      color: #555;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .credit-divider {
+      width: 140px;
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px dashed #999;
+    }
+
+    .site-credit a,
+    .site-credit a:hover,
+    .site-credit a:focus,
+    .site-credit a:active {
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 3px;
+    }
+
+    /* ====================
+       모바일
+    ==================== */
+    @media (max-width: 480px) {
+      .album-header,
+      .product-header {
+        gap: 12px;
+      }
+
+      .product-header {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-table {
+        font-size: 11px;
+      }
+
+      .info-table th,
+      .info-table td {
+        padding: 10px 4px;
+      }
+
+      .info-table th {
+        width: 40%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html#home">
+      <img
+        class="site-logo"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+    <a class="back-link" href="./index.html#list">
+      ← 리스트로 돌아가기
+    </a>
+
+    <!-- ========== 활동 정보 시작 ========== -->
+    <section
+      class="album-header"
+      aria-labelledby="activity-title"
+      data-category="앨범"
+    >
+      <img
+        class="album-image"
+        src="https://drive.google.com/thumbnail?id=1tBZKWZUsTe1U7UIO_WBBioYAcesjzCaR&amp;sz=w1600"
+        alt="21-22 The Royal 활동"
+      >
+
+      <div class="album-info">
+        <h1 id="activity-title" class="visually-hidden">
+          MY YOUTH
+        </h1>
+
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th scope="row">활동명</th>
+              <td>21-22<br>The Royal</td>
+            </tr>
+            <tr>
+              <th scope="row">공연일</th>
+              <td>2021.12.18(서울)<br><br>2022.01.22<br>~ 01.23(대구)<br><br>2022.02.19<br>~ 02.20(앵콜)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- ========== 활동 정보 끝 ========== -->
+
+
+    <!-- ========== 굿즈 목록 시작 ========== -->
+    <section class="goods-section" aria-labelledby="goods-title">
+      <h2 id="goods-title" class="section-title">
+        굿즈 보기
+      </h2>
+
+      <div class="goods-list">
+
+        <!-- ========== 1번 아크릴 응봉 시작 ========== -->
+        <details
+          id="Royal-fanlight"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="아크릴 응원봉"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 아크릴 응원봉"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">1</span>
+            <span class="goods-name">21-22 The Royal MD<br>아크릴 응원봉</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1Zqx4yQ_W6F_K2HL2l7pMAzi3gCjlj7U9&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 아크릴 응원봉"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>15,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>아크릴 응원봉</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 1번 상품 끝 ========== -->
+
+
+        <!-- ========== 2번 가디건 시작 ========== -->
+        <details
+          id="Royal-cardigan"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="가디건"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 가디건, 의류"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">2</span>
+            <span class="goods-name">21-22 The Royal MD<br>가디건</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=13jvIR-dPRhK3vH5_LVjCvPJMmT0aW6yp&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 가디건"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>79,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>가디건 / 포토카드 4장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- 포토카드 영역 시작 -->
+<details
+  class="photocard-section photocard-details"
+  data-photocard
+>
+  <summary class="photocard-toggle">
+    <span>포토카드 보기</span>
+    <span class="photocard-arrow" aria-hidden="true"></span>
+  </summary>
+
+  <div class="photocard-types" aria-label="포토카드 유형">
+    <span class="photocard-type type-personal active">개인</span>
+    <span class="photocard-type type-unit">유닛</span>
+    <span class="photocard-type type-group">단체</span>
+  </div>
+
+  <div class="photocard-content">
+    <!-- 개인 포토카드 사진 -->
+    <img
+      class="photocard-image"
+      data-pc-types="personal"
+      src="https://drive.google.com/thumbnail?id=1DJXIRrINvfnWBqryJN9U_322_ue6FqZZ&amp;sz=w1600"
+      alt="21-22 더 로얄 가디건 포토카드"
+      loading="lazy"
+    >
+  </div>
+</details>
+<!-- 포토카드 영역 끝 -->
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 2번 상품 끝 ========== -->
+
+
+        <!-- ========== 3번 담요 시작 ========== -->
+        <details
+          id="Royal-blanket"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="양털 담요"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 양털 담요"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">3</span>
+            <span class="goods-name">21-22 The Royal MD<br>양털 담요</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1Jdps-5gCV2UWCcrYASYBKgsroSN0qvrm&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 양털 담요"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>28,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>양털 담요</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 3번 상품 끝 ========== -->
+
+
+        <!-- ========== 4번 머그 시작 ========== -->
+        <details
+          id="Royal-mug"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="머그컵"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 머그컵"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">4</span>
+            <span class="goods-name">21-22 The Royal MD<br>머그컵</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1InhVccTdal6HnTgXZeOIJoCXYTBXs8g1&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 머그컵"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>18,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>머그컵</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 4번 상품 끝 ========== -->
+
+
+        <!-- ========== 5번 에코백 시작 ========== -->
+        <details
+          id="Royal-ecobag"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="에코백"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 에코백"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">5</span>
+            <span class="goods-name">21-22 The Royal MD<br>에코백</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1W1G3BcGd3_6QLvkT6bQyDIhpO98F0uo0&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 에코백"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>25,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>에코백 / 포토카드 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- 포토카드 영역 시작 -->
+<details
+  class="photocard-section photocard-details"
+  data-photocard
+>
+  <summary class="photocard-toggle">
+    <span>포토카드 보기</span>
+    <span class="photocard-arrow" aria-hidden="true"></span>
+  </summary>
+
+  <div class="photocard-types" aria-label="포토카드 유형">
+    <span class="photocard-type type-personal">개인</span>
+    <span class="photocard-type type-unit">유닛</span>
+    <span class="photocard-type type-group active">단체</span>
+  </div>
+
+  <div class="photocard-content">
+    <!-- 개인 포토카드 사진 -->
+    <img
+      class="photocard-image"
+      data-pc-types="group"
+      src="https://drive.google.com/thumbnail?id=1qao7HMGHDvTUokXhkgv-MR9bFMyTNPNr&amp;sz=w1600"
+      alt="21-22 더 로얄 에코백 포토카드"
+      loading="lazy"
+    >
+  </div>
+</details>
+<!-- 포토카드 영역 끝 -->
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 5번 상품 끝 ========== -->
+
+
+        <!-- ========== 6번 엽서 시작 ========== -->
+        <details
+          id="Royal-postcard"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="엽서 세트"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 엽서"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">6</span>
+            <span class="goods-name">21-22 The Royal MD<br>엽서 세트</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1WSwz6NDefYnjN1Fk6k7NWHVtlgOD2alm&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 엽서 세트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>18,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>엽서 18장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 6번 상품 끝 ========== -->
+
+
+        <!-- ========== 7번 스티커 시작 ========== -->
+        <details
+          id="Royal-sticker"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="스티커 세트"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 스티커"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">7</span>
+            <span class="goods-name">21-22 The Royal MD<br>스티커 세트</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1gVhp-bIwXWBd8Rflv74dEOleRFvrC6uY&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 스티커 세트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>8,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>멤버별 4장 / 단체 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 7번 상품 끝 ========== -->
+
+
+        <!-- ========== 8번 포토북 시작 ========== -->
+        <details
+          id="Royal-photobook"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="미니 포토북"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 미니포토북"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">8</span>
+            <span class="goods-name">21-22 The Royal MD<br>미니 포토북</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1miqyUbIz7xBVubYH22duXoDakg5C26lv&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 미니 포토북"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>15,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>미니 포토북</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 8번 상품 끝 ========== -->
+
+
+        <!-- ========== 9번 틴케 시작 ========== -->
+        <details
+          id="Royal-pcset"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="포토카드 세트"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 포토카드 세트"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">9</span>
+            <span class="goods-name">21-22 The Royal MD<br>포토카드 세트</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1cVI5oQo5HhB46IMpQYrH6p0KmpQv33F7&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 포토카드 세트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>15,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>틴케이스 / 포토카드 15장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- 포토카드 영역 시작 -->
+<details
+  class="photocard-section photocard-details"
+  data-photocard
+>
+  <summary class="photocard-toggle">
+    <span>포토카드 보기</span>
+    <span class="photocard-arrow" aria-hidden="true"></span>
+  </summary>
+
+  <div class="photocard-types" aria-label="포토카드 유형">
+    <span class="photocard-type type-personal active">개인</span>
+    <span class="photocard-type type-unit">유닛</span>
+    <span class="photocard-type type-group active">단체</span>
+  </div>
+
+  <div class="photocard-content">
+    <!-- 개인 포토카드 사진 -->
+    <img
+      class="photocard-image"
+      data-pc-types="personal, group"
+      src="https://drive.google.com/thumbnail?id=1ANDve0PQwfPI0OVWib4iY-fVIT9002A7&amp;sz=w1600"
+      alt="21-22 더 로얄 포토카드 세트 포토카드"
+      loading="lazy"
+    >
+  </div>
+</details>
+<!-- 포토카드 영역 끝 -->
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 9번 상품 끝 ========== -->
+
+
+        <!-- ========== 10번 포토북 시작 ========== -->
+        <details
+          id="Royal-ticketbook"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="티켓북"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 티켓북"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">10</span>
+            <span class="goods-name">21-22 The Royal MD<br>티켓북</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1ANDve0PQwfPI0OVWib4iY-fVIT9002A7&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 티켓북"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>29,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>티켓북(내지25매) / 스페셜 티켓 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 내지 1매당 포켓 4개(총 100개)</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 10번 상품 끝 ========== -->
+
+        <!-- ========== 11번 입장포카 시작 ========== -->
+        <details
+          id="Royal-pc"
+          class="goods-accordion"
+          data-category=" "
+          data-name="관람객 대상 포토카드"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, 특전, 포토카드, 입장, 포카, 싸인, 사인"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">11</span>
+            <span class="goods-name">21-22 The Royal MD<br>관람객 대상 포토카드</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1tBZKWZUsTe1U7UIO_WBBioYAcesjzCaR&amp;sz=w1600"
+                alt="21-22 더로얄 관람객 대상 포토카드"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 양일 이미지 상이<br>- 싸인 포토카드</td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- 포토카드 영역 시작 -->
+<details
+  class="photocard-section photocard-details"
+  data-photocard
+>
+  <summary class="photocard-toggle">
+    <span>포토카드 보기</span>
+    <span class="photocard-arrow" aria-hidden="true"></span>
+  </summary>
+
+  <div class="photocard-types" aria-label="포토카드 유형">
+    <span class="photocard-type type-personal">개인</span>
+    <span class="photocard-type type-unit">유닛</span>
+    <span class="photocard-type type-group active">단체</span>
+  </div>
+
+  <div class="photocard-content">
+    <!-- 개인 포토카드 사진 -->
+    <img
+      class="photocard-image"
+      data-pc-types="group"
+      src="https://drive.google.com/thumbnail?id=1hVj7t9aySV9bw9_0YbhK0_9Clf3uFXEm&amp;sz=w1600"
+      alt="21-22 더 로얄 포토카드 세트 포토카드"
+      loading="lazy"
+    >
+  </div>
+</details>
+<!-- 포토카드 영역 끝 -->
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 11번 상품 끝 ========== -->
+
+
+        <!-- ========== 12번 현수포스터 시작 ========== -->
+        <details
+          id="Royal-poster"
+          class="goods-accordion"
+          data-category=" "
+          data-name="티켓 현장수령 특전 포스터"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, 특전, 포스터, 현장수령, 싸인, 사인"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">12</span>
+            <span class="goods-name">21-22 The Royal MD<br>티켓 현장수령 특전 포스터</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1tBZKWZUsTe1U7UIO_WBBioYAcesjzCaR&amp;sz=w1600"
+                alt="21-22 더로얄 티켓 현장수령 특전 포스터"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 양일 이미지 상이<br>- 싸인 포스터</td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- 포토카드 영역 시작 -->
+<details
+  class="photocard-section photocard-details"
+  data-photocard
+>
+  <summary class="photocard-toggle">
+    <span>포토카드 보기</span>
+    <span class="photocard-arrow" aria-hidden="true"></span>
+  </summary>
+
+  <div class="photocard-types" aria-label="포토카드 유형">
+    <span class="photocard-type type-personal">개인</span>
+    <span class="photocard-type type-unit">유닛</span>
+    <span class="photocard-type type-group active">단체</span>
+  </div>
+
+  <div class="photocard-content">
+    <!-- 개인 포토카드 사진 -->
+    <img
+      class="photocard-image"
+      data-pc-types="group"
+      src="https://drive.google.com/thumbnail?id=1hVj7t9aySV9bw9_0YbhK0_9Clf3uFXEm&amp;sz=w1600"
+      alt="21-22 더 로얄 포토카드 세트 포토카드"
+      loading="lazy"
+    >
+  </div>
+</details>
+<!-- 포토카드 영역 끝 -->
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 12번 상품 끝 ========== -->
+
+
+        <!-- ========== 13번 딥디 시작 ========== -->
+        <details
+          id="Royal-dvd"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="포토북 & DVD"
+          data-keywords="21-22 the royal, 21 22 the royal, 더로얄, 더로열, md, 엠디, 포토북, dvd, 디비디, 딥디"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">9</span>
+            <span class="goods-name">21-22 The Royal MD<br>포토북 & DVD</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <!-- ---------- 상품 상세 시작 ---------- -->
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1u3FYUI0iU0DPan1Nxx8y2EQAcRpYEkKq&amp;sz=w1600"
+                alt="21-22 더로얄 엠디 dvd"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!--
+                <h3 class="product-name">제품명</h3>
+                <p class="product-subtext">제품 설명</p>
+                -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>39,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>케이스 / 포토북 / CD / 포토카드 5장 / 메시지 스티커 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+<!-- 포토카드 영역 시작 -->
+<details
+  class="photocard-section photocard-details"
+  data-photocard
+>
+  <summary class="photocard-toggle">
+    <span>포토카드 보기</span>
+    <span class="photocard-arrow" aria-hidden="true"></span>
+  </summary>
+
+  <div class="photocard-types" aria-label="포토카드 유형">
+    <span class="photocard-type type-personal active">개인</span>
+    <span class="photocard-type type-unit">유닛</span>
+    <span class="photocard-type type-group active">단체</span>
+  </div>
+
+  <div class="photocard-content">
+    <!-- 개인 포토카드 사진 -->
+    <img
+      class="photocard-image"
+      data-pc-types="personal, group"
+      src="https://drive.google.com/thumbnail?id=1TqAUJ189-QYsXczjKDWFB58zU7DGU0Al&amp;sz=w1600"
+      alt="21-22 더 로얄 dvd 포토카드"
+      loading="lazy"
+    >
+  </div>
+</details>
+<!-- 포토카드 영역 끝 -->
+
+          </div>
+          <!-- ---------- 상품 상세 끝 ---------- -->
+        </details>
+        <!-- ========== 13번 상품 끝 ========== -->
+
+      </div>
+    </section>
+    <!-- ========== 굿즈 목록 끝 ========== -->
+
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+
+  <script>
+    (() => {
+      /*
+        검색 결과에서 전달한 상품 번호 또는
+        주소의 #상품아이디를 읽습니다.
+      */
+      const cards = document.querySelectorAll(
+        ".goods-accordion[data-category]"
+      );
+
+      const params = new URLSearchParams(location.search);
+      const productNumber = Number(params.get("product"));
+
+      let target = null;
+
+      /* 상품 id가 있으면 우선 사용 */
+      try {
+        const id = decodeURIComponent(location.hash.slice(1));
+        const element = id ? document.getElementById(id) : null;
+
+        if (element?.matches(".goods-accordion[data-category]")) {
+          target = element;
+        }
+      } catch {
+        // 잘못된 주소 형식이면 상품 번호로 확인
+      }
+
+      /* id가 없는 상품은 번호로 찾기 */
+      if (
+        !target &&
+        Number.isInteger(productNumber) &&
+        productNumber >= 1
+      ) {
+        target = cards[productNumber - 1];
+      }
+
+      if (!target) return;
+
+      target.open = true;
+
+      function scrollToProduct() {
+        target.scrollIntoView({
+          block: "start"
+        });
+      }
+
+      if (document.readyState === "complete") {
+        scrollToProduct();
+      } else {
+        window.addEventListener("load", scrollToProduct, {
+          once: true
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
