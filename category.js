@@ -9,7 +9,8 @@ const activityPages = [
   { name: "Evolution", url: "./Evolution.html" },
   { name: "Mystique", url: "./mystique.html" },
   { name: "MY YOUTH", url: "./MyYouth.html" },
-  { name: "The Forestella", url: "./TheFore.html" }
+  { name: "The Forestella", url: "./TheFore.html" },
+  { name: "시간여행", url: "./time.html" }
 ];
 
   const category = document.body.dataset.category;
