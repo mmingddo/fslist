@@ -14,7 +14,8 @@
     { name: "바람", url: "./wind.html" },
     { name: "The Forestella", url: "./TheFore.html" },
     { name: "ID: PITTA", url: "./idpitta.html" },
-    { name: "PARANA", url: "./parana.html" }
+    { name: "PARANA", url: "./parana.html" },
+    { name: "숲별 1기", url: "./sb1.html" }
   ];
 
   const validTypes = ["personal", "unit", "group"];
