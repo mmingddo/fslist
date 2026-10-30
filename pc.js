@@ -4,7 +4,9 @@
   ==================== */
   const activityPages = [
     { name: "Evolution", url: "./Evolution.html" },
-    { name: "Mystique", url: "./mystique.html" }
+    { name: "Mystique", url: "./mystique.html" },
+    { name: "시간여행", url: "./time.html" },
+    { name: "The Forestella", url: "./TheFore.html" }
   ];
 
   const validTypes = ["personal", "unit", "group"];
