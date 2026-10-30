@@ -498,6 +498,45 @@
         width: 40%;
       }
     }
+
+    /* ====================
+       포토카드 유형 표시
+    ==================== */
+    .photocard-types {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+      width: 100%;
+      margin: 0;
+      padding: 12px;
+    }
+
+    .photocard-type {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 3px 2px;
+      border-radius: 20px;
+      background: #b5b5b5;
+      color: #333;
+      font-size: 13px;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .type-personal.active {
+      background: #dfb2fa;
+    }
+
+    .type-unit.active {
+      background: #ffd18b;
+    }
+
+    .type-group.active {
+      background: #a8e8e8;
+    }
+  </style>
   </style>
 </head>
 
