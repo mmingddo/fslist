@@ -10,7 +10,6 @@
 
   <title>굿즈리스트</title>
 
-  <!-- 앱 설치 설정 및 브라우저 아이콘 -->
   <link rel="manifest" href="./manifest.webmanifest">
   <link
     rel="icon"
@@ -53,6 +52,10 @@
       box-sizing: border-box;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     body {
       margin: 0;
       background: var(--background-color);
@@ -66,10 +69,6 @@
     select,
     textarea {
       font: inherit;
-    }
-
-    [hidden] {
-      display: none !important;
     }
 
     main {
@@ -90,7 +89,7 @@
     }
 
     /* ====================
-       제목 및 안내 문구
+       제목·안내 문구
     ==================== */
     .site-title,
     .page-title {
@@ -111,30 +110,31 @@
       height: 40px;
     }
 
-    /* 메인 제목 크기 */
+    /* 메인 제목 */
     .title-text {
       font-size: 25px;
       font-weight: 700;
       line-height: 1;
     }
 
-    /* 리스트 제목 크기 */
+    /* 리스트 제목 */
     #list .page-title {
       font-size: 26px;
     }
 
-    /* 검색 제목 크기 */
+    /* 검색 제목 */
     #search .page-title {
       font-size: 26px;
     }
 
-    /* 카테고리 제목 크기 */
+    /* 메뉴 제목 */
     #category .page-title {
       font-size: 26px;
     }
 
     .page-title svg,
-    .menu-button svg {
+    .menu-button svg,
+    .menu-section-title svg {
       flex-shrink: 0;
       fill: none;
       stroke: currentColor;
@@ -156,8 +156,15 @@
       line-height: 1.6;
     }
 
+    .news-title {
+      margin: 0 0 6px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
     /* ====================
-       메인 상단 버튼
+       메인·마이페이지 버튼
     ==================== */
     .home-links {
       display: grid;
@@ -194,15 +201,8 @@
       border-top: 1px solid #ddd;
     }
 
-    .news-title {
-      margin: 0 0 6px;
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
     /* ====================
-       굿즈 펼치기 카드
+       메인 굿즈 소식
     ==================== */
     .goods-news {
       display: grid;
@@ -257,7 +257,6 @@
       font-weight: 500;
     }
 
-    /* 펼치기 화살표 */
     .accordion-arrow {
       display: flex;
       align-items: center;
@@ -280,14 +279,12 @@
       border-bottom: 10px solid var(--accent-color);
     }
 
-    /* 카드 제목 아래 구분선 */
     .goods-title-divider {
       margin: 0 12px;
       border: 0;
       border-top: 1px solid #ddd;
     }
 
-    /* 상세 목록 */
     .goods-detail {
       padding-bottom: 4px;
     }
@@ -303,7 +300,6 @@
       min-width: 0;
     }
 
-    /* 공지글·리스트 버튼 가로 배치 */
     .goods-info-buttons {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -331,7 +327,6 @@
       cursor: pointer;
     }
 
-    /* 사진은 제품명과 버튼 전체 높이의 중앙 */
     .goods-photo-link {
       display: block;
       align-self: center;
@@ -351,13 +346,35 @@
       object-position: center;
     }
 
-    .goods-preview-empty {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 10px;
-      text-align: center;
+    /* ====================
+       리스트 정렬
+    ==================== */
+    .activity-sort {
+      margin-top: 24px;
+    }
+
+    .activity-sort-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .activity-sort-button {
+      min-height: 40px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .activity-sort-button[aria-pressed="true"] {
+      border-color: var(--accent-color);
+      background: var(--accent-color);
+      color: #fff;
     }
 
     /* ====================
@@ -405,8 +422,23 @@
     }
 
     /* ====================
-       카테고리
+       메뉴 내부 제목·카테고리
     ==================== */
+    .menu-section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0 0;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .menu-section-title svg {
+      width: 24px;
+      height: 24px;
+    }
+
     .category-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -422,12 +454,8 @@
       grid-column: 1 / -1;
     }
 
-    .category-year {
-      margin-top: 30px;
-    }
-
     /* ====================
-       검색
+       검색창
     ==================== */
     .search-input {
       width: 100%;
@@ -519,6 +547,43 @@
       color: var(--accent-color);
     }
 
+    /* 검색 결과 */
+    .search-results {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .search-result {
+      display: block;
+      padding: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .search-result:hover {
+      border-color: var(--accent-color);
+    }
+
+    .search-result-name {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .search-result-meta {
+      display: block;
+      margin-top: 6px;
+      color: #555;
+      font-size: var(--small-text-size);
+      line-height: 1.6;
+    }
+
     /* ====================
        제작자 표기
     ==================== */
@@ -531,7 +596,6 @@
       text-align: left;
     }
 
-    /* 링크 색깔과 연결은 유지하고 밑줄만 제거 */
     .site-credit a,
     .site-credit a:hover,
     .site-credit a:focus,
@@ -629,7 +693,9 @@
       border-radius: 10px;
     }
 
-    /* 작은 화면에서도 활동 카드 3열 유지 */
+    /* ====================
+       모바일
+    ==================== */
     @media (max-width: 480px) {
       .activity-grid {
         gap: 8px;
@@ -644,108 +710,6 @@
         font-size: 11px;
       }
     }
-    /* ====================
-   실제 상품 검색 결과
-==================== */
-.search-results {
-  display: grid;
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.search-result {
-  display: block;
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  color: #000;
-  text-decoration: none;
-}
-
-.search-result:hover {
-  border-color: var(--accent-color);
-}
-
-.search-result-name {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.search-result-meta {
-  display: block;
-  margin-top: 6px;
-  color: #555;
-  font-size: var(--small-text-size);
-  line-height: 1.6;
-}
-/* ====================
-   리스트 정렬
-==================== */
-.activity-sort {
-  margin-top: 24px;
-}
-
-.activity-sort-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.activity-sort-button {
-  min-height: 40px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 999px;
-  background: #fff;
-  color: #000;
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.activity-sort-button[aria-pressed="true"] {
-  border-color: #3662ae;
-  background: #3662ae;
-  color: #fff;
-}
-/* 메뉴 안의 카테고리·마이페이지 제목 */
-.menu-section-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 28px 0 0;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
-.menu-section-title svg {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-/* 하단 메뉴의 샵 아이콘 */
-.menu-button[data-page="category"] svg {
-  display: block;
-  width: 25px;
-  height: 25px;
-  flex-shrink: 0;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
   </style>
 </head>
 
@@ -783,31 +747,23 @@
         (X(구 트위터), 인스타그램 등)
       </p>
 
-      <!-- 전체 굿즈 목록 시작 -->
       <div class="goods-news">
 
         <!-- ========== 1번 굿즈 시작 ========== -->
         <details class="goods-accordion">
           <summary class="goods-summary">
             <span class="goods-number">1</span>
-
             <span class="goods-name accordion-title">
               [ 포레스텔라 ]<br>
               카니버 X 포레스텔<br>
               콜라보 패키지
             </span>
-
-            <span
-              class="accordion-arrow"
-              aria-hidden="true"
-            ></span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-title-divider">
 
-          <!-- 1번 상세 목록 시작 -->
           <div class="goods-detail">
-
             <!-- ---------- 1-1번 제품 시작 ---------- -->
             <div class="goods-detail-row">
               <span class="goods-number">1</span>
@@ -821,17 +777,13 @@
                     href="https://www.instagram.com/p/De_cqCkRfMu/"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
@@ -845,9 +797,7 @@
               </div>
             </div>
             <!-- ---------- 1-1번 제품 끝 ---------- -->
-
           </div>
-          <!-- 1번 상세 목록 끝 -->
         </details>
         <!-- ========== 1번 굿즈 끝 ========== -->
 
@@ -856,30 +806,23 @@
         <details class="goods-accordion">
           <summary class="goods-summary">
             <span class="goods-number">2</span>
-
             <span class="goods-name accordion-title">
               [ 포레스텔라 ]<br>
               카니버 X 포레스텔<br>
-              넥텍 & 드롭스토퍼
+              넥텍 &amp; 드롭스토퍼
             </span>
-
-            <span
-              class="accordion-arrow"
-              aria-hidden="true"
-            ></span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-title-divider">
 
-          <!-- 2번 상세 목록 시작 -->
           <div class="goods-detail">
-
             <!-- ---------- 2-1번 제품 시작 ---------- -->
             <div class="goods-detail-row">
               <span class="goods-number">1</span>
 
               <div class="goods-info">
-                <span class="goods-name">넥텍 & 드롭스토퍼</span>
+                <span class="goods-name">넥텍 &amp; 드롭스토퍼</span>
 
                 <div class="goods-info-buttons">
                   <a
@@ -887,17 +830,13 @@
                     href="https://www.instagram.com/p/DeqPohRGFvv/"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
@@ -911,9 +850,7 @@
               </div>
             </div>
             <!-- ---------- 2-1번 제품 끝 ---------- -->
-
           </div>
-          <!-- 2번 상세 목록 끝 -->
         </details>
         <!-- ========== 2번 굿즈 끝 ========== -->
 
@@ -922,24 +859,17 @@
         <details class="goods-accordion">
           <summary class="goods-summary">
             <span class="goods-number">3</span>
-
             <span class="goods-name accordion-title">
               [ 민규 ]<br>
               2026 MONO DRAMA<br>
               Sweet Escape MD
             </span>
-
-            <span
-              class="accordion-arrow"
-              aria-hidden="true"
-            ></span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-title-divider">
 
-          <!-- 3번 상세 목록 시작 -->
           <div class="goods-detail">
-
             <!-- ---------- 3-1번 제품 시작 ---------- -->
             <div class="goods-detail-row">
               <span class="goods-number">1</span>
@@ -953,17 +883,13 @@
                     href="https://www.instagram.com/p/DdTkgByGnRB/"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
@@ -977,9 +903,7 @@
               </div>
             </div>
             <!-- ---------- 3-1번 제품 끝 ---------- -->
-
           </div>
-          <!-- 3번 상세 목록 끝 -->
         </details>
         <!-- ========== 3번 굿즈 끝 ========== -->
 
@@ -988,24 +912,17 @@
         <details class="goods-accordion">
           <summary class="goods-summary">
             <span class="goods-number">4</span>
-
             <span class="goods-name accordion-title">
               [ 민규 ]<br>
               2nd EP ALBUM<br>
               Sweet Escape
             </span>
-
-            <span
-              class="accordion-arrow"
-              aria-hidden="true"
-            ></span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-title-divider">
 
-          <!-- 2번 상세 목록 시작 -->
           <div class="goods-detail">
-
             <!-- ---------- 4-1번 제품 시작 ---------- -->
             <div class="goods-detail-row">
               <span class="goods-number">1</span>
@@ -1019,17 +936,13 @@
                     href="https://www.instagram.com/p/DciGlo-moGu/?"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
@@ -1058,17 +971,13 @@
                     href="https://www.instagram.com/p/DciGhFpGmC0/?"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
@@ -1097,17 +1006,13 @@
                     href="https://x.com/KiTalbum/status/2094696998201069971?s=20"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
@@ -1122,6 +1027,7 @@
             </div>
             <!-- ---------- 4-3번 제품 끝 ---------- -->
 
+
             <!-- ---------- 4-4번 제품 시작 ---------- -->
             <div class="goods-detail-row">
               <span class="goods-number">4</span>
@@ -1132,62 +1038,49 @@
                 <div class="goods-info-buttons">
                   <a
                     class="goods-action-button"
-                    href="https://x.com/KiTalbum/status/2097565674486763552?&s=20"
+                    href="https://x.com/KiTalbum/status/2097565674486763552?&amp;s=20"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
               <div class="goods-photo-link">
                 <img
                   class="goods-preview"
-                  src="https://pbs.twimg.com/media/HRwFdJmbUAAhvXT?format=jpg&name=large"
-                  alt="조민규 스윗 이스케이프 키트베러 컵홀 공지 미리보기"
+                  src="https://pbs.twimg.com/media/HRwFdJmbUAAhvXT?format=jpg&amp;name=large"
+                  alt="조민규 스윗 이스케이프 키트베러 컵홀더 공지 미리보기"
                   loading="lazy"
                 >
               </div>
             </div>
             <!-- ---------- 4-4번 제품 끝 ---------- -->
-
           </div>
-          <!-- 4번 상세 목록 끝 -->
         </details>
         <!-- ========== 4번 굿즈 끝 ========== -->
 
 
         <!-- ========== 5번 굿즈 시작 ========== -->
         <details class="goods-accordion">
-        <summary class="goods-summary">
+          <summary class="goods-summary">
             <span class="goods-number">5</span>
-
             <span class="goods-name accordion-title">
               [ 민규 ]<br>
               2nd EP ALBUM<br>
               Sweet Escape 청음회
             </span>
-
-            <span
-              class="accordion-arrow"
-              aria-hidden="true"
-            ></span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-title-divider">
 
-          <!-- 5번 상세 목록 시작 -->
           <div class="goods-detail">
-
             <!-- ---------- 5-1번 제품 시작 ---------- -->
             <div class="goods-detail-row">
               <span class="goods-number">1</span>
@@ -1201,17 +1094,13 @@
                     href="https://www.instagram.com/p/DctB_dgmtfT/?"
                     target="_blank"
                     rel="noopener noreferrer"
-                  >
-                    공지글 보기
-                  </a>
+                  >공지글 보기</a>
 
                   <button
                     class="goods-action-button"
                     type="button"
                     data-open-page="list"
-                  >
-                    리스트 보기
-                  </button>
+                  >리스트 보기</button>
                 </div>
               </div>
 
@@ -1224,12 +1113,12 @@
                 >
               </div>
             </div>
-          <!-- 5번 상세 목록 끝 -->
+            <!-- ---------- 5-1번 제품 끝 ---------- -->
+          </div>
         </details>
         <!-- ========== 5번 굿즈 끝 ========== -->
 
       </div>
-      <!-- 전체 굿즈 목록 끝 -->
     </section>
     <!-- 메인 화면 끝 -->
 
@@ -1240,13 +1129,7 @@
     <section id="list" hidden>
       <h1 class="page-title">
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect
-            x="4"
-            y="3"
-            width="16"
-            height="18"
-            rx="2"
-          ></rect>
+          <rect x="4" y="3" width="16" height="18" rx="2"></rect>
           <path d="m8 12 3 3 5-6"></path>
         </svg>
         <span>리스트</span>
@@ -1254,43 +1137,41 @@
 
       <p class="news-description">
         활동 별로 분류되어 있어요.<br>
-        다른 카테고리로 보고 싶다면, 하단 카테고리 메뉴를 이용해 주세요!
+        다른 카테고리로 보고 싶다면, 하단 메뉴를 이용해 주세요!
       </p>
 
-<!-- 정렬순 변경 시작 -->
-<div class="activity-sort">
-  <h2 class="news-title">정렬순 변경</h2>
+      <!-- 정렬순 변경 시작 -->
+      <div class="activity-sort">
+        <h2 class="news-title">정렬순 변경</h2>
 
-  <div class="activity-sort-buttons" role="group" aria-label="리스트 정렬">
-    <button
-      class="activity-sort-button"
-      type="button"
-      data-sort="original"
-      aria-pressed="true"
-    >
-      오래된
-    </button>
+        <div
+          class="activity-sort-buttons"
+          role="group"
+          aria-label="리스트 정렬"
+        >
+          <button
+            class="activity-sort-button"
+            type="button"
+            data-sort="original"
+            aria-pressed="true"
+          >오래된순</button>
 
-    <button
-      class="activity-sort-button"
-      type="button"
-      data-sort="reverse"
-      aria-pressed="false"
-    >
-      최신순
-    </button>
-  </div>
-</div>
-<!-- 정렬순 변경 끝 -->
+          <button
+            class="activity-sort-button"
+            type="button"
+            data-sort="reverse"
+            aria-pressed="false"
+          >최신순</button>
+        </div>
+      </div>
+      <!-- 정렬순 변경 끝 -->
 
-<!-- 이 아래에 기존 활동 카드 목록 -->
 
       <!-- 활동 카드 목록 시작 -->
       <div class="activity-grid">
 
-        <!--1 활동 에볼 시작 -->
-        <article class="activity-card" data-year="2018"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 1 시작 ========== -->
+        <article class="activity-card" data-year="2018">
           <a
             class="activity-image-link"
             href="./Evolution.html"
@@ -1303,15 +1184,13 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">Evolution</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 1 끝 ========== -->
 
 
-        <!--2 활동 미스티크 시작 -->
-        <article class="activity-card" data-year="2019"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 2 시작 ========== -->
+        <article class="activity-card" data-year="2019">
           <a
             class="activity-image-link"
             href="./mystique.html"
@@ -1324,19 +1203,17 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">Mystique</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 2 끝 ========== -->
 
 
-        <!--3 활동 마유스 시작 -->
-        <article class="activity-card" data-year="2019"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 3 시작 ========== -->
+        <article class="activity-card" data-year="2019">
           <a
             class="activity-image-link"
             href="./MyYouth.html"
-            aria-label="My Youth 상세페이지 보기"
+            aria-label="MY YOUTH 상세페이지 보기"
           >
             <img
               class="activity-image"
@@ -1345,19 +1222,17 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">MY YOUTH</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 3 끝 ========== -->
 
 
-        <!--4 활동 반고흐 시작 -->
-        <article class="activity-card" data-year="2019"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 4 시작 ========== -->
+        <article class="activity-card" data-year="2019">
           <a
             class="activity-image-link"
             href="./gogh19.html"
-            aria-label="빈센트 반고흐 상세페이지 보기"
+            aria-label="빈센트 반 고흐 상세페이지 보기"
           >
             <img
               class="activity-image"
@@ -1366,19 +1241,17 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">2019<br>빈센트 반 고흐</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 4 끝 ========== -->
 
 
-        <!--5 활동 뉴에이지 시작 -->
-        <article class="activity-card" data-year="2020"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 5 시작 ========== -->
+        <article class="activity-card" data-year="2020">
           <a
             class="activity-image-link"
             href="./newage.html"
-            aria-label="New age 상세페이지 보기"
+            aria-label="NEW AGE 상세페이지 보기"
           >
             <img
               class="activity-image"
@@ -1387,15 +1260,13 @@
               loading="lazy"
             >
           </a>
-
-          <h2 class="activity-name"> 신세계:<br>NEW AGE</h2>
+          <h2 class="activity-name">신세계:<br>NEW AGE</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 5 끝 ========== -->
 
 
-        <!--6 활동 렌트 시작 -->
-        <article class="activity-card" data-year="2020"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 6 시작 ========== -->
+        <article class="activity-card" data-year="2020">
           <a
             class="activity-image-link"
             href="./rent20.html"
@@ -1404,23 +1275,21 @@
             <img
               class="activity-image"
               src="https://drive.google.com/thumbnail?id=1n9niOkCw2bxOguDQQ3Nh-EJs57h111m3&amp;sz=w1600"
-              alt="2020 Rent"
+              alt="2020 RENT"
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">2020<br>RENT</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 6 끝 ========== -->
 
 
-        <!--7 활동 시간여행 시작 -->
-        <article class="activity-card" data-year="2020"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 7 시작 ========== -->
+        <article class="activity-card" data-year="2020">
           <a
             class="activity-image-link"
             href="./time.html"
-            aria-label="My Youth 상세페이지 보기"
+            aria-label="시간여행 상세페이지 보기"
           >
             <img
               class="activity-image"
@@ -1429,15 +1298,13 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">시간여행</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 7 끝 ========== -->
 
 
-        <!--8 활동 미드나잇 시작 -->
-        <article class="activity-card" data-year="2020"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 8 시작 ========== -->
+        <article class="activity-card" data-year="2020">
           <a
             class="activity-image-link"
             href="./midnight20.html"
@@ -1450,15 +1317,15 @@
               loading="lazy"
             >
           </a>
-
-          <h2 class="activity-name">2020<br>미드나잇:<br>액터뮤지션</h2>
+          <h2 class="activity-name">
+            2020<br>미드나잇:<br>액터뮤지션
+          </h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 8 끝 ========== -->
 
 
-        <!--9 활동 바람 시작 -->
-        <article class="activity-card" data-year="2021"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 9 시작 ========== -->
+        <article class="activity-card" data-year="2021">
           <a
             class="activity-image-link"
             href="./wind.html"
@@ -1471,14 +1338,13 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">바람</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 9 끝 ========== -->
 
-        <!--10 활동 더포레 시작 -->
-        <article class="activity-card" data-year="2021"></article>
-        <article class="activity-card">
+
+        <!-- ========== 활동 10 시작 ========== -->
+        <article class="activity-card" data-year="2021">
           <a
             class="activity-image-link"
             href="./TheFore.html"
@@ -1491,19 +1357,17 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">The Forestella</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 10 끝 ========== -->
 
 
-        <!--11 활동 아이디피타 시작 -->
-        <article class="activity-card" data-year="2021"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 11 시작 ========== -->
+        <article class="activity-card" data-year="2021">
           <a
             class="activity-image-link"
             href="./idpitta.html"
-            aria-label="ID Forestella 상세페이지 보기"
+            aria-label="ID: PITTA 상세페이지 보기"
           >
             <img
               class="activity-image"
@@ -1512,15 +1376,13 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">ID: PITTA</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 11 끝 ========== -->
 
-  
-        <!--12 활동 파라나 시작 -->
-        <article class="activity-card" data-year="2021"></article>
-        <article class="activity-card">
+
+        <!-- ========== 활동 12 시작 ========== -->
+        <article class="activity-card" data-year="2021">
           <a
             class="activity-image-link"
             href="./parana.html"
@@ -1533,15 +1395,13 @@
               loading="lazy"
             >
           </a>
-
-          <h2 class="activity-name"> 신세계:<br>PARANA</h2>
+          <h2 class="activity-name">신세계:<br>PARANA</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 12 끝 ========== -->
 
 
-        <!--13 활동 숲별 1기 시작 -->
-        <article class="activity-card" data-year="2021"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 13 시작 ========== -->
+        <article class="activity-card" data-year="2021">
           <a
             class="activity-image-link"
             href="./sb1.html"
@@ -1554,15 +1414,13 @@
               loading="lazy"
             >
           </a>
-
-          <h2 class="activity-name"> 숲별 1기</h2>
+          <h2 class="activity-name">숲별 1기</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 13 끝 ========== -->
 
 
-        <!--14 활동 21 로얄 시작 -->
-        <article class="activity-card" data-year="2021"></article>
-        <article class="activity-card">
+        <!-- ========== 활동 14 시작 ========== -->
+        <article class="activity-card" data-year="2021">
           <a
             class="activity-image-link"
             href="./royal21.html"
@@ -1575,10 +1433,9 @@
               loading="lazy"
             >
           </a>
-
           <h2 class="activity-name">21-22<br>The Royal</h2>
         </article>
-        <!-- 활동 끝 -->
+        <!-- ========== 활동 14 끝 ========== -->
 
       </div>
       <!-- 활동 카드 목록 끝 -->
@@ -1642,89 +1499,92 @@
         class="news-description"
         role="status"
       ></p>
+
+      <div id="search-results" class="search-results"></div>
     </section>
     <!-- 검색 화면 끝 -->
 
 
     <!-- ====================
-         카테고리 화면 시작
+         메뉴 화면 시작
     ==================== -->
-<h1 class="page-title">
-  <span>메뉴</span>
-</h1>
+    <section id="category" hidden>
+      <h1 class="page-title">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 6h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 18h16"></path>
+        </svg>
+        <span>메뉴</span>
+      </h1>
 
-<!-- 카테고리 제목 -->
-<h2 class="menu-section-title">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M3 9h18l-2-6H5L3 9Z"></path>
-    <path d="M3 9v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V9"></path>
-    <path d="M5 14v7h14v-7h4v7"></path>
-  </svg>
-  <span>카테고리</span>
-</h2>
+      <!-- 카테고리 -->
+      <h2 class="menu-section-title">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 3 8 21"></path>
+          <path d="M16 3 14 21"></path>
+          <path d="M4 9h16"></path>
+          <path d="M3 15h16"></path>
+        </svg>
+        <span>카테고리</span>
+      </h2>
 
       <div class="category-grid">
-<a
-  class="category-item category-all"
-  href="./pc.html"
->
-  포토카드만 모아보기
-</a>
+        <a
+          class="category-item category-all"
+          href="./pc.html"
+        >포토카드만 모아보기</a>
 
-       <a class="category-item" href="./album.html">
-  앨범
-</a>
+        <a class="category-item" href="./album.html">
+          앨범
+        </a>
 
-<a class="category-item" href="./md.html">
-  MD
-</a>
+        <a class="category-item" href="./md.html">
+          MD
+        </a>
 
-<a class="category-item" href="./seasongreeting.html">
-  시즌그리팅
-</a>
+        <a class="category-item" href="./seasongreeting.html">
+          시즌그리팅
+        </a>
 
-<a class="category-item" href="./fankit.html">
-  팬키트
-</a>
+        <a class="category-item" href="./fankit.html">
+          팬키트
+        </a>
 
-<a class="category-item" href="./etc.html">
-  기타
-</a>
+        <a class="category-item" href="./etc.html">
+          기타
+        </a>
 
-<a class="category-item" href="./solo.html">
-  개인
-</a>
+        <a class="category-item" href="./solo.html">
+          개인
+        </a>
 
-<a
-  class="category-item category-all"
-  href=".year.html"
->
-  년도별
-</a>
+        <a
+          class="category-item category-all"
+          href="./year.html"
+        >년도별</a>
       </div>
 
-<!-- 마이페이지 영역 시작 -->
-<h2 class="menu-section-title">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 5v16"></path>
-    <path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path>
-  </svg>
-  <span>마이페이지</span>
-</h2>
+      <!-- 마이페이지 -->
+      <h2 class="menu-section-title">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v16"></path>
+          <path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path>
+        </svg>
+        <span>마이페이지</span>
+      </h2>
 
-<div class="home-links">
-  <a class="home-link" href="./mypage.html#bookmarks">
-    북마크 모아보기
-  </a>
+      <div class="home-links">
+        <a class="home-link" href="./mypage.html#bookmarks">
+          북마크 모아보기
+        </a>
 
-  <a class="home-link" href="./mypage.html#notes">
-    메모 모아보기
-  </a>
-</div>
-<!-- 마이페이지 영역 끝 -->
-
+        <a class="home-link" href="./mypage.html#notes">
+          메모 모아보기
+        </a>
+      </div>
     </section>
-    <!-- 카테고리 화면 끝 -->
+    <!-- 메뉴 화면 끝 -->
 
 
     <!-- ====================
@@ -1766,12 +1626,11 @@
 
   <!-- ====================
        하단 메뉴
-       메인 → 리스트 → 검색 → 카테고리
+       메인 → 리스트 → 검색 → 메뉴
   ==================== -->
   <nav class="bottom-menu" aria-label="하단 메뉴">
     <div class="menu-inner">
 
-      <!-- 메인 버튼 -->
       <button
         class="menu-button"
         type="button"
@@ -1786,7 +1645,6 @@
         <span>메인</span>
       </button>
 
-      <!-- 리스트 버튼 -->
       <button
         class="menu-button"
         type="button"
@@ -1794,19 +1652,12 @@
         aria-controls="list"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect
-            x="4"
-            y="3"
-            width="16"
-            height="18"
-            rx="2"
-          ></rect>
+          <rect x="4" y="3" width="16" height="18" rx="2"></rect>
           <path d="m8 12 3 3 5-6"></path>
         </svg>
         <span>리스트</span>
       </button>
 
-      <!-- 검색 버튼 -->
       <button
         class="menu-button"
         type="button"
@@ -1820,654 +1671,639 @@
         <span>검색</span>
       </button>
 
-<!-- 메뉴 버튼 -->
-<button
-  class="menu-button"
-  type="button"
-  data-page="category"
-  aria-controls="category"
->
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M3 9h18l-2-6H5L3 9Z"></path>
-    <path d="M3 9v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V9"></path>
-    <path d="M5 14v7h14v-7"></path>
-    <path d="M10 21v-6h4v6"></path>
-  </svg>
-  <span>메뉴</span>
-</button>
+      <button
+        class="menu-button"
+        type="button"
+        data-page="category"
+        aria-controls="category"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 6h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 18h16"></path>
+        </svg>
+        <span>메뉴</span>
+      </button>
 
     </div>
   </nav>
 
 
-<script>
-  (() => {
-    /* ====================
-       화면 전환
-    ==================== */
-    /* 브라우저의 이전 스크롤 위치 자동 복원 해제 */
-if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
-}
-    const menuButtons = document.querySelectorAll(".menu-button");
-    const pages = document.querySelectorAll("main > section");
+  <script>
+    (() => {
+      /* ====================
+         화면 전환·리스트 정렬·위치 복원
+      ==================== */
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
 
-    function openPage(pageId) {
-      const targetPage = [...pages].find(
-        (page) => page.id === pageId
-      );
+      const pages = [
+        ...document.querySelectorAll("main > section")
+      ];
 
-      if (!targetPage) return;
+      const menuButtons = [
+        ...document.querySelectorAll(".menu-button")
+      ];
 
-      pages.forEach((page) => {
-        page.hidden = page !== targetPage;
-      });
+      const grid = document.querySelector("#list .activity-grid");
 
-      menuButtons.forEach((button) => {
-        if (button.dataset.page === pageId) {
-          button.setAttribute("aria-current", "page");
-        } else {
-          button.removeAttribute("aria-current");
+      const sortButtons = [
+        ...document.querySelectorAll(".activity-sort-button")
+      ];
+
+      const originalCards = [
+        ...grid.querySelectorAll(":scope > .activity-card")
+      ];
+
+      const positionKey = "goodslist-list-position";
+      let currentSort = "original";
+      let scrollTask = 0;
+
+      function scrollToTop(top = 0) {
+        window.scrollTo({
+          top,
+          left: 0,
+          behavior: "instant"
+        });
+      }
+
+      function clearSavedPosition() {
+        try {
+          sessionStorage.removeItem(positionKey);
+        } catch {
+          // 저장 기능이 제한되어도 화면 전환은 가능합니다.
         }
-      });
-
-      history.replaceState(null, "", `#${pageId}`);
-      window.scrollTo(0, 0);
-    }
-
-    function openPageFromHash() {
-      const pageId = window.location.hash.slice(1);
-      const validPage = [...pages].some(
-        (page) => page.id === pageId
-      );
-
-      openPage(validPage ? pageId : "home");
-    }
-
-    menuButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        openPage(button.dataset.page);
-      });
-    });
-
-    document.querySelectorAll("[data-open-page]").forEach((button) => {
-      button.addEventListener("click", () => {
-        openPage(button.dataset.openPage);
-      });
-    });
-
-    openPageFromHash();
-
-    window.addEventListener("hashchange", openPageFromHash);
-    /* 페이지 복원 및 이미지 로딩 후에도 맨 위에서 표시 */
-function resetPageScroll() {
-  requestAnimationFrame(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant"
-    });
-  });
-}
-
-window.addEventListener("pageshow", resetPageScroll);
-window.addEventListener("load", resetPageScroll);
-
-
-    /* ====================
-       검색할 활동 페이지 목록
-
-       활동 페이지가 늘어나면
-       여기에 한 줄씩 추가하세요.
-    ==================== */
-const activityPages = [
-  { name: "Evolution", url: "./Evolution.html" },
-  { name: "Mystique", url: "./mystique.html" },
-  { name: "MY YOUTH", url: "./MyYouth.html" },
-  { name: "2019 빈센트 반 고흐", url: "./gogh19.html" },
-  { name: "NEW AGE", url: "./newage.html" },
-  { name: "2020 RENT", url: "./rent20.html" },
-  { name: "시간여행", url: "./time.html" },
-  { name: "미드나잇: 액터뮤지션", url: "./midnight20.html" },
-  { name: "바람", url: "./wind.html" },
-  { name: "The Forestella", url: "./TheFore.html" },
-  { name: "ID: PITTA", url: "./idpitta.html" },
-  { name: "PARANA", url: "./parana.html" },
-  { name: "숲별 1기", url: "./sb1.html" },
-  { name: "21-22 The Royal", url: "./royal21.html" }
-];
-
-
-    /* ====================
-       검색 화면 요소
-    ==================== */
-    const storageKey = "goodslist-recent-searches";
-
-    const form = document.getElementById("search-form");
-    const input = document.getElementById("search-input");
-    const relatedBox = document.getElementById("related-searches");
-    const relatedList = document.getElementById("related-list");
-    const recentList = document.getElementById("recent-list");
-    const emptyMessage = document.getElementById("recent-empty");
-    const clearButton = document.getElementById("clear-searches");
-    const searchMessage = document.getElementById("search-message");
-
-    /* 검색 결과 영역을 안내 문구 아래에 생성 */
-    const results = document.createElement("div");
-    results.id = "search-results";
-    results.className = "search-results";
-    searchMessage.after(results);
-
-    let products = [];
-    let failedPageCount = 0;
-    let recentKeywords = [];
-    let searchRequestId = 0;
-
-
-    /* ====================
-       검색어 비교 방식
-
-       공백·대소문자 무시
-       시그 → 시즌그리팅
-    ==================== */
-    function normalize(text) {
-      return String(text)
-        .normalize("NFKC")
-        .toLowerCase()
-        .replace(/\s+/g, "")
-        .replace(/시그/g, "시즌그리팅");
-    }
-
-
-    /* ====================
-       활동 페이지에서 상품 읽기
-    ==================== */
-    async function loadProducts() {
-      const loaded = await Promise.all(
-        activityPages.map(async (activity) => {
-          try {
-            const response = await fetch(activity.url);
-
-            if (!response.ok) {
-              throw new Error("활동 페이지를 불러오지 못했습니다.");
-            }
-
-            const html = await response.text();
-            const doc = new DOMParser().parseFromString(
-              html,
-              "text/html"
-            );
-
-            const cards = doc.querySelectorAll(
-              ".goods-accordion[data-category]"
-            );
-
-            return [...cards].map((card, index) => {
-              const summaryName = card.querySelector(
-                ".goods-summary .goods-name"
-              );
-
-              const name =
-                card.dataset.name?.trim() ||
-                summaryName?.innerText?.trim() ||
-                summaryName?.textContent?.trim() ||
-                `${activity.name} 상품 ${index + 1}`;
-
-              const category = card.dataset.category || "";
-              const keywords = card.dataset.keywords || "";
-
-              /*
-                상품의 순서도 주소에 기록합니다.
-                id가 없는 상품도 이동할 수 있습니다.
-              */
-              const url = new URL(activity.url, location.href);
-              url.searchParams.set("product", index + 1);
-
-              if (card.id) {
-                url.hash = card.id;
-              }
-
-              return {
-                name,
-                category,
-                activity: activity.name,
-                url: url.href,
-
-                /*
-                  단어 사이를 구분해 두고,
-                  검색할 때 각각 비교합니다.
-                */
-                searchFields: [
-                  name,
-                  category,
-                  activity.name,
-                  ...keywords.split(/[,，\n]/)
-                ].map(normalize)
-              };
-            });
-          } catch {
-            failedPageCount += 1;
-            return [];
-          }
-        })
-      );
-
-      products = loaded.flat();
-    }
-
-    const productsReady = loadProducts();
-
-
-    /* ====================
-       검색 조건
-
-       여러 단어를 입력하면
-       모든 단어가 포함된 상품 검색
-    ==================== */
-    function findProducts(keyword) {
-      const terms = keyword
-        .trim()
-        .split(/\s+/)
-        .map(normalize)
-        .filter(Boolean);
-
-      if (terms.length === 0) return [];
-
-      return products.filter((product) => {
-        /*
-          Sweet Escape처럼 띄어 쓴 이름도
-          SweetEscape로 찾을 수 있게 연결합니다.
-        */
-        const combined = product.searchFields.join("");
-
-        return terms.every((term) => combined.includes(term));
-      });
-    }
-
-
-    /* ====================
-       최근 검색 기록 읽기
-    ==================== */
-    try {
-      const saved = JSON.parse(localStorage.getItem(storageKey));
-
-      if (Array.isArray(saved)) {
-        const seen = new Set();
-
-        recentKeywords = saved
-          .filter((item) => {
-            return typeof item === "string" && item.trim();
-          })
-          .map((item) => item.trim())
-          .filter((item) => {
-            const key = normalize(item);
-
-            if (seen.has(key)) return false;
-
-            seen.add(key);
-            return true;
-          })
-          .slice(0, 5);
-      }
-    } catch {
-      recentKeywords = [];
-    }
-
-    function saveHistory() {
-      try {
-        localStorage.setItem(
-          storageKey,
-          JSON.stringify(recentKeywords)
-        );
-      } catch {
-        // 저장이 제한되어도 현재 화면에서는 사용 가능
-      }
-    }
-
-    function rememberKeyword(keyword) {
-      recentKeywords = [
-        keyword,
-        ...recentKeywords.filter((item) => {
-          return normalize(item) !== normalize(keyword);
-        })
-      ].slice(0, 5);
-
-      saveHistory();
-      renderRecent();
-    }
-
-    function runSearch(keyword) {
-      input.value = keyword;
-      form.requestSubmit();
-    }
-
-    function renderRecent() {
-      recentList.replaceChildren();
-
-      emptyMessage.hidden = recentKeywords.length > 0;
-      clearButton.hidden = recentKeywords.length === 0;
-
-      recentKeywords.forEach((keyword) => {
-        const item = document.createElement("li");
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.className = "recent-keyword";
-        button.textContent = keyword;
-
-        button.addEventListener("click", () => {
-          runSearch(keyword);
-        });
-
-        item.append(button);
-        recentList.append(item);
-      });
-    }
-
-
-    /* ====================
-       연관 검색어 최대 5개
-
-       별명으로 검색해도
-       실제 상품명을 표시
-    ==================== */
-    function renderRelated() {
-      relatedList.replaceChildren();
-
-      const keyword = input.value.trim();
-
-      if (!keyword) {
-        relatedBox.hidden = true;
-        return;
       }
 
-      const matches = findProducts(keyword).slice(0, 5);
+      function setSort(sort) {
+        currentSort = sort === "reverse" ? "reverse" : "original";
 
-      relatedBox.hidden = matches.length === 0;
-
-      matches.forEach((product) => {
-        const item = document.createElement("li");
-        const button = document.createElement("button");
-
-        button.type = "button";
-        button.className = "related-keyword";
-        button.textContent =
-          `${product.name} · ${product.activity}`;
-
-        button.addEventListener("click", () => {
-          /*
-            같은 이름을 가진 다른 상품과
-            혼동하지 않도록 해당 상품으로 바로 이동
-          */
-          rememberKeyword(keyword);
-          location.href = product.url;
-        });
-
-        item.append(button);
-        relatedList.append(item);
-      });
-    }
-
-
-    /* ====================
-       검색 결과 표시
-    ==================== */
-    function renderResults(matches) {
-      results.replaceChildren();
-
-      matches.forEach((product) => {
-        const link = document.createElement("a");
-        const name = document.createElement("span");
-        const meta = document.createElement("span");
-
-        link.className = "search-result";
-        link.href = product.url;
-
-        name.className = "search-result-name";
-        name.textContent = product.name;
-
-        meta.className = "search-result-meta";
-        meta.textContent =
-          `${product.activity} · ${product.category}`;
-
-        link.append(name, meta);
-        results.append(link);
-      });
-    }
-
-
-    /* ====================
-       검색창 입력
-    ==================== */
-    input.addEventListener("input", () => {
-      /* 이전 검색 작업의 결과 표시 취소 */
-      searchRequestId += 1;
-
-      searchMessage.textContent = "";
-      results.replaceChildren();
-      renderRelated();
-    });
-
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        relatedBox.hidden = true;
-      }
-    });
-
-    /*
-      상품 로딩이 끝나면 현재 입력어의
-      연관 검색어를 다시 표시
-    */
-    productsReady.then(() => {
-      if (document.activeElement === input) {
-        renderRelated();
-      }
-    });
-
-
-    /* ====================
-       Enter 또는 검색 키로 검색
-    ==================== */
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const keyword = input.value.trim();
-
-      if (!keyword) return;
-
-      const requestId = ++searchRequestId;
-
-      rememberKeyword(keyword);
-
-      relatedBox.hidden = true;
-      results.replaceChildren();
-      input.blur();
-
-      searchMessage.textContent = "상품을 검색하고 있어요.";
-
-      await productsReady;
-
-      if (requestId !== searchRequestId) return;
-
-      /* 모든 활동 페이지를 불러오지 못한 경우 */
-      if (failedPageCount === activityPages.length) {
-        searchMessage.textContent =
-          "상품 정보를 불러오지 못했어요. 잠시 후 새로고침해 주세요.";
-        return;
-      }
-
-      const matches = findProducts(keyword);
-
-      renderResults(matches);
-
-      searchMessage.textContent = matches.length > 0
-        ? `검색 결과 ${matches.length}개`
-        : "검색 결과가 없어요. 다른 검색어를 입력해 주세요.";
-
-      /* 일부 페이지에 문제가 있으면 누락 가능성을 안내 */
-      if (failedPageCount > 0) {
-        searchMessage.textContent +=
-          " 일부 활동 페이지를 불러오지 못해 결과가 누락될 수 있어요.";
-      }
-    });
-
-
-    /* ====================
-       최근 검색어 전체 삭제
-    ==================== */
-    clearButton.addEventListener("click", () => {
-      recentKeywords = [];
-      saveHistory();
-      renderRecent();
-    });
-
-    renderRecent();
-  })();
-</script>
-<script>
-  (() => {
-    const grid = document.querySelector("#list .activity-grid");
-    const buttons = document.querySelectorAll(
-      "#list .activity-sort-button"
-    );
-
-    if (!grid) return;
-
-    /* HTML에 작성한 최초 순서를 기억 */
-    const originalCards = [...grid.children].filter((element) => {
-      return element.classList.contains("activity-card");
-    });
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const cards = button.dataset.sort === "reverse"
+        const cards = currentSort === "reverse"
           ? [...originalCards].reverse()
           : [...originalCards];
 
-        /* 기존 카드를 선택한 순서로 이동 */
-        cards.forEach((card) => {
-          grid.append(card);
-        });
+        grid.append(...cards);
 
-        buttons.forEach((item) => {
-          item.setAttribute(
+        sortButtons.forEach((button) => {
+          button.setAttribute(
             "aria-pressed",
-            String(item === button)
+            String(button.dataset.sort === currentSort)
           );
         });
-      });
-    });
-  })();
-</script>
-<script>
-  (() => {
-    const storageKey = "goodslist-list-position";
-    const grid = document.querySelector("#list .activity-grid");
-
-    if (!grid) return;
-
-    let returnPosition = null;
-
-    /* 활동 상세페이지로 이동하기 전에 위치 저장 */
-    grid.addEventListener("click", (event) => {
-      const link = event.target.closest("a[href]");
-
-      if (!link) return;
-
-      /* 새 탭으로 여는 경우는 제외 */
-      if (
-        event.ctrlKey ||
-        event.metaKey ||
-        event.shiftKey ||
-        event.altKey ||
-        link.target === "_blank"
-      ) {
-        return;
       }
 
-      const selectedSort = document.querySelector(
-        '#list .activity-sort-button[aria-pressed="true"]'
-      );
+      function openPage(pageId, resetScroll = true) {
+        const target = pages.find((page) => page.id === pageId)
+          || document.getElementById("home");
 
-      try {
-        sessionStorage.setItem(
-          storageKey,
-          JSON.stringify({
-            scrollY: window.scrollY,
-            sort: selectedSort?.dataset.sort || "original",
-            savedAt: Date.now()
-          })
-        );
-      } catch {
-        // 저장이 제한된 브라우저에서는 위치 복원 생략
-      }
-    }, true);
+        pages.forEach((page) => {
+          page.hidden = page !== target;
+        });
 
-    /* 돌아왔을 때 위치와 정렬 복원 */
-    function restoreListPosition() {
-      const navigation = performance.getEntriesByType(
-        "navigation"
-      )[0];
+        menuButtons.forEach((button) => {
+          if (button.dataset.page === target.id) {
+            button.setAttribute("aria-current", "page");
+          } else {
+            button.removeAttribute("aria-current");
+          }
+        });
 
-      /* 새로고침하거나 다른 화면으로 오면 복원하지 않음 */
-      if (
-        navigation?.type === "reload" ||
-        location.hash !== "#list"
-      ) {
-        returnPosition = null;
-
-        try {
-          sessionStorage.removeItem(storageKey);
-        } catch {}
-
-        return;
-      }
-
-      try {
-        const saved = JSON.parse(
-          sessionStorage.getItem(storageKey) || "null"
-        );
-
-        /* 30분 안에 돌아온 경우에만 복원 */
-        if (
-          saved &&
-          Date.now() - saved.savedAt < 30 * 60 * 1000
-        ) {
-          returnPosition = saved;
+        if (location.hash !== `#${target.id}`) {
+          history.replaceState(null, "", `#${target.id}`);
         }
 
-        sessionStorage.removeItem(storageKey);
-      } catch {}
+        if (resetScroll) {
+          const task = ++scrollTask;
+          scrollToTop();
 
-      if (!returnPosition) return;
+          requestAnimationFrame(() => {
+            if (task === scrollTask) scrollToTop();
+          });
+        }
+      }
 
-      const sortButton = [
-        ...document.querySelectorAll(
-          "#list .activity-sort-button"
-        )
-      ].find((button) => {
-        return button.dataset.sort === returnPosition.sort;
+      function openPageFromHash(resetScroll = true) {
+        openPage(location.hash.slice(1) || "home", resetScroll);
+      }
+
+      menuButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          clearSavedPosition();
+          openPage(button.dataset.page);
+        });
       });
 
-      /* 기존 정렬 버튼의 기능 사용 */
-      sortButton?.click();
+      document.querySelectorAll("[data-open-page]").forEach((button) => {
+        button.addEventListener("click", () => {
+          clearSavedPosition();
+          openPage(button.dataset.openPage);
+        });
+      });
 
-      const top = Number(returnPosition.scrollY) || 0;
+      sortButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          setSort(button.dataset.sort);
+        });
+      });
 
-      /* 기존 맨 위 이동 처리가 끝난 뒤 위치 복원 */
-      requestAnimationFrame(() => {
+      window.addEventListener("hashchange", () => {
+        clearSavedPosition();
+        openPageFromHash();
+      });
+
+      /* 활동 상세페이지로 이동하기 전에 리스트 위치 저장 */
+      grid.addEventListener("click", (event) => {
+        const link = event.target.closest("a[href]");
+
+        if (
+          !link ||
+          event.button !== 0 ||
+          event.ctrlKey ||
+          event.metaKey ||
+          event.shiftKey ||
+          event.altKey ||
+          link.target === "_blank"
+        ) {
+          return;
+        }
+
+        try {
+          sessionStorage.setItem(
+            positionKey,
+            JSON.stringify({
+              scrollY: window.scrollY,
+              sort: currentSort,
+              savedAt: Date.now()
+            })
+          );
+        } catch {
+          // 저장이 제한되면 위치 복원만 생략합니다.
+        }
+      }, true);
+
+      /*
+        새로고침: 현재 탭의 맨 위
+        상세페이지에서 복귀: 저장한 리스트 위치
+      */
+      window.addEventListener("pageshow", (event) => {
+        const navigation = performance.getEntriesByType("navigation")[0];
+
+        const isReload =
+          !event.persisted && navigation?.type === "reload";
+
+        let saved = null;
+
+        try {
+          saved = JSON.parse(
+            sessionStorage.getItem(positionKey) || "null"
+          );
+        } catch {
+          saved = null;
+        }
+
+        clearSavedPosition();
+        openPageFromHash(false);
+
+        const canRestore =
+          !isReload &&
+          location.hash === "#list" &&
+          saved &&
+          Number.isFinite(saved.scrollY) &&
+          Number.isFinite(saved.savedAt) &&
+          Date.now() - saved.savedAt >= 0 &&
+          Date.now() - saved.savedAt < 30 * 60 * 1000;
+
+        let top = 0;
+
+        if (canRestore) {
+          setSort(saved.sort);
+          top = Math.max(0, saved.scrollY);
+        } else if (isReload) {
+          setSort("original");
+        }
+
+        const task = ++scrollTask;
+
         requestAnimationFrame(() => {
-          window.scrollTo({
-            top,
-            left: 0,
-            behavior: "instant"
+          requestAnimationFrame(() => {
+            if (task === scrollTask) scrollToTop(top);
           });
         });
       });
-    }
 
-    window.addEventListener("pageshow", restoreListPosition);
-  })();
-</script>
+      openPageFromHash(false);
+
+
+      /* ====================
+         검색할 활동 페이지 목록
+
+         새 활동 페이지가 생기면 한 줄씩 추가하세요.
+      ==================== */
+      const activityPages = [
+        { name: "Evolution", url: "./Evolution.html" },
+        { name: "Mystique", url: "./mystique.html" },
+        { name: "MY YOUTH", url: "./MyYouth.html" },
+        { name: "2019 빈센트 반 고흐", url: "./gogh19.html" },
+        { name: "NEW AGE", url: "./newage.html" },
+        { name: "2020 RENT", url: "./rent20.html" },
+        { name: "시간여행", url: "./time.html" },
+        { name: "미드나잇: 액터뮤지션", url: "./midnight20.html" },
+        { name: "바람", url: "./wind.html" },
+        { name: "The Forestella", url: "./TheFore.html" },
+        { name: "ID: PITTA", url: "./idpitta.html" },
+        { name: "PARANA", url: "./parana.html" },
+        { name: "숲별 1기", url: "./sb1.html" },
+        { name: "21-22 The Royal", url: "./royal21.html" }
+      ];
+
+
+      /* ====================
+         검색 화면 요소
+      ==================== */
+      const storageKey = "goodslist-recent-searches";
+
+      const form = document.getElementById("search-form");
+      const input = document.getElementById("search-input");
+      const relatedBox = document.getElementById("related-searches");
+      const relatedList = document.getElementById("related-list");
+      const recentList = document.getElementById("recent-list");
+      const emptyMessage = document.getElementById("recent-empty");
+      const clearButton = document.getElementById("clear-searches");
+      const searchMessage = document.getElementById("search-message");
+      const results = document.getElementById("search-results");
+
+      let products = [];
+      let failedPageCount = 0;
+      let recentKeywords = [];
+      let searchRequestId = 0;
+
+
+      /* ====================
+         검색어 비교 방식
+         공백·대소문자 무시 / 시그 → 시즌그리팅
+      ==================== */
+      function normalize(text) {
+        return String(text)
+          .normalize("NFKC")
+          .toLowerCase()
+          .replace(/\s+/g, "")
+          .replace(/시그/g, "시즌그리팅");
+      }
+
+      function readText(element) {
+        if (!element) return "";
+
+        const copy = element.cloneNode(true);
+
+        copy.querySelectorAll("br").forEach((br) => {
+          br.replaceWith(" ");
+        });
+
+        return copy.textContent.replace(/\s+/g, " ").trim();
+      }
+
+
+      /* ====================
+         활동 페이지에서 상품 읽기
+      ==================== */
+      async function loadProducts() {
+        const loaded = await Promise.all(
+          activityPages.map(async (activity) => {
+            try {
+              const pageUrl = new URL(activity.url, location.href);
+
+              const response = await fetch(pageUrl.href, {
+                cache: "no-cache"
+              });
+
+              if (!response.ok) {
+                throw new Error("활동 페이지를 불러오지 못했습니다.");
+              }
+
+              const html = await response.text();
+
+              const doc = new DOMParser().parseFromString(
+                html,
+                "text/html"
+              );
+
+              const cards = [
+                ...doc.querySelectorAll(
+                  ".goods-accordion[data-category]"
+                )
+              ];
+
+              const idCounts = new Map();
+
+              cards.forEach((card) => {
+                if (card.id) {
+                  idCounts.set(
+                    card.id,
+                    (idCounts.get(card.id) || 0) + 1
+                  );
+                }
+              });
+
+              return cards.map((card, index) => {
+                const summary = card.querySelector(
+                  ".goods-summary .goods-name"
+                );
+
+                const summaryName = readText(summary);
+
+                const name =
+                  card.dataset.name?.trim() ||
+                  summaryName ||
+                  `${activity.name} 상품 ${index + 1}`;
+
+                const category = card.dataset.category?.trim() || "";
+                const keywords = card.dataset.keywords || "";
+
+                const url = new URL(pageUrl.href);
+                url.searchParams.set("product", index + 1);
+
+                /* 중복되지 않는 ID만 주소에 사용 */
+                if (card.id && idCounts.get(card.id) === 1) {
+                  url.hash = card.id;
+                }
+
+                return {
+                  name,
+                  category,
+                  activity: activity.name,
+                  url: url.href,
+                  searchFields: [
+                    name,
+                    summaryName,
+                    category,
+                    activity.name,
+                    ...keywords.split(/[,，\n]/)
+                  ].map(normalize)
+                };
+              });
+            } catch {
+              failedPageCount += 1;
+              return [];
+            }
+          })
+        );
+
+        products = loaded.flat();
+      }
+
+      const productsReady = loadProducts();
+
+
+      /* ====================
+         상품 검색
+         여러 단어는 모두 포함되어야 검색됨
+      ==================== */
+      function findProducts(keyword) {
+        const terms = keyword
+          .trim()
+          .split(/\s+/)
+          .map(normalize)
+          .filter(Boolean);
+
+        if (terms.length === 0) return [];
+
+        return products.filter((product) => {
+          const combined = product.searchFields.join("");
+
+          return terms.every((term) => combined.includes(term));
+        });
+      }
+
+
+      /* ====================
+         최근 검색 기록
+      ==================== */
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey));
+
+        if (Array.isArray(saved)) {
+          const seen = new Set();
+
+          recentKeywords = saved
+            .filter((item) => {
+              return typeof item === "string" && item.trim();
+            })
+            .map((item) => item.trim())
+            .filter((item) => {
+              const key = normalize(item);
+
+              if (seen.has(key)) return false;
+
+              seen.add(key);
+              return true;
+            })
+            .slice(0, 5);
+        }
+      } catch {
+        recentKeywords = [];
+      }
+
+      function saveHistory() {
+        try {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify(recentKeywords)
+          );
+        } catch {
+          // 저장이 제한되어도 현재 화면에서는 사용 가능합니다.
+        }
+      }
+
+      function rememberKeyword(keyword) {
+        recentKeywords = [
+          keyword,
+          ...recentKeywords.filter((item) => {
+            return normalize(item) !== normalize(keyword);
+          })
+        ].slice(0, 5);
+
+        saveHistory();
+        renderRecent();
+      }
+
+      function runSearch(keyword) {
+        input.value = keyword;
+        form.requestSubmit();
+      }
+
+      function renderRecent() {
+        recentList.replaceChildren();
+
+        emptyMessage.hidden = recentKeywords.length > 0;
+        clearButton.hidden = recentKeywords.length === 0;
+
+        recentKeywords.forEach((keyword) => {
+          const item = document.createElement("li");
+          const button = document.createElement("button");
+
+          button.type = "button";
+          button.className = "recent-keyword";
+          button.textContent = keyword;
+
+          button.addEventListener("click", () => {
+            runSearch(keyword);
+          });
+
+          item.append(button);
+          recentList.append(item);
+        });
+      }
+
+
+      /* ====================
+         연관 검색어 최대 5개
+      ==================== */
+      function renderRelated() {
+        relatedList.replaceChildren();
+
+        const keyword = input.value.trim();
+
+        if (!keyword) {
+          relatedBox.hidden = true;
+          return;
+        }
+
+        const matches = findProducts(keyword).slice(0, 5);
+        relatedBox.hidden = matches.length === 0;
+
+        matches.forEach((product) => {
+          const item = document.createElement("li");
+          const button = document.createElement("button");
+
+          button.type = "button";
+          button.className = "related-keyword";
+          button.textContent =
+            `${product.name} · ${product.activity}`;
+
+          button.addEventListener("click", () => {
+            rememberKeyword(keyword);
+            location.href = product.url;
+          });
+
+          item.append(button);
+          relatedList.append(item);
+        });
+      }
+
+
+      /* ====================
+         검색 결과 표시
+      ==================== */
+      function renderResults(matches) {
+        results.replaceChildren();
+
+        const fragment = document.createDocumentFragment();
+
+        matches.forEach((product) => {
+          const link = document.createElement("a");
+          const name = document.createElement("span");
+          const meta = document.createElement("span");
+
+          link.className = "search-result";
+          link.href = product.url;
+
+          name.className = "search-result-name";
+          name.textContent = product.name;
+
+          meta.className = "search-result-meta";
+          meta.textContent = [
+            product.activity,
+            product.category
+          ].filter(Boolean).join(" · ");
+
+          link.append(name, meta);
+          fragment.append(link);
+        });
+
+        results.append(fragment);
+      }
+
+
+      /* ====================
+         검색창 입력
+      ==================== */
+      input.addEventListener("input", () => {
+        searchRequestId += 1;
+        searchMessage.textContent = "";
+        results.replaceChildren();
+        renderRelated();
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          relatedBox.hidden = true;
+        }
+      });
+
+      productsReady.then(() => {
+        if (
+          !document.getElementById("search").hidden &&
+          document.activeElement === input
+        ) {
+          renderRelated();
+        }
+      });
+
+
+      /* ====================
+         Enter 또는 검색 키로 검색
+      ==================== */
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const keyword = input.value.trim();
+        if (!keyword) return;
+
+        const requestId = ++searchRequestId;
+
+        rememberKeyword(keyword);
+        relatedBox.hidden = true;
+        results.replaceChildren();
+        input.blur();
+
+        searchMessage.textContent = "상품을 검색하고 있어요.";
+
+        await productsReady;
+
+        if (requestId !== searchRequestId) return;
+
+        if (failedPageCount === activityPages.length) {
+          searchMessage.textContent =
+            "상품 정보를 불러오지 못했어요. 잠시 후 새로고침해 주세요.";
+          return;
+        }
+
+        const matches = findProducts(keyword);
+        renderResults(matches);
+
+        searchMessage.textContent = matches.length > 0
+          ? `검색 결과 ${matches.length}개`
+          : "검색 결과가 없어요. 다른 검색어를 입력해 주세요.";
+
+        if (failedPageCount > 0) {
+          searchMessage.textContent +=
+            " 일부 활동 페이지를 불러오지 못해 결과가 누락될 수 있어요.";
+        }
+      });
+
+
+      /* ====================
+         최근 검색어 전체 삭제
+      ==================== */
+      clearButton.addEventListener("click", () => {
+        recentKeywords = [];
+        saveHistory();
+        renderRecent();
+      });
+
+      renderRecent();
+    })();
+  </script>
 </body>
 </html>

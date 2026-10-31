@@ -285,6 +285,7 @@
 
       button.type = "button";
       button.className = "member-filter-button";
+      button.dataset.member = name;   
       button.textContent = name;
 
       button.setAttribute("aria-pressed", "false");
