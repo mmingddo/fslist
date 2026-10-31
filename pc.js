@@ -195,13 +195,20 @@
   /* ====================
      유형 필터 적용
   ==================== */
-  function applyFilters() {
-    if (!loaded) return;
+function applyFilters() {
+  if (!loaded) return;
 
-    let visibleProducts = 0;
-    let visiblePhotos = 0;
+  let visibleProducts = 0;
+  let visiblePhotos = 0;
 
-    entries.forEach(({ card }) => {
+  /* 원본 목록을 유지하면서 표시 순서만 결정 */
+  const sortedEntries = pcSort === "reverse"
+    ? [...entries].reverse()
+    : [...entries];
+
+  sortedEntries.forEach(({ card }) => {
+    /* 선택한 순서로 상품 상자를 이동 */
+    container.append(card);
       let cardPhotoCount = 0;
 
       card.querySelectorAll("details[data-photocard]").forEach(

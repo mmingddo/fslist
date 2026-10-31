@@ -713,6 +713,39 @@
   background: #3662ae;
   color: #fff;
 }
+/* 메뉴 안의 카테고리·마이페이지 제목 */
+.menu-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.menu-section-title svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* 하단 메뉴의 샵 아이콘 */
+.menu-button[data-page="category"] svg {
+  display: block;
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
   </style>
 </head>
 
@@ -1235,7 +1268,7 @@
       data-sort="original"
       aria-pressed="true"
     >
-      날짜순
+      오래된
     </button>
 
     <button
@@ -1256,6 +1289,7 @@
       <div class="activity-grid">
 
         <!--1 활동 에볼 시작 -->
+        <article class="activity-card" data-year="2018"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1276,6 +1310,7 @@
 
 
         <!--2 활동 미스티크 시작 -->
+        <article class="activity-card" data-year="2019"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1296,6 +1331,7 @@
 
 
         <!--3 활동 마유스 시작 -->
+        <article class="activity-card" data-year="2019"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1316,6 +1352,7 @@
 
 
         <!--4 활동 반고흐 시작 -->
+        <article class="activity-card" data-year="2019"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1336,6 +1373,7 @@
 
 
         <!--5 활동 뉴에이지 시작 -->
+        <article class="activity-card" data-year="2020"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1356,6 +1394,7 @@
 
 
         <!--6 활동 렌트 시작 -->
+        <article class="activity-card" data-year="2020"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1376,6 +1415,7 @@
 
 
         <!--7 활동 시간여행 시작 -->
+        <article class="activity-card" data-year="2020"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1396,6 +1436,7 @@
 
 
         <!--8 활동 미드나잇 시작 -->
+        <article class="activity-card" data-year="2020"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1416,6 +1457,7 @@
 
 
         <!--9 활동 바람 시작 -->
+        <article class="activity-card" data-year="2021"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1435,6 +1477,7 @@
         <!-- 활동 끝 -->
 
         <!--10 활동 더포레 시작 -->
+        <article class="activity-card" data-year="2021"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1455,6 +1498,7 @@
 
 
         <!--11 활동 아이디피타 시작 -->
+        <article class="activity-card" data-year="2021"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1475,6 +1519,7 @@
 
   
         <!--12 활동 파라나 시작 -->
+        <article class="activity-card" data-year="2021"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1495,6 +1540,7 @@
 
 
         <!--13 활동 숲별 1기 시작 -->
+        <article class="activity-card" data-year="2021"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1515,6 +1561,7 @@
 
 
         <!--14 활동 21 로얄 시작 -->
+        <article class="activity-card" data-year="2021"></article>
         <article class="activity-card">
           <a
             class="activity-image-link"
@@ -1602,13 +1649,19 @@
     <!-- ====================
          카테고리 화면 시작
     ==================== -->
-    <section id="category" hidden>
-      <h1 class="page-title">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-        <span>카테고리</span>
-      </h1>
+<h1 class="page-title">
+  <span>메뉴</span>
+</h1>
+
+<!-- 카테고리 제목 -->
+<h2 class="menu-section-title">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 9h18l-2-6H5L3 9Z"></path>
+    <path d="M3 9v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V9"></path>
+    <path d="M5 14v7h14v-7h4v7"></path>
+  </svg>
+  <span>카테고리</span>
+</h2>
 
       <div class="category-grid">
 <a
@@ -1642,13 +1695,34 @@
   개인
 </a>
 
-        <button
-          class="category-item category-all category-year"
-          type="button"
-        >
-          년도별
-        </button>
+<a
+  class="category-item category-all"
+  href=".year.html"
+>
+  년도별
+</a>
       </div>
+
+<!-- 마이페이지 영역 시작 -->
+<h2 class="menu-section-title">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 5v16"></path>
+    <path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path>
+  </svg>
+  <span>마이페이지</span>
+</h2>
+
+<div class="home-links">
+  <a class="home-link" href="./mypage.html#bookmarks">
+    북마크 모아보기
+  </a>
+
+  <a class="home-link" href="./mypage.html#notes">
+    메모 모아보기
+  </a>
+</div>
+<!-- 마이페이지 영역 끝 -->
+
     </section>
     <!-- 카테고리 화면 끝 -->
 
@@ -1746,18 +1820,21 @@
         <span>검색</span>
       </button>
 
-      <!-- 메뉴 버튼 -->
-      <button
-        class="menu-button"
-        type="button"
-        data-page="category"
-        aria-controls="category"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-        <span>메뉴</span>
-      </button>
+<!-- 메뉴 버튼 -->
+<button
+  class="menu-button"
+  type="button"
+  data-page="category"
+  aria-controls="category"
+>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 9h18l-2-6H5L3 9Z"></path>
+    <path d="M3 9v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V9"></path>
+    <path d="M5 14v7h14v-7"></path>
+    <path d="M10 21v-6h4v6"></path>
+  </svg>
+  <span>메뉴</span>
+</button>
 
     </div>
   </nav>
@@ -2280,6 +2357,116 @@ const activityPages = [
         });
       });
     });
+  })();
+</script>
+<script>
+  (() => {
+    const storageKey = "goodslist-list-position";
+    const grid = document.querySelector("#list .activity-grid");
+
+    if (!grid) return;
+
+    let returnPosition = null;
+
+    /* 활동 상세페이지로 이동하기 전에 위치 저장 */
+    grid.addEventListener("click", (event) => {
+      const link = event.target.closest("a[href]");
+
+      if (!link) return;
+
+      /* 새 탭으로 여는 경우는 제외 */
+      if (
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        event.altKey ||
+        link.target === "_blank"
+      ) {
+        return;
+      }
+
+      const selectedSort = document.querySelector(
+        '#list .activity-sort-button[aria-pressed="true"]'
+      );
+
+      try {
+        sessionStorage.setItem(
+          storageKey,
+          JSON.stringify({
+            scrollY: window.scrollY,
+            sort: selectedSort?.dataset.sort || "original",
+            savedAt: Date.now()
+          })
+        );
+      } catch {
+        // 저장이 제한된 브라우저에서는 위치 복원 생략
+      }
+    }, true);
+
+    /* 돌아왔을 때 위치와 정렬 복원 */
+    function restoreListPosition() {
+      const navigation = performance.getEntriesByType(
+        "navigation"
+      )[0];
+
+      /* 새로고침하거나 다른 화면으로 오면 복원하지 않음 */
+      if (
+        navigation?.type === "reload" ||
+        location.hash !== "#list"
+      ) {
+        returnPosition = null;
+
+        try {
+          sessionStorage.removeItem(storageKey);
+        } catch {}
+
+        return;
+      }
+
+      try {
+        const saved = JSON.parse(
+          sessionStorage.getItem(storageKey) || "null"
+        );
+
+        /* 30분 안에 돌아온 경우에만 복원 */
+        if (
+          saved &&
+          Date.now() - saved.savedAt < 30 * 60 * 1000
+        ) {
+          returnPosition = saved;
+        }
+
+        sessionStorage.removeItem(storageKey);
+      } catch {}
+
+      if (!returnPosition) return;
+
+      const sortButton = [
+        ...document.querySelectorAll(
+          "#list .activity-sort-button"
+        )
+      ].find((button) => {
+        return button.dataset.sort === returnPosition.sort;
+      });
+
+      /* 기존 정렬 버튼의 기능 사용 */
+      sortButton?.click();
+
+      const top = Number(returnPosition.scrollY) || 0;
+
+      /* 기존 맨 위 이동 처리가 끝난 뒤 위치 복원 */
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top,
+            left: 0,
+            behavior: "instant"
+          });
+        });
+      });
+    }
+
+    window.addEventListener("pageshow", restoreListPosition);
   })();
 </script>
 </body>

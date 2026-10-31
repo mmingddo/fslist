@@ -13,61 +13,16 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" type="image/png" href="./icon-192.png">
 
+  <!-- 공통 디자인 -->
+  <link rel="stylesheet" href="./category.css">
+
+  <!-- 상품별 북마크·메모 기능 -->
+  <script src="./personal.js" defer></script>
+
   <style>
     /* ====================
-       폰트
+       화면에는 숨기는 활동 제목
     ==================== */
-    @font-face {
-      font-family: "GmarketSans";
-      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
-        format("woff");
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: "GmarketSans";
-      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
-        format("woff");
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    /* ====================
-       공통 설정
-    ==================== */
-    :root {
-      --accent-color: #3662ae;
-      --table-radius: 12px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #fafafa;
-      color: #333;
-      font-family: "GmarketSans", "맑은 고딕", sans-serif;
-      font-weight: 500;
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      max-width: 1000px;
-      min-height: 100vh;
-      min-height: 100dvh;
-      margin: 0 auto;
-      padding: 32px 24px;
-      padding-bottom: calc(
-        32px + env(safe-area-inset-bottom, 0px)
-      );
-    }
-
     .visually-hidden {
       position: absolute;
       width: 1px;
@@ -80,69 +35,25 @@
       border: 0;
     }
 
-    /* ====================
-       로고·사이트명
-    ==================== */
-    .site-brand {
-      display: flex;
-      align-items: center;
-      align-self: flex-start;
-      gap: 12px;
-      margin-bottom: 24px;
-      color: #333;
-      text-decoration: none;
-    }
-
-    .site-logo {
-      display: block;
-      flex-shrink: 0;
-      width: auto;
-      height: 40px;
-    }
-
-    .site-brand-text {
-      font-size: 25px;
-      font-weight: 700;
-      line-height: 1;
-    }
-
     .back-link {
       align-self: flex-start;
-      margin-bottom: 24px;
-      color: var(--accent-color);
-      font-size: 12px;
-      text-decoration: none;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
     }
 
     /* ====================
-       이미지·정보 배치
+       활동 이미지·정보 배치
     ==================== */
-    .album-header,
-    .product-header {
+    .album-header {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: center;
       gap: 20px;
     }
 
-    .album-header {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .product-header {
-      grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
-    }
-
-    .album-info,
-    .product-description {
+    .album-info {
       min-width: 0;
     }
 
-    .album-image,
-    .product-image {
+    .album-image {
       display: block;
       width: 100%;
       height: auto;
@@ -155,102 +66,67 @@
     }
 
     /* ====================
-       활동·상품 정보 표
+       활동 정보 표
     ==================== */
-    .info-table,
-    .product-table {
+    .info-table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
-      border-radius: var(--table-radius);
+      border-radius: 12px;
       table-layout: fixed;
+      font-size: 14px;
       line-height: 1.6;
     }
 
     .info-table th,
-    .info-table td,
-    .product-table th,
-    .product-table td {
-      overflow-wrap: anywhere;
+    .info-table td {
+      padding: 14px 10px;
       text-align: center;
+      overflow-wrap: anywhere;
     }
 
-    .info-table th,
-    .product-table th {
+    .info-table th {
+      width: 36%;
       border: 0;
       background: var(--accent-color);
       color: #fff;
       font-weight: 500;
     }
 
-    .info-table td,
-    .product-table td {
+    .info-table td {
       border: 1px solid var(--accent-color);
       background: #fff;
       color: #000;
     }
 
     /* 왼쪽 항목 사이 흰색 구분선 */
-    .info-table tr + tr th,
-    .product-table tr + tr th {
+    .info-table tr + tr th {
       border-top: 1px solid #fff;
     }
 
     /* 오른쪽 테두리 겹침 방지 */
-    .info-table tr + tr td,
-    .product-table tr + tr td {
+    .info-table tr + tr td {
       border-top: 0;
     }
 
-    .info-table tr:first-child th,
-    .product-table tr:first-child th {
-      border-top-left-radius: var(--table-radius);
+    .info-table tr:first-child th {
+      border-top-left-radius: 12px;
     }
 
-    .info-table tr:last-child th,
-    .product-table tr:last-child th {
-      border-bottom-left-radius: var(--table-radius);
+    .info-table tr:first-child td {
+      border-top-right-radius: 12px;
     }
 
-    .info-table tr:first-child td,
-    .product-table tr:first-child td {
-      border-top-right-radius: var(--table-radius);
+    .info-table tr:last-child th {
+      border-bottom-left-radius: 12px;
     }
 
-    .info-table tr:last-child td,
-    .product-table tr:last-child td {
-      border-bottom-right-radius: var(--table-radius);
-    }
-
-    .info-table {
-      font-size: 14px;
-    }
-
-    .info-table th,
-    .info-table td {
-      padding: 14px 10px;
-    }
-
-    .info-table th {
-      width: 36%;
-    }
-
-    .product-table {
-      margin-top: 20px;
-      font-size: 13px;
-    }
-
-    .product-table th,
-    .product-table td {
-      padding: 12px 10px;
-    }
-
-    .product-table th {
-      width: 30%;
+    .info-table tr:last-child td {
+      border-bottom-right-radius: 12px;
     }
 
     /* ====================
-       굿즈 목록·상품 카드
+       활동 페이지의 상품 목록
     ==================== */
     .goods-section {
       margin-top: 32px;
@@ -268,253 +144,28 @@
       gap: 12px;
     }
 
-    .goods-accordion {
-      overflow: hidden;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background: #fff;
-      color: #000;
-    }
-
-    .goods-summary {
-      display: grid;
-      grid-template-columns: 48px minmax(0, 1fr) 48px;
-      align-items: center;
-      gap: 12px;
-      min-height: 72px;
-      padding: 8px 12px 8px 0;
-    }
-
-    .goods-summary,
-    .photocard-toggle {
-      list-style: none;
-      cursor: pointer;
-    }
-
-    .goods-summary::-webkit-details-marker,
-    .photocard-toggle::-webkit-details-marker {
-      display: none;
-    }
-
-    .goods-number {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      align-self: stretch;
-      border-right: 1px solid #ddd;
-      font-size: 16px;
-    }
-
-    .goods-name {
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
-
-    .accordion-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-    }
-
-    .accordion-arrow::before {
-      content: "";
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 10px solid var(--accent-color);
-    }
-
-    .goods-accordion[open] > .goods-summary .accordion-arrow::before {
-      border-top: 0;
-      border-bottom: 10px solid var(--accent-color);
-    }
-
-    .goods-divider {
-      margin: 0 12px;
-      border: 0;
-      border-top: 1px solid #ddd;
-    }
-
     .goods-content {
-      padding: 16px;
-      font-size: 13px;
       line-height: 1.7;
     }
 
-    /* ====================
-       제품명·설명
-    ==================== */
+    .product-image {
+      height: auto;
+    }
+
     .product-description {
       overflow-wrap: anywhere;
     }
 
-    .product-name {
-      margin: 0 0 8px;
-      color: #000;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.6;
-    }
-
-    .product-subtext {
-      margin: 0;
-      color: #555;
-      font-size: 13px;
+    .product-table {
       line-height: 1.6;
     }
 
     /* ====================
-       포토카드 펼치기
-    ==================== */
-    .photocard-section {
-      width: 100%;
-      min-width: 0;
-      margin-top: 20px;
-      overflow: hidden;
-      border: 1px solid var(--accent-color);
-      border-radius: 12px;
-      background: #fff;
-    }
-
-    .photocard-details {
-      width: 100%;
-      min-width: 0;
-    }
-
-    .photocard-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      min-height: 44px;
-      padding: 12px 16px;
-      border: 0;
-      background: var(--accent-color);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.6;
-    }
-
-    .photocard-arrow {
-      flex-shrink: 0;
-      width: 0;
-      height: 0;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-top: 9px solid #fff;
-    }
-
-    .photocard-section[open] > .photocard-toggle .photocard-arrow {
-      border-top: 0;
-      border-bottom: 9px solid #fff;
-    }
-
-    /* ====================
-       포토카드 유형 표시
-    ==================== */
-.photocard-types {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  width: 100%;
-  margin: 0;
-  padding: 12px;
-}
-
-    .photocard-type {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 0;
-      padding: 3px 2px;
-      border-radius: 20px;
-      background-color: #b5b5b5;
-      color: #333;
-      font-size: 13px;
-      line-height: 1.3;
-      text-align: center;
-    }
-
-    .type-personal.active {
-      background-color: #dfb2fa;
-    }
-
-    .type-unit.active {
-      background-color: #ffd18b;
-    }
-
-    .type-group.active {
-      background-color: #a8e8e8;
-    }
-
-    /* 포토카드 이미지 */
-    .photocard-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      width: 100%;
-      padding: 0;
-    }
-
-    .photocard-image {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      border: 0;
-      border-radius: 0;
-    }
-
-    /* ====================
-       제작자·도움
-    ==================== */
-    .site-credit {
-      margin-top: auto;
-      padding-top: 40px;
-      color: #555;
-      font-size: 12px;
-      line-height: 1.6;
-      text-align: left;
-    }
-
-    .credit-divider {
-      width: 140px;
-      margin: 10px 0;
-      border: 0;
-      border-top: 1px dashed #999;
-    }
-
-    .site-credit a,
-    .site-credit a:hover,
-    .site-credit a:focus,
-    .site-credit a:active {
-      text-decoration: none;
-    }
-
-    a:focus-visible,
-    summary:focus-visible {
-      outline: 2px solid var(--accent-color);
-      outline-offset: 3px;
-    }
-
-    /* ====================
-       모바일
+       모바일 활동 정보
     ==================== */
     @media (max-width: 480px) {
-      .album-header,
-      .product-header {
+      .album-header {
         gap: 12px;
-      }
-
-      .product-header {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .info-table {
@@ -554,17 +205,16 @@
     <section
       class="album-header"
       aria-labelledby="activity-title"
-      data-category="앨범"
     >
       <img
         class="album-image"
         src="https://drive.google.com/thumbnail?id=12c-lNRCbDKh8lWjbuBLYY-37vgTZqIdf&amp;sz=w1600"
-        alt="ID PITTA 앨범"
+        alt="ID: PITTA 앨범"
       >
 
       <div class="album-info">
         <h1 id="activity-title" class="visually-hidden">
-          Mystique
+          ID: PITTA
         </h1>
 
         <table class="info-table">
@@ -594,11 +244,12 @@
 
         <!-- ========== 1번 앨범 상품 시작 ========== -->
         <details
-          id="idpitta-album"
+          id="id-pitta-album"
           class="goods-accordion"
           data-category="앨범, 개인"
           data-name="앨범"
           data-keywords="ID PITTA, 아이디 피타, 음반, 앨범"
+          data-members="형호"
         >
           <summary class="goods-summary">
             <span class="goods-number">1</span>
@@ -608,21 +259,17 @@
 
           <hr class="goods-divider">
 
-          <!-- ---------- 상품 상세 시작 ---------- -->
           <div class="goods-content">
             <div class="product-header">
               <img
                 class="product-image"
                 src="https://drive.google.com/thumbnail?id=12c-lNRCbDKh8lWjbuBLYY-37vgTZqIdf&amp;sz=w1600"
-                alt="ID PITTA 앨범"
+                alt="ID: PITTA 앨범"
                 loading="lazy"
               >
 
               <div class="product-description">
-                <!--
-                <h3 class="product-name">제품명</h3>
-                <p class="product-subtext">제품 설명</p>
-                -->
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
               </div>
             </div>
 
@@ -634,7 +281,10 @@
                 </tr>
                 <tr>
                   <th scope="row">구성품</th>
-                  <td>종이 북커버 / 포토북 / CD / 포토카드 4장 / 엽서 2장</td>
+                  <td>
+                    종이 북커버 / 포토북 / CD /
+                    포토카드 4장 / 엽서 2장
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">비고</th>
@@ -643,67 +293,80 @@
               </tbody>
             </table>
 
-<!-- 포토카드 영역 시작 -->
-<details
-  class="photocard-section photocard-details"
-  data-photocard
->
-  <summary class="photocard-toggle">
-    <span>포토카드 보기</span>
-    <span class="photocard-arrow" aria-hidden="true"></span>
-  </summary>
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
 
-  <div class="photocard-types" aria-label="포토카드 유형">
-    <span class="photocard-type type-personal active">개인</span>
-    <span class="photocard-type type-unit">유닛</span>
-    <span class="photocard-type type-group">단체</span>
-  </div>
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
 
-  <div class="photocard-content">
-    <!-- 개인 포토카드 사진 -->
-    <img
-      class="photocard-image"
-      data-pc-types="personal"
-      src="https://drive.google.com/thumbnail?id=1K-0R9pd70wrwAMIU54enYH61f6TdDImK&amp;sz=w1600"
-      alt="The Forestella 앨범 포토카드"
-      loading="lazy"
-    >
-  </div>
-</details>
-<!-- 포토카드 영역 끝 -->
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1K-0R9pd70wrwAMIU54enYH61f6TdDImK&amp;sz=w1600"
+                  alt="ID: PITTA 앨범 개인 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
 
- <!-- 상세페이지 영역 시작 -->
-<details class="photocard-section photocard-details">
-  <summary class="photocard-toggle">
-    <span>상세페이지 보기</span>
-    <span class="photocard-arrow" aria-hidden="true"></span>
-  </summary>
+            <!-- 상세페이지 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>상세페이지 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
 
-  <!-- 펼쳤을 때만 보이는 사진 -->
-  <div class="photocard-content">
-    <img
-      class="photocard-image"
-      src="https://drive.google.com/thumbnail?id=1Yaxzzd3kENz60VHOiR0S9xKa23k_L9eW&amp;sz=w1600"
-      alt="아이디 피타 앨범 상세페이지"
-      loading="lazy"
-    >
-  </div>
-</details>
-<!-- 상세페이지 영역 끝 -->
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1Yaxzzd3kENz60VHOiR0S9xKa23k_L9eW&amp;sz=w1600"
+                  alt="아이디 피타 앨범 상세페이지"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 상세페이지 영역 끝 -->
 
           </div>
-          <!-- ---------- 상품 상세 끝 ---------- -->
         </details>
         <!-- ========== 1번 상품 끝 ========== -->
 
 
-        <!-- ========== 2번 lp 상품 시작 ========== -->
+        <!-- ========== 2번 LP 상품 시작 ========== -->
         <details
-          id="idpitta-album"
+          id="id-pitta-LP"
           class="goods-accordion"
           data-category="앨범, 개인"
           data-name="LP 야광"
           data-keywords="ID PITTA, 아이디 피타, 음반, 앨범, LP, 엘피, 야광"
+          data-members="형호"
         >
           <summary class="goods-summary">
             <span class="goods-number">2</span>
@@ -713,21 +376,17 @@
 
           <hr class="goods-divider">
 
-          <!-- ---------- 상품 상세 시작 ---------- -->
           <div class="goods-content">
             <div class="product-header">
               <img
                 class="product-image"
                 src="https://drive.google.com/thumbnail?id=1Gt_58H-PKScmENMJphjPXRFiefTcyOOL&amp;sz=w1600"
-                alt="ID PITTA LP 야광"
+                alt="ID: PITTA LP 야광"
                 loading="lazy"
               >
 
               <div class="product-description">
-                <!--
-                <h3 class="product-name">제품명</h3>
-                <p class="product-subtext">제품 설명</p>
-                -->
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
               </div>
             </div>
 
@@ -747,44 +406,41 @@
                 </tr>
               </tbody>
             </table>
-
           </div>
-          <!-- ---------- 상품 상세 끝 ---------- -->
         </details>
         <!-- ========== 2번 상품 끝 ========== -->
 
 
         <!-- ========== 3번 카세트 상품 시작 ========== -->
         <details
-          id="idpitta-album"
+          id="id-pitta-tape"
           class="goods-accordion"
-          data-category="MD, 개인"
+          data-category="앨범, MD, 개인"
           data-name="카세트테이프"
           data-keywords="ID PITTA, 아이디 피타, 음반, 카세트 테이프"
+          data-members="형호"
         >
           <summary class="goods-summary">
             <span class="goods-number">3</span>
-            <span class="goods-name">ID: PITTA 음반<br>카세트 테이프</span>
+            <span class="goods-name">
+              ID: PITTA 음반<br>카세트 테이프
+            </span>
             <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-divider">
 
-          <!-- ---------- 상품 상세 시작 ---------- -->
           <div class="goods-content">
             <div class="product-header">
               <img
                 class="product-image"
                 src="https://drive.google.com/thumbnail?id=1qqB3gjXDOYrqsczUFgV3S-X-Xm2WWKvZ&amp;sz=w1600"
-                alt="ID PITTA 카세프 테이프"
+                alt="ID: PITTA 카세트 테이프"
                 loading="lazy"
               >
 
               <div class="product-description">
-                <!--
-                <h3 class="product-name">제품명</h3>
-                <p class="product-subtext">제품 설명</p>
-                -->
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
               </div>
             </div>
 
@@ -804,44 +460,41 @@
                 </tr>
               </tbody>
             </table>
-
           </div>
-          <!-- ---------- 상품 상세 끝 ---------- -->
         </details>
         <!-- ========== 3번 상품 끝 ========== -->
 
-        
-        <!-- ========== 4번 앨범 상품 시작 ========== -->
+
+        <!-- ========== 4번 MD 앨범 상품 시작 ========== -->
         <details
-          id="idpitta-md-album"
+          id="id-pitta-md-album"
           class="goods-accordion"
           data-category="MD, 개인"
           data-name="MD 앨범"
           data-keywords="ID PITTA, 아이디 피타, MD, 음반, 앨범"
+          data-members="형호"
         >
           <summary class="goods-summary">
             <span class="goods-number">4</span>
-            <span class="goods-name">ID: PITTA 콘서트 MD<br>앨범</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>앨범
+            </span>
             <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-divider">
 
-          <!-- ---------- 상품 상세 시작 ---------- -->
           <div class="goods-content">
             <div class="product-header">
               <img
                 class="product-image"
                 src="https://drive.google.com/thumbnail?id=1zM3EzMeCQFiGUXp3eSsFqowBstYrjeHt&amp;sz=w1600"
-                alt="ID PITTA MD 앨범"
+                alt="ID: PITTA MD 앨범"
                 loading="lazy"
               >
 
               <div class="product-description">
-                <!--
-                <h3 class="product-name">제품명</h3>
-                <p class="product-subtext">제품 설명</p>
-                -->
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
               </div>
             </div>
 
@@ -853,7 +506,10 @@
                 </tr>
                 <tr>
                   <th scope="row">구성품</th>
-                  <td>종이 북커버 / 포토북 / CD / 포토카드 4장 / 엽서 2장</td>
+                  <td>
+                    종이 북커버 / 포토북 / CD /
+                    포토카드 4장 / 엽서 2장
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">비고</th>
@@ -861,44 +517,41 @@
                 </tr>
               </tbody>
             </table>
-
           </div>
-          <!-- ---------- 상품 상세 끝 ---------- -->
         </details>
         <!-- ========== 4번 상품 끝 ========== -->
 
 
-        <!-- ========== 5번 하차벨 상품 시작 ========== -->
+        <!-- ========== 5번 팬라이트 상품 시작 ========== -->
         <details
-          id="idpitta-md-fanlight"
+          id="id-pitta-fanlight"
           class="goods-accordion"
           data-category="MD, 개인"
           data-name="팬라이트"
           data-keywords="ID PITTA, 아이디 피타, MD, 응원, 팬라이트, fanlight, 하차벨"
+          data-members="형호"
         >
           <summary class="goods-summary">
             <span class="goods-number">5</span>
-            <span class="goods-name">ID: PITTA 콘서트 MD<br>팬라이트</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>팬라이트
+            </span>
             <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-divider">
 
-          <!-- ---------- 상품 상세 시작 ---------- -->
           <div class="goods-content">
             <div class="product-header">
               <img
                 class="product-image"
                 src="https://drive.google.com/thumbnail?id=1_6MGMwokaQHy5pDJE0g4-WT3vOnQfaW-&amp;sz=w1600"
-                alt="ID PITTA MD 팬라이트"
+                alt="ID: PITTA MD 팬라이트"
                 loading="lazy"
               >
 
               <div class="product-description">
-                <!--
-                <h3 class="product-name">제품명</h3>
-                <p class="product-subtext">제품 설명</p>
-                -->
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
               </div>
             </div>
 
@@ -914,48 +567,48 @@
                 </tr>
                 <tr>
                   <th scope="row">비고</th>
-                  <td>- 버스 하차벨처럼 생겨 별명이 하차벨이다.<br>- 최근에는 사용하지 않는다. (중앙제어X)</td>
+                  <td>
+                    - 버스 하차벨처럼 생겨 별명이 하차벨이다.<br>
+                    - 최근에는 사용하지 않는다. (중앙제어X)
+                  </td>
                 </tr>
               </tbody>
             </table>
-
           </div>
-          <!-- ---------- 상품 상세 끝 ---------- -->
         </details>
         <!-- ========== 5번 상품 끝 ========== -->
 
 
         <!-- ========== 6번 그립톡 상품 시작 ========== -->
         <details
-          id="idpitta-md-grip"
+          id="id-pitta-grip"
           class="goods-accordion"
           data-category="MD, 개인"
           data-name="그립톡"
           data-keywords="ID PITTA, 아이디 피타, MD, 그립톡, 스마트톡"
+          data-members="형호"
         >
           <summary class="goods-summary">
             <span class="goods-number">6</span>
-            <span class="goods-name">ID: PITTA 콘서트 MD<br>그립톡</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>그립톡
+            </span>
             <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-divider">
 
-          <!-- ---------- 상품 상세 시작 ---------- -->
           <div class="goods-content">
             <div class="product-header">
               <img
                 class="product-image"
                 src="https://drive.google.com/thumbnail?id=12rCMxWjO7Bn6w8DQj1VgHqT8R9qfROau&amp;sz=w1600"
-                alt="ID PITTA MD 그립톡"
+                alt="ID: PITTA MD 그립톡"
                 loading="lazy"
               >
 
               <div class="product-description">
-                <!--
-                <h3 class="product-name">제품명</h3>
-                <p class="product-subtext">제품 설명</p>
-                -->
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
               </div>
             </div>
 
@@ -975,43 +628,41 @@
                 </tr>
               </tbody>
             </table>
-
           </div>
-          <!-- ---------- 상품 상세 끝 ---------- -->
         </details>
         <!-- ========== 6번 상품 끝 ========== -->
 
-        <!-- ========== 7번 집업 상품 시작 ========== -->
+
+        <!-- ========== 7번 후드집업 상품 시작 ========== -->
         <details
-          id="idpitta-md-hoodie"
+          id="id-pitta-hoodie"
           class="goods-accordion"
           data-category="MD, 개인"
           data-name="후드집업"
           data-keywords="ID PITTA, 아이디 피타, MD, 기모후드집업, 의류"
+          data-members="형호"
         >
           <summary class="goods-summary">
             <span class="goods-number">7</span>
-            <span class="goods-name">ID: PITTA 콘서트 MD<br>기모 후드 집업</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>기모 후드 집업
+            </span>
             <span class="accordion-arrow" aria-hidden="true"></span>
           </summary>
 
           <hr class="goods-divider">
 
-          <!-- ---------- 상품 상세 시작 ---------- -->
           <div class="goods-content">
             <div class="product-header">
               <img
                 class="product-image"
                 src="https://drive.google.com/thumbnail?id=14AgLS8J0YagCni3-2m1cXsJlNWnu1kDx&amp;sz=w1600"
-                alt="ID PITTA MD 후드집업"
+                alt="ID: PITTA MD 후드집업"
                 loading="lazy"
               >
 
               <div class="product-description">
-                <!--
-                <h3 class="product-name">제품명</h3>
-                <p class="product-subtext">제품 설명</p>
-                -->
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
               </div>
             </div>
 
@@ -1031,9 +682,7 @@
                 </tr>
               </tbody>
             </table>
-
           </div>
-          <!-- ---------- 상품 상세 끝 ---------- -->
         </details>
         <!-- ========== 7번 상품 끝 ========== -->
 
@@ -1080,31 +729,32 @@
   <script>
     (() => {
       /*
-        검색 결과에서 전달한 상품 번호 또는
-        주소의 #상품아이디를 읽습니다.
+        검색 결과·마이페이지 등에서 전달한
+        상품 번호 또는 상품 ID로 해당 상품을 펼칩니다.
       */
-      const cards = document.querySelectorAll(
-        ".goods-accordion[data-category]"
-      );
+      const cards = [
+        ...document.querySelectorAll(
+          ".goods-accordion[data-category]"
+        )
+      ];
 
       const params = new URLSearchParams(location.search);
       const productNumber = Number(params.get("product"));
 
-      let target = null;
+      let productId = "";
 
-      /* 상품 id가 있으면 우선 사용 */
       try {
-        const id = decodeURIComponent(location.hash.slice(1));
-        const element = id ? document.getElementById(id) : null;
-
-        if (element?.matches(".goods-accordion[data-category]")) {
-          target = element;
-        }
+        productId = decodeURIComponent(location.hash.slice(1));
       } catch {
-        // 잘못된 주소 형식이면 상품 번호로 확인
+        // 해시가 잘못된 형식이면 상품 번호로 확인합니다.
       }
 
-      /* id가 없는 상품은 번호로 찾기 */
+      /* 고유한 상품 ID로 찾기 */
+      let target = cards.find((card) => {
+        return card.id === productId;
+      });
+
+      /* 상품 ID로 찾지 못하면 상품 번호로 찾기 */
       if (
         !target &&
         Number.isInteger(productNumber) &&
@@ -1113,13 +763,23 @@
         target = cards[productNumber - 1];
       }
 
+      /*
+        기존 중복 ID가 포함된 주소도 연결되도록 처리합니다.
+        상품 번호가 없는 예전 주소는 첫 상품을 엽니다.
+      */
+      if (!target && productId === "idpitta-album") {
+        target = cards[0];
+      }
+
       if (!target) return;
 
       target.open = true;
 
       function scrollToProduct() {
-        target.scrollIntoView({
-          block: "start"
+        requestAnimationFrame(() => {
+          target.scrollIntoView({
+            block: "start"
+          });
         });
       }
 

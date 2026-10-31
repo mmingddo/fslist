@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#3662ae">
+
+  <title>마이페이지 | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+  <link rel="stylesheet" href="./category.css">
+
+  <!-- 상품 상세페이지와 같은 저장 기능 사용 -->
+  <script src="./personal.js" defer></script>
+
+  <style>
+    /* ====================
+       북마크·메모 선택 버튼
+    ==================== */
+    .mypage-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .mypage-tab {
+      min-width: 0;
+      min-height: 40px;
+      padding: 8px 4px;
+      border: 1px solid #ccc;
+      border-radius: 999px;
+      background: #fff;
+      color: #333;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .mypage-tab[aria-pressed="true"] {
+      border-color: #3662ae;
+      background: #3662ae;
+      color: #fff;
+    }
+
+    .mypage-tab:focus-visible {
+      outline: 2px solid #3662ae;
+      outline-offset: 3px;
+    }
+
+    /* ====================
+       저장한 상품 목록
+    ==================== */
+    .saved-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .saved-card {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr);
+      align-items: start;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .saved-image-box {
+      overflow: hidden;
+      width: 80px;
+      height: 80px;
+      border: 1px solid #3662ae;
+      border-radius: 8px;
+      background: #f2f2f2;
+    }
+
+    .saved-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .saved-info {
+      min-width: 0;
+    }
+
+    .saved-name {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .saved-name a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .saved-category {
+      margin: 6px 0 0;
+      color: #555;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .saved-note {
+      margin: 10px 0 0;
+      color: #333;
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .saved-open {
+      display: inline-block;
+      margin-top: 10px;
+      color: #3662ae;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .saved-open:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html#home">
+      <img
+        class="site-logo"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+    <!-- ========== 마이페이지 시작 ========== -->
+    <section aria-labelledby="mypage-title">
+      <h1 id="mypage-title" class="category-title">
+        마이페이지
+      </h1>
+
+      <p class="category-description">
+        북마크와 메모는 현재 브라우저에 저장돼요.
+      </p>
+
+      <a class="back-link" href="./index.html#category">
+        ← 메뉴로 돌아가기
+      </a>
+
+      <!-- 모아보기 선택 -->
+      <div
+        class="mypage-tabs"
+        role="group"
+        aria-label="저장 목록 선택"
+      >
+        <button
+          class="mypage-tab"
+          type="button"
+          data-view="bookmarks"
+          aria-pressed="true"
+          aria-controls="saved-list"
+        >
+          북마크 모아보기
+        </button>
+
+        <button
+          class="mypage-tab"
+          type="button"
+          data-view="notes"
+          aria-pressed="false"
+          aria-controls="saved-list"
+        >
+          메모 모아보기
+        </button>
+      </div>
+
+      <p
+        id="saved-message"
+        class="category-description"
+        role="status"
+      ></p>
+
+      <div id="saved-list" class="saved-list"></div>
+    </section>
+    <!-- ========== 마이페이지 끝 ========== -->
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const personal = window.GoodsPersonal;
+      const list = document.getElementById("saved-list");
+      const message = document.getElementById("saved-message");
+      const tabs = document.querySelectorAll(".mypage-tab");
+
+      if (!personal) {
+        message.textContent =
+          "保存 기능을 불러오지 못했어요. personal.js 파일 연결을 확인해 주세요."
+            .replace("保存", "저장");
+        return;
+      }
+
+      /* ====================
+         저장 목록 표시
+      ==================== */
+      function renderSaved() {
+        const view = location.hash === "#notes"
+          ? "notes"
+          : "bookmarks";
+
+        tabs.forEach((tab) => {
+          tab.setAttribute(
+            "aria-pressed",
+            String(tab.dataset.view === view)
+          );
+        });
+
+        const saved = personal.readSaved();
+
+        const products = Object.values(saved)
+          .filter((product) => {
+            if (!product || typeof product !== "object") {
+              return false;
+            }
+
+            if (!product.key) return false;
+
+            return view === "notes"
+              ? Boolean(product.note)
+              : Boolean(product.bookmarked);
+          })
+          .sort((a, b) => {
+            return (Number(b.updatedAt) || 0) -
+              (Number(a.updatedAt) || 0);
+          });
+
+        list.replaceChildren();
+
+        if (products.length === 0) {
+          message.textContent = view === "notes"
+            ? "저장한 메모가 없어요."
+            : "저장한 북마크가 없어요.";
+          return;
+        }
+
+        message.textContent = `${products.length}개`;
+
+        products.forEach((product) => {
+          const card = document.createElement("article");
+          card.className = "saved-card";
+
+          /* 상품 이미지 */
+          const imageBox = document.createElement("div");
+          imageBox.className = "saved-image-box";
+
+          if (product.image) {
+            const image = document.createElement("img");
+
+            image.className = "saved-image";
+            image.src = product.image;
+            image.alt = product.name;
+            image.loading = "lazy";
+
+            imageBox.append(image);
+          }
+
+          const info = document.createElement("div");
+          info.className = "saved-info";
+
+          /* 상품명 */
+          const heading = document.createElement("h2");
+          heading.className = "saved-name";
+
+          const titleLink = document.createElement("a");
+          titleLink.href = product.url;
+          titleLink.textContent = product.name;
+
+          heading.append(titleLink);
+          info.append(heading);
+
+          /* 카테고리 */
+          if (product.category) {
+            const category = document.createElement("p");
+
+            category.className = "saved-category";
+            category.textContent = product.category;
+
+            info.append(category);
+          }
+
+          /* 저장한 메모 */
+          if (product.note) {
+            const note = document.createElement("p");
+
+            note.className = "saved-note";
+            note.textContent = product.note;
+
+            info.append(note);
+          }
+
+          /* 원래 상품으로 이동 */
+          const openLink = document.createElement("a");
+
+          openLink.className = "saved-open";
+          openLink.href = product.url;
+          openLink.textContent = "상품 상세 보기 →";
+
+          info.append(openLink);
+
+          /*
+            메모 수정·삭제 및 북마크 해제 버튼.
+            저장 상태는 personal.js에서 다시 읽습니다.
+          */
+          const productInfo = {
+            key: product.key,
+            name: product.name,
+            category: product.category,
+            image: product.image,
+            url: product.url
+          };
+
+          info.append(
+            personal.createButtons(productInfo)
+          );
+
+          card.append(imageBox, info);
+          list.append(card);
+        });
+
+        personal.refreshButtons();
+      }
+
+      /* ====================
+         모아보기 전환
+      ==================== */
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          location.hash = tab.dataset.view;
+        });
+      });
+
+      window.addEventListener("hashchange", renderSaved);
+
+      /* 메모 저장·삭제 또는 북마크 변경 시 목록 갱신 */
+      document.addEventListener(
+        "personal-data-changed",
+        renderSaved
+      );
+
+      renderSaved();
+    });
+  </script>
+</body>
+</html>

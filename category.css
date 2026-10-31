@@ -30,6 +30,7 @@
   box-sizing: border-box;
 }
 
+/* 상품 필터·안내 문구 등의 숨김 처리 */
 [hidden] {
   display: none !important;
 }
@@ -50,7 +51,9 @@ main {
   min-height: 100dvh;
   margin: 0 auto;
   padding: 32px 24px;
-  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(
+    32px + env(safe-area-inset-bottom, 0px)
+  );
 }
 
 /* ====================
@@ -110,6 +113,76 @@ main {
 }
 
 /* ====================
+   카테고리 정렬순 변경
+==================== */
+.category-sort {
+  margin-bottom: 20px;
+}
+
+.category-sort-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.category-sort-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.category-sort-buttons button {
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.category-sort-buttons button[aria-pressed="true"] {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: #fff;
+}
+
+/* ====================
+   개인 카테고리 멤버 필터
+==================== */
+.member-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin: 0 0 16px;
+}
+
+.member-filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px 2px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: #b5b5b5;
+  color: #333;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.member-filter-button[aria-pressed="true"] {
+  border-color: var(--accent-color);
+  background: #dfb2fa;
+}
+
+/* ====================
    상품 목록·펼치기 상자
 ==================== */
 .category-products {
@@ -158,6 +231,7 @@ main {
   overflow-wrap: anywhere;
 }
 
+/* 상품 펼치기 화살표 */
 .accordion-arrow {
   display: flex;
   align-items: center;
@@ -180,6 +254,7 @@ main {
   border-bottom: 10px solid var(--accent-color);
 }
 
+/* 제목 아래 구분선 */
 .goods-divider,
 .goods-title-divider {
   margin: 0 12px;
@@ -194,7 +269,7 @@ main {
 }
 
 /* ====================
-   商品 사진·설명
+   상품 사진·설명
 ==================== */
 .product-header {
   display: grid;
@@ -254,6 +329,7 @@ main {
   overflow-wrap: anywhere;
 }
 
+/* 왼쪽: 파란 배경·흰 글씨 */
 .product-table th {
   width: 30%;
   border: 0;
@@ -262,20 +338,24 @@ main {
   font-weight: 500;
 }
 
+/* 오른쪽: 파란 테두리·흰 배경·검정 글씨 */
 .product-table td {
   border: 1px solid var(--accent-color);
   background: #fff;
   color: #000;
 }
 
+/* 왼쪽 항목 사이 흰색 구분선 */
 .product-table tr + tr th {
   border-top: 1px solid #fff;
 }
 
+/* 오른쪽 행 사이 테두리 겹침 방지 */
 .product-table tr + tr td {
   border-top: 0;
 }
 
+/* 표 바깥 모서리 */
 .product-table tr:first-child th {
   border-top-left-radius: 12px;
 }
@@ -293,7 +373,7 @@ main {
 }
 
 /* ====================
-   포토카드 펼치기
+   포토카드·상세페이지 펼치기
 ==================== */
 .photocard-section {
   overflow: hidden;
@@ -336,6 +416,50 @@ main {
   border-bottom: 9px solid #fff;
 }
 
+/* ====================
+   포토카드 유형 표시
+==================== */
+.photocard-types {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+}
+
+.photocard-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 3px 2px;
+  border-radius: 20px;
+  background: #b5b5b5;
+  color: #333;
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* 개인 */
+.type-personal.active {
+  background: #dfb2fa;
+}
+
+/* 유닛 */
+.type-unit.active {
+  background: #ffd18b;
+}
+
+/* 단체 */
+.type-group.active {
+  background: #a8e8e8;
+}
+
+/* ====================
+   펼쳐지는 이미지
+==================== */
 .photocard-content {
   display: flex;
   flex-direction: column;
@@ -366,6 +490,7 @@ main {
   text-align: left;
 }
 
+/* 링크 색깔·연결 유지, 밑줄만 제거 */
 .site-credit a,
 .site-credit a:hover,
 .site-credit a:focus,
@@ -380,8 +505,12 @@ main {
   border-top: 1px dashed #999;
 }
 
-/* 키보드 선택 표시 */
-a:focus-visible {
+/* ====================
+   키보드 선택 표시
+==================== */
+a:focus-visible,
+.category-sort-buttons button:focus-visible,
+.member-filter-button:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 3px;
 }
@@ -392,49 +521,12 @@ a:focus-visible {
   outline-offset: -3px;
 }
 
+/* ====================
+   모바일
+==================== */
 @media (max-width: 480px) {
   .product-header {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
-}
-/* ====================
-   포토카드 유형 표시
-==================== */
-.photocard-types {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  width: 100%;
-  margin: 0;
-  padding: 12px;
-}
-
-.photocard-type {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  padding: 3px 2px;
-  border-radius: 20px;
-  background-color: #b5b5b5;
-  color: #333;
-  font-size: 13px;
-  line-height: 1.3;
-  text-align: center;
-}
-
-/* 개인 */
-.type-personal.active {
-  background-color: #dfb2fa;
-}
-
-/* 유닛 */
-.type-unit.active {
-  background-color: #ffd18b;
-}
-
-/* 단체 */
-.type-group.active {
-  background-color: #a8e8e8;
 }

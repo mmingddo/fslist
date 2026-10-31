@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#3662ae">
+
+  <title>년도별 | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+  <link rel="stylesheet" href="./category.css">
+
+  <style>
+    [hidden] {
+      display: none !important;
+    }
+
+    /* ====================
+       연표 전체
+    ==================== */
+    .year-timeline {
+      position: relative;
+      margin-top: 12px;
+      padding-left: 28px;
+    }
+
+    /* 왼쪽 세로선 */
+    .year-timeline::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      bottom: 0;
+      left: 8px;
+      width: 2px;
+      background: #3662ae;
+    }
+
+    .year-section {
+      position: relative;
+      padding-bottom: 32px;
+    }
+
+    /* 연도별 동그라미 */
+    .year-section::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: -27px;
+      width: 16px;
+      height: 16px;
+      border: 3px solid #fafafa;
+      border-radius: 50%;
+      background: #3662ae;
+    }
+
+    .year-title {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    /* ====================
+       활동 카드: 한 줄에 3개
+    ==================== */
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .year-grid .activity-card {
+      min-width: 0;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .year-grid .activity-image-link {
+      display: block;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .year-grid .activity-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      background: #f2f2f2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .year-grid .activity-name {
+      margin: 12px 0 4px;
+      color: #000;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.6;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 480px) {
+      .year-grid {
+        gap: 8px;
+      }
+
+      .year-grid .activity-card {
+        padding: 6px;
+      }
+
+      .year-grid .activity-name {
+        margin-top: 8px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html#home">
+      <img
+        class="site-logo"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+    <!-- ========== 연표 시작 ========== -->
+    <section aria-labelledby="year-page-title">
+      <h1 id="year-page-title" class="category-title">
+        카테고리 → 년도별
+      </h1>
+
+      <a class="back-link" href="./index.html#category">
+        ← 메뉴로 돌아가기
+      </a>
+
+      <p
+        id="year-message"
+        class="category-description"
+        role="status"
+      >
+        활동 목록을 불러오고 있어요.
+      </p>
+
+      <div id="year-timeline" class="year-timeline"></div>
+    </section>
+    <!-- ========== 연표 끝 ========== -->
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+
+  <script>
+    (() => {
+      const timeline = document.getElementById("year-timeline");
+      const message = document.getElementById("year-message");
+
+      /* ====================
+         활동별 연도 확인
+      ==================== */
+      async function readActivity(card, indexUrl) {
+        const link = card.querySelector(".activity-image-link");
+        const image = card.querySelector(".activity-image");
+
+        if (!link) return null;
+
+        const pageUrl = new URL(
+          link.getAttribute("href"),
+          indexUrl
+        );
+
+        /* 복사한 카드의 주소를 정확하게 연결 */
+        link.href = pageUrl.href;
+        link.removeAttribute("target");
+
+        const imageSrc = image?.getAttribute("src");
+
+        if (imageSrc) {
+          image.src = new URL(imageSrc, indexUrl).href;
+        }
+
+        /*
+          리스트 카드에 data-year가 있으면
+          해당 연도를 우선 사용
+        */
+        const manualYear = card.dataset.year?.trim();
+
+        if (/^\d{4}$/.test(manualYear || "")) {
+          return {
+            card,
+            year: manualYear,
+            failed: false
+          };
+        }
+
+        try {
+          const response = await fetch(pageUrl.href, {
+            cache: "no-cache"
+          });
+
+          if (!response.ok) {
+            throw new Error("활동 페이지를 불러오지 못했습니다.");
+          }
+
+          const doc = new DOMParser().parseFromString(
+            await response.text(),
+            "text/html"
+          );
+
+          const rows = doc.querySelectorAll(
+            ".info-table tr"
+          );
+
+          let year = "";
+
+          for (const row of rows) {
+            const label = row.querySelector("th")
+              ?.textContent.replace(/\s+/g, "") || "";
+
+            /*
+              발매일·공연일·활동 기간 등
+              날짜가 적힌 행에서 연도 확인
+            */
+            if (
+              !/발매|공연|활동기간|모집|가입/.test(label)
+            ) {
+              continue;
+            }
+
+            const value = row.querySelector("td")
+              ?.textContent || "";
+
+            const match = value.match(/\b(?:19|20)\d{2}\b/);
+
+            if (match) {
+              year = match[0];
+              break;
+            }
+          }
+
+          return {
+            card,
+            year: year || "연도 미등록",
+            failed: false
+          };
+        } catch {
+          return {
+            card,
+            year: "연도 미등록",
+            failed: true
+          };
+        }
+      }
+
+      /* ====================
+         리스트에서 활동 카드 가져오기
+      ==================== */
+      async function loadTimeline() {
+        try {
+          const indexUrl = new URL(
+            "./index.html",
+            location.href
+          );
+
+          const response = await fetch(indexUrl.href, {
+            cache: "no-cache"
+          });
+
+          if (!response.ok) {
+            throw new Error("리스트를 불러오지 못했습니다.");
+          }
+
+          const doc = new DOMParser().parseFromString(
+            await response.text(),
+            "text/html"
+          );
+
+          const cards = [
+            ...doc.querySelectorAll(
+              "#list .activity-grid > .activity-card"
+            )
+          ];
+
+          const loaded = await Promise.all(
+            cards.map((card) => {
+              return readActivity(card, indexUrl.href);
+            })
+          );
+
+          const activities = loaded.filter(Boolean);
+
+          if (activities.length === 0) {
+            message.textContent = "등록된 활동이 없어요.";
+            return;
+          }
+
+          /* 연도별로 묶기 */
+          const groups = new Map();
+
+          activities.forEach((activity) => {
+            if (!groups.has(activity.year)) {
+              groups.set(activity.year, []);
+            }
+
+            groups.get(activity.year).push(activity.card);
+          });
+
+          /* 오래된 연도부터 표시, 미등록은 마지막 */
+          const years = [...groups.keys()].sort((a, b) => {
+            if (a === b) return 0;
+            if (a === "연도 미등록") return 1;
+            if (b === "연도 미등록") return -1;
+
+            return Number(a) - Number(b);
+          });
+
+          const fragment = document.createDocumentFragment();
+
+          years.forEach((year) => {
+            const section = document.createElement("section");
+            section.className = "year-section";
+
+            const title = document.createElement("h2");
+            title.className = "year-title";
+            title.textContent = year;
+
+            const grid = document.createElement("div");
+            grid.className = "year-grid";
+
+            groups.get(year).forEach((card) => {
+              grid.append(document.importNode(card, true));
+            });
+
+            section.append(title, grid);
+            fragment.append(section);
+          });
+
+          timeline.replaceChildren(fragment);
+
+          const failedCount = activities.filter(
+            (activity) => activity.failed
+          ).length;
+
+          if (failedCount > 0) {
+            message.textContent =
+              "일부 활동의 날짜를 불러오지 못해 ‘연도 미등록’에 표시했어요.";
+          } else {
+            message.textContent = "";
+            message.hidden = true;
+          }
+        } catch {
+          message.textContent =
+            "활동 목록을 불러오지 못했어요. 잠시 후 새로고침해 주세요.";
+        }
+      }
+
+      loadTimeline();
+    })();
+  </script>
+</body>
+</html>
