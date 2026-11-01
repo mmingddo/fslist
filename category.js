@@ -8,6 +8,7 @@
   const activityPages = [
     { name: "Evolution", url: "./Evolution.html" },
     { name: "Mystique", url: "./mystique.html" },
+    { name: "A Wake 2019년 3호", url: "./awake201903.html" },
     { name: "MY YOUTH", url: "./MyYouth.html" },
     { name: "2019 빈센트 반 고흐", url: "./gogh19.html" },
     { name: "NEW AGE", url: "./newage.html" },
