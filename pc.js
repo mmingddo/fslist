@@ -27,6 +27,8 @@
   const message = document.getElementById("pc-message");
   const buttons = document.querySelectorAll(".pc-filter");
 
+  if (!container || !message) return;
+
   const selectedTypes = new Set();
 
   let entries = [];
@@ -66,6 +68,7 @@
       element.id = newId;
     });
 
+    /* id를 참조하는 속성도 함께 변경 */
     [copy, ...copy.querySelectorAll("*")].forEach((element) => {
       [
         "aria-labelledby",
@@ -87,21 +90,26 @@
       });
     });
 
+    /* 이미지의 상대 주소 보정 */
     copy.querySelectorAll("img[src]").forEach((image) => {
-      const src = image.getAttribute("src").trim();
+      const src = image.getAttribute("src")?.trim();
 
       if (src) {
         image.src = new URL(src, pageUrl).href;
       }
     });
 
+    /* 상품 내부 링크의 상대 주소 보정 */
     copy.querySelectorAll("a[href]").forEach((link) => {
-      const href = link.getAttribute("href").trim();
+      const href = link.getAttribute("href")?.trim();
 
       if (!href) return;
 
       if (href.startsWith("#") && idMap.has(href.slice(1))) {
-        link.setAttribute("href", `#${idMap.get(href.slice(1))}`);
+        link.setAttribute(
+          "href",
+          `#${idMap.get(href.slice(1))}`
+        );
       } else {
         link.href = new URL(href, pageUrl).href;
       }
@@ -110,7 +118,7 @@
 
 
   /* ====================
-     活動 페이지에서 포토카드 상품 읽기
+     활동 페이지에서 포토카드 상품 읽기
   ==================== */
   async function readPage(activity, activityIndex) {
     const pageUrl = new URL(activity.url, location.href);
@@ -120,7 +128,9 @@
     });
 
     if (!response.ok) {
-      throw new Error("활동 페이지를 불러오지 못했습니다.");
+      throw new Error(
+        `${activity.name} 페이지를 불러오지 못했습니다.`
+      );
     }
 
     const html = await response.text();
@@ -181,6 +191,7 @@
         section.open = true;
       });
 
+      /* 상품 상자는 처음에 접어서 표시 */
       copy.removeAttribute("open");
 
       prepareCopy(
@@ -195,22 +206,16 @@
 
 
   /* ====================
-     유형 필터 적용
+     유형 필터·자동 순번 적용
   ==================== */
-function applyFilters() {
-  if (!loaded) return;
+  function applyFilters() {
+    if (!loaded) return;
 
-  let visibleProducts = 0;
-  let visiblePhotos = 0;
+    let visibleProducts = 0;
+    let visiblePhotos = 0;
 
-  /* 원본 목록을 유지하면서 표시 순서만 결정 */
-  const sortedEntries = pcSort === "reverse"
-    ? [...entries].reverse()
-    : [...entries];
-
-  sortedEntries.forEach(({ card }) => {
-    /* 선택한 순서로 상품 상자를 이동 */
-    container.append(card);
+    /* 활동 페이지 목록에 등록한 순서대로 표시 */
+    entries.forEach(({ card }) => {
       let cardPhotoCount = 0;
 
       card.querySelectorAll("details[data-photocard]").forEach(
@@ -224,8 +229,8 @@ function applyFilters() {
             const types = getTypes(image);
 
             /*
-              선택 없음: 전체
-              여러 개 선택: 선택한 유형 중 하나라도 포함
+              선택 없음: 전체 표시
+              여러 개 선택: 선택한 유형 중 하나라도 포함하면 표시
             */
             const matches =
               selectedTypes.size === 0 ||
@@ -263,6 +268,7 @@ function applyFilters() {
 
       card.hidden = cardPhotoCount === 0;
 
+      /* 표시되는 상품만 1번부터 순번 부여 */
       if (cardPhotoCount > 0) {
         visibleProducts += 1;
         visiblePhotos += cardPhotoCount;
@@ -295,6 +301,8 @@ function applyFilters() {
     button.addEventListener("click", () => {
       const type = button.dataset.type;
 
+      if (!validTypes.includes(type)) return;
+
       if (selectedTypes.has(type)) {
         selectedTypes.delete(type);
       } else {
@@ -323,6 +331,9 @@ function applyFilters() {
     const responses = await Promise.allSettled(
       activityPages.map(readPage)
     );
+
+    entries = [];
+    failedCount = 0;
 
     responses.forEach((response) => {
       if (response.status === "fulfilled") {
