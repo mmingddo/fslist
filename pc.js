@@ -19,6 +19,7 @@
     { name: "ID: PITTA", url: "./idpitta.html" },
     { name: "PARANA", url: "./parana.html" },
     { name: "숲별 1기", url: "./sb1.html" },
+    { name: "2022년 시즌그리팅", url: "./seag22.html" },
     { name: "21-22 The Royal", url: "./royal21.html" }
   ];
 
