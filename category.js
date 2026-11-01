@@ -58,8 +58,8 @@
         class="category-description"
       ></p>
 
-      <a class="back-link" href="./index.html#list">
-        ← 리스트로 돌아가기
+      <a class="back-link" href="./index.html#category">
+        ← 메뉴로 돌아가기
       </a>
 
       <!-- 정렬순 변경 -->
