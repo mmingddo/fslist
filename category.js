@@ -14,6 +14,7 @@
     { name: "2019 빈센트 반 고흐", url: "./gogh19.html" },
     { name: "NEW AGE", url: "./newage.html" },
     { name: "2020 RENT", url: "./rent20.html" },
+    { name: "THEATRE+ 2020년 9월호", url: "./thea+201908.html" },
     { name: "시간여행", url: "./time.html" },
     { name: "미드나잇: 액터뮤지션", url: "./midnight20.html" },
     { name: "바람", url: "./wind.html" },
