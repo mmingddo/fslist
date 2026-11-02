@@ -290,7 +290,7 @@
         );
 
         if (number) {
-          number.textContent = visibleProducts;
+          number.textContent = '${visibleProducts} (${cardPhotoCount}장)';
         }
       }
     });
