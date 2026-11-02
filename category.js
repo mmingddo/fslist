@@ -19,11 +19,14 @@
     { name: "미드나잇: 액터뮤지션", url: "./midnight20.html" },
     { name: "바람", url: "./wind.html" },
     { name: "The Forestella", url: "./TheFore.html" },
+    { name: "2021년 생활지음", url: "./zium21.html" },
     { name: "ID: PITTA", url: "./idpitta.html" },
     { name: "PARANA", url: "./parana.html" },
     { name: "숲별 1기", url: "./sb1.html" },
+    { name: "21-22 The Royal", url: "./royal21.html" },
     { name: "2022년 시즌그리팅", url: "./seag22.html" },
-    { name: "21-22 The Royal", url: "./royal21.html" }
+    { name: "COSMOPOLITAN 2022년 1월호", url: "./cosmo202201.html" },
+    { name: "공식 응원봉", url: "./fanlight22.html" }
   ];
 
   /* ====================
