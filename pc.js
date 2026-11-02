@@ -271,6 +271,13 @@
         }
       );
 
+          /* 상품 안에서 필터에 맞는 이미지 요소를 한 번씩만 집계 */
+      cardPhotoCount = [...card.querySelectorAll(
+        "details[data-photocard] img.photocard-image[data-pc-types]"
+      )].filter((image) => !image.hidden).length;
+
+      card.hidden = cardPhotoCount === 0;
+
       card.hidden = cardPhotoCount === 0;
 
       /* 표시되는 상품만 1번부터 순번 부여 */
