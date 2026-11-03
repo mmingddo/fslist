@@ -19,6 +19,7 @@
 
   <!-- 상품별 북마크·메모 기능 -->
   <script src="./personal.js" defer></script>
+  <script src="./goods-sort.js" defer></script>
 
   <style>
     /* ====================
@@ -254,6 +255,28 @@
       <h2 id="goods-title" class="section-title">
         굿즈 보기
       </h2>
+
+
+      <!-- 상품 정렬 버튼 시작 -->
+<div class="goods-sort-buttons" role="group" aria-label="상품 정렬">
+  <button
+    type="button"
+    data-goods-sort="original"
+    aria-pressed="true"
+  >
+    순서대로
+  </button>
+
+  <button
+    type="button"
+    data-goods-sort="reverse"
+    aria-pressed="false"
+  >
+    역순서대로
+  </button>
+</div>
+<!-- 상품 정렬 버튼 끝 -->
+ 
 
       <div class="goods-list">
 
@@ -1725,7 +1748,7 @@
         <!-- ========== 17번 상품 끝 ========== -->
 
 
-        <!-- ========== 18번 티셔츠 블 시작 ========== -->
+        <!-- ========== 18번 티셔츠  시작 ========== -->
         <details
           id="worldtree-md-tblack"
           class="goods-accordion"
@@ -1816,6 +1839,58 @@
           </div>
         </details>
         <!-- ========== 18번 상품 끝 ========== -->
+
+
+        <!-- ========== 19번 키링 시작 ========== -->
+        <details
+          id="worldtree-md-fanlightpouch"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="공식 응원봉 파우치"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 공식응원봉파우치, 아크릴키링"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">14</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>아크릴 키링</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=10rUa4w0eM89gaHcm196ZNf1pDGH_bHME&amp;sz=w1600"
+                alt="world tree MD 아크릴 키링"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>10,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>아크릴 키링</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 19번 상품 끝 ========== -->
 
 
       </div>

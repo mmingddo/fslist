@@ -19,6 +19,7 @@
 
   <!-- 상품별 북마크·메모 기능 -->
   <script src="./personal.js" defer></script>
+  <script src="./goods-sort.js" defer></script>
 
   <style>
     /* ====================
@@ -254,6 +255,28 @@
       <h2 id="goods-title" class="section-title">
         굿즈 보기
       </h2>
+
+
+      <!-- 상품 정렬 버튼 시작 -->
+<div class="goods-sort-buttons" role="group" aria-label="상품 정렬">
+  <button
+    type="button"
+    data-goods-sort="original"
+    aria-pressed="true"
+  >
+    순서대로
+  </button>
+
+  <button
+    type="button"
+    data-goods-sort="reverse"
+    aria-pressed="false"
+  >
+    역순서대로
+  </button>
+</div>
+<!-- 상품 정렬 버튼 끝 -->
+
 
       <div class="goods-list">
 

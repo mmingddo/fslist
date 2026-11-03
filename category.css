@@ -571,3 +571,37 @@ a:focus-visible,
     gap: 12px;
   }
 }
+
+
+/* ====================
+   활동 상세페이지 상품 정렬
+==================== */
+.goods-sort-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.goods-sort-buttons button {
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.goods-sort-buttons button[aria-pressed="true"] {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: #fff;
+}
+
+.goods-sort-buttons button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
