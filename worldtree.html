@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./category.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#000000">
+
+  <title>THE BEGINNING: WORLD TREE | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icon-192.png">
+
+  <!-- 공통 디자인 -->
+  <link rel="stylesheet" href="./category.css">
+
+  <!-- 상품별 북마크·메모 기능 -->
+  <script src="./personal.js" defer></script>
+
+  <style>
+    /* ====================
+       화면에 숨기는 활동 제목
+    ==================== */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .back-link {
+      align-self: flex-start;
+    }
+
+    /* ====================
+       활동 이미지·정보 배치
+    ==================== */
+    .album-header {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      gap: 20px;
+    }
+
+    .album-info {
+      min-width: 0;
+    }
+
+    .album-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #f2f2f2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ====================
+       활동 정보 표
+    ==================== */
+    .info-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      table-layout: fixed;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 14px 10px;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .info-table th {
+      width: 36%;
+      border: 0;
+      background: var(--accent-color);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .info-table td {
+      border: 1px solid var(--accent-color);
+      background: #fff;
+      color: #000;
+    }
+
+    .info-table tr + tr th {
+      border-top: 1px solid #fff;
+    }
+
+    .info-table tr + tr td {
+      border-top: 0;
+    }
+
+    .info-table tr:first-child th {
+      border-top-left-radius: 12px;
+    }
+
+    .info-table tr:first-child td {
+      border-top-right-radius: 12px;
+    }
+
+    .info-table tr:last-child th {
+      border-bottom-left-radius: 12px;
+    }
+
+    .info-table tr:last-child td {
+      border-bottom-right-radius: 12px;
+    }
+
+    /* ====================
+       활동 페이지 상품 목록
+    ==================== */
+    .goods-section {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .goods-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    /* 기존 활동 페이지의 세부 설정 유지 */
+    .goods-content {
+      line-height: 1.7;
+    }
+
+    .product-image {
+      height: auto;
+    }
+
+    .product-description {
+      overflow-wrap: anywhere;
+    }
+
+    .product-name {
+      color: #000;
+    }
+
+    .product-table {
+      line-height: 1.6;
+    }
+
+    .photocard-section,
+    .photocard-details {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .photocard-toggle {
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ====================
+       모바일 활동 정보
+    ==================== */
+    @media (max-width: 480px) {
+      .album-header {
+        gap: 12px;
+      }
+
+      .info-table {
+        font-size: 11px;
+      }
+
+      .info-table th,
+      .info-table td {
+        padding: 10px 4px;
+      }
+
+      .info-table th {
+        width: 40%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html#home">
+      <img
+        class="site-logo"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+    <a class="back-link" href="./index.html#list">
+      ← 리스트로 돌아가기
+    </a>
+
+    <!-- ========== 활동 정보 시작 ========== -->
+    <section
+      class="album-header"
+      aria-labelledby="activity-title"
+    >
+      <img
+        class="album-image"
+        src="https://drive.google.com/thumbnail?id=1ziWjPNaUp5SDEi9JljzzJRa9ure744Wo&amp;sz=w1600"
+        alt="월드트리 활동"
+      >
+
+      <div class="album-info">
+        <h1 id="activity-title" class="visually-hidden">
+          THE BEGINNING: WORLD TREE
+        </h1>
+
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th scope="row">활동명</th>
+              <td>THE BEGINNING:<br>WORLD TREE</td>
+            </tr>
+            <tr>
+              <th scope="row">발매일</th>
+              <td>2022.05.30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- ========== 활동 정보 끝 ========== -->
+
+
+    <!-- ========== 굿즈 목록 시작 ========== -->
+    <section class="goods-section" aria-labelledby="goods-title">
+      <h2 id="goods-title" class="section-title">
+        굿즈 보기
+      </h2>
+
+      <div class="goods-list">
+
+        <!-- ========== 1번 앨범 문라 상품 시작 ========== -->
+        <details
+          id="worldtree-moon-album"
+          class="goods-accordion"
+          data-category="앨범"
+          data-name="앨범 (moonlight ver.)"
+          data-keywords="worldtree, 월드트리, thebeginning, 더비기닝, 문라잇, moonlight, 미니1집, 음반, 앨범, CD, 씨디, 시디, 포토북, 엽서, 스티커, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">1</span>
+            <span class="goods-name">WORLD TREE 앨범 (moonlight ver.)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1eOJSIT0VkSqdPBNcAEoGxIs77Toe0E-r&amp;sz=w1600"
+                alt="world tree moonlight 앨범"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>31,200원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토북 / CD / 엽서 4장 / 스티커 1장 / 포토카드 10개</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 포토카드 뒷면 퍼즐</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal group"
+                  src="https://drive.google.com/thumbnail?id=1EmviITaQVuSraEavARLcJzvXKmlJ2u2t&amp;sz=w1600"
+                  alt="world tree moonlight 앨범 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+
+            <!-- 뒷면 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>뒷면 퍼즐 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1wCTYIVadDgwD934AKXnsXLmNhS81GDfC&amp;sz=w1600"
+                  alt="world tree moonlight 포토카드 뒷면"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 뒷면 영역 끝 -->
+
+
+            <!-- 상세페이지 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>상세페이지 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1ExM8McZoAJkNIqdeHxPgj8SNt5GxN_Kq&amp;sz=w1600"
+                  alt="world tree 앨범 상세페이지"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 상세페이지 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 1번 상품 끝 ========== -->
+
+
+        <!-- ========== 2번 앨범 선라 상품 시작 ========== -->
+        <details
+          id="worldtree-sun-album"
+          class="goods-accordion"
+          data-category="앨범"
+          data-name="앨범 (sunlight ver.)"
+          data-keywords="worldtree, 월드트리, thebeginning, 더비기닝, 선라잇, sunlight, 미니1집, 음반, 앨범, CD, 씨디, 시디, 포토북, 엽서, 스티커, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">2</span>
+            <span class="goods-name">WORLD TREE 앨범 (sunlight ver.)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1kd_JjadFKaaNF7m0pvCquARDxr0KNu9b&amp;sz=w1600"
+                alt="world tree sunlight 앨범"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>31,200원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토북 / CD / 엽서 4장 / 스티커 1장 / 포토카드 10개</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 포토카드 뒷면 퍼즐</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal group"
+                  src="https://drive.google.com/thumbnail?id=14WUxz-K_19NRiRG45BXvb6aIB_KLD0kM&amp;sz=w1600"
+                  alt="world tree sunlight 앨범 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+
+            <!-- 뒷면 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>뒷면 퍼즐 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1zbb9RvzEvYyIrc-ERz2kZf2hD0d4JCnO&amp;sz=w1600"
+                  alt="world tree sunlight 포토카드 뒷면"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 뒷면 영역 끝 -->
+
+
+            <!-- 상세페이지 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>상세페이지 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1ExM8McZoAJkNIqdeHxPgj8SNt5GxN_Kq&amp;sz=w1600"
+                  alt="world tree 앨범 상세페이지"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 상세페이지 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 2번 상품 끝 ========== -->
+
+
+
+      </div>
+      <!-- goods-list 끝 -->
+    </section>
+    <!-- ========== 굿즈 목록 끝 ========== -->
+
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+
+  <script>
+    (() => {
+      /*
+        검색 결과·마이페이지 등에서 전달한
+        상품 번호 또는 상품 ID로 해당 상품을 펼칩니다.
+      */
+      const cards = [
+        ...document.querySelectorAll(
+          ".goods-accordion[data-category]"
+        )
+      ];
+
+      const params = new URLSearchParams(location.search);
+      const productNumber = Number(params.get("product"));
+
+      let productId = "";
+
+      try {
+        productId = decodeURIComponent(location.hash.slice(1));
+      } catch {
+        // 해시가 잘못된 형식이면 상품 번호로 확인합니다.
+      }
+
+      /* 고유한 상품 ID로 찾기 */
+      let target = cards.find((card) => {
+        return card.id === productId;
+      });
+
+      /* 상품 ID로 찾지 못하면 상품 번호로 찾기 */
+      if (
+        !target &&
+        Number.isInteger(productNumber) &&
+        productNumber >= 1
+      ) {
+        target = cards[productNumber - 1];
+      }
+
+      /*
+        예전 중복 ID가 포함된 주소도 연결합니다.
+        상품 번호가 없으면 해당 그룹의 첫 상품을 엽니다.
+      */
+      if (!target) {
+        const legacyTargets = {
+          "TheForestella-album": "product-1",
+          "TheForestella-md": "product-4"
+        };
+
+        const legacyId = legacyTargets[productId];
+
+        if (legacyId) {
+          target = cards.find((card) => {
+            return card.id === legacyId;
+          });
+        }
+      }
+
+      if (!target) return;
+
+      target.open = true;
+
+      function scrollToProduct() {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({
+            block: "start"
+          });
+        });
+      }
+
+      if (document.readyState === "complete") {
+        scrollToProduct();
+      } else {
+        window.addEventListener("load", scrollToProduct, {
+          once: true
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
