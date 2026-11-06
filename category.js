@@ -30,7 +30,10 @@
     { name: "THE BEGINNING: WORLD TREE", url: "./worldtree.html" },
     { name: "1st LOOK 2022년 241호", url: "./firstlook202206.html" },
     { name: "CONTRAST", url: "./contrast.html" },
-    { name: "THEATRE+ 2022년 7월호", url: "./thea+202207.html" }
+    { name: "THEATRE+ 2022년 7월호", url: "./thea+202207.html" },
+    { name: "2022년 고우림 생일카페", url: "./WRbirth22.html" },
+    { name: "BOTIQUE", url: "./boutique.html" },
+    { name: "숲속의 포레시피", url: "./forrecipe22.html" }
   ];
 
   /* ====================
