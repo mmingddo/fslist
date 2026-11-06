@@ -28,7 +28,8 @@
     { name: "COSMOPOLITAN 2022년 1월호", url: "./cosmo202201.html" },
     { name: "공식 응원봉", url: "./fanlight22.html" },
     { name: "THE BEGINNING: WORLD TREE", url: "./worldtree.html" },
-    { name: "1st LOOK 2022년 241호", url: "./firstlook202206.html" }
+    { name: "1st LOOK 2022년 241호", url: "./firstlook202206.html" },
+    { name: "CONTRAST", url: "./contrast.html" }
   ];
 
   /* ====================
