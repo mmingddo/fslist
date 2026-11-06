@@ -33,7 +33,8 @@
     { name: "THEATRE+ 2022년 7월호", url: "./thea+202207.html" },
     { name: "2022년 고우림 생일카페", url: "./WRbirth22.html" },
     { name: "BOTIQUE", url: "./boutique.html" },
-    { name: "숲속의 포레시피", url: "./forrecipe22.html" }
+    { name: "숲속의 포레시피", url: "./forrecipe22.html" },
+    { name: "2022년 생활지음", url: "./zium22.html" }
   ];
 
   /* ====================
