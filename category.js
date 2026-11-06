@@ -29,7 +29,8 @@
     { name: "공식 응원봉", url: "./fanlight22.html" },
     { name: "THE BEGINNING: WORLD TREE", url: "./worldtree.html" },
     { name: "1st LOOK 2022년 241호", url: "./firstlook202206.html" },
-    { name: "CONTRAST", url: "./contrast.html" }
+    { name: "CONTRAST", url: "./contrast.html" },
+    { name: "THEATRE+ 2022년 7월호", url: "./thea+202207.html" }
   ];
 
   /* ====================
