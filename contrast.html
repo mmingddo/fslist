@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./category.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#000000">
+
+  <title>ID: PITTA | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1BhDYJ8C4ic59AWids_NZxEaqMQHuUTJV&amp;sz=w1600">
+
+  <!-- 공통 디자인 -->
+  <link rel="stylesheet" href="./category.css">
+
+  <!-- 상품별 북마크·메모 기능 -->
+  <script src="./personal.js" defer></script>
+  <script src="./goods-sort.js" defer></script>
+
+  <style>
+    /* ====================
+       화면에는 숨기는 활동 제목
+    ==================== */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .back-link {
+      align-self: flex-start;
+    }
+
+    /* ====================
+       활동 이미지·정보 배치
+    ==================== */
+    .album-header {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      gap: 20px;
+    }
+
+    .album-info {
+      min-width: 0;
+    }
+
+    .album-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #f2f2f2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ====================
+       활동 정보 표
+    ==================== */
+    .info-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      table-layout: fixed;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 14px 10px;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .info-table th {
+      width: 36%;
+      border: 0;
+      background: var(--accent-color);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .info-table td {
+      border: 1px solid var(--accent-color);
+      background: #fff;
+      color: #000;
+    }
+
+    /* 왼쪽 항목 사이 흰색 구분선 */
+    .info-table tr + tr th {
+      border-top: 1px solid #fff;
+    }
+
+    /* 오른쪽 테두리 겹침 방지 */
+    .info-table tr + tr td {
+      border-top: 0;
+    }
+
+    .info-table tr:first-child th {
+      border-top-left-radius: 12px;
+    }
+
+    .info-table tr:first-child td {
+      border-top-right-radius: 12px;
+    }
+
+    .info-table tr:last-child th {
+      border-bottom-left-radius: 12px;
+    }
+
+    .info-table tr:last-child td {
+      border-bottom-right-radius: 12px;
+    }
+
+    /* ====================
+       활동 페이지의 상품 목록
+    ==================== */
+    .goods-section {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .goods-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .goods-content {
+      line-height: 1.7;
+    }
+
+    .product-image {
+      height: auto;
+    }
+
+    .product-description {
+      overflow-wrap: anywhere;
+    }
+
+    .product-table {
+      line-height: 1.6;
+    }
+
+    /* ====================
+       모바일 활동 정보
+    ==================== */
+    @media (max-width: 480px) {
+      .album-header {
+        gap: 12px;
+      }
+
+      .info-table {
+        font-size: 11px;
+      }
+
+      .info-table th,
+      .info-table td {
+        padding: 10px 4px;
+      }
+
+      .info-table th {
+        width: 40%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html#home">
+      <img
+        class="site-logo"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+    <a class="back-link" href="./index.html#list">
+      ← 리스트로 돌아가기
+    </a>
+
+    <!-- ========== 활동 정보 시작 ========== -->
+    <section
+      class="album-header"
+      aria-labelledby="activity-title"
+    >
+      <img
+        class="album-image"
+        src="https://drive.google.com/thumbnail?id=12c-lNRCbDKh8lWjbuBLYY-37vgTZqIdf&amp;sz=w1600"
+        alt="ID: PITTA 앨범"
+      >
+
+      <div class="album-info">
+        <h1 id="activity-title" class="visually-hidden">
+          ID: PITTA
+        </h1>
+
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th scope="row">활동명</th>
+              <td>ID: PITTA</td>
+            </tr>
+            <tr>
+              <th scope="row">발매일</th>
+              <td>2021.11.10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- ========== 활동 정보 끝 ========== -->
+
+
+    <!-- ========== 굿즈 목록 시작 ========== -->
+    <section class="goods-section" aria-labelledby="goods-title">
+      <h2 id="goods-title" class="section-title">
+        굿즈 보기
+      </h2>
+
+
+      <!-- 상품 정렬 버튼 시작 -->
+<div class="goods-sort-buttons" role="group" aria-label="상품 정렬">
+  <button
+    type="button"
+    data-goods-sort="original"
+    aria-pressed="true"
+  >
+    순서대로
+  </button>
+
+  <button
+    type="button"
+    data-goods-sort="reverse"
+    aria-pressed="false"
+  >
+    역순서대로
+  </button>
+</div>
+<!-- 상품 정렬 버튼 끝 -->
+
+
+      <div class="goods-list">
+
+        <!-- ========== 1번 앨범 상품 시작 ========== -->
+        <details
+          id="id-pitta-album"
+          class="goods-accordion"
+          data-category="앨범, 개인"
+          data-name="앨범"
+          data-keywords="ID PITTA, 아이디 피타, 음반, 앨범, CD, 씨디, 시디, 종이북커버, 포토북, 포토카드, 엽서"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">1</span>
+            <span class="goods-name">ID: PITTA 앨범</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=12c-lNRCbDKh8lWjbuBLYY-37vgTZqIdf&amp;sz=w1600"
+                alt="ID: PITTA 앨범"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>19,300원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>
+                    종이 북커버 / 포토북 / CD /
+                    포토카드 4장 / 엽서 2장
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 초도 한정 타투 스티커 1장 증정</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1K-0R9pd70wrwAMIU54enYH61f6TdDImK&amp;sz=w1600"
+                  alt="ID: PITTA 앨범 개인 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+            <!-- 상세페이지 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>상세페이지 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1Yaxzzd3kENz60VHOiR0S9xKa23k_L9eW&amp;sz=w1600"
+                  alt="아이디 피타 앨범 상세페이지"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 상세페이지 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 1번 상품 끝 ========== -->
+
+
+        <!-- ========== 2번 LP 상품 시작 ========== -->
+        <details
+          id="id-pitta-LP"
+          class="goods-accordion"
+          data-category="앨범, 개인"
+          data-name="LP 야광"
+          data-keywords="ID PITTA, 아이디 피타, 음반, 앨범, LP, 엘피, 야광"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">2</span>
+            <span class="goods-name">ID: PITTA LP<br>야광</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1Gt_58H-PKScmENMJphjPXRFiefTcyOOL&amp;sz=w1600"
+                alt="ID: PITTA LP 야광"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>22,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>LP</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 10인치</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 2번 상품 끝 ========== -->
+
+
+        <!-- ========== 3번 카세트 상품 시작 ========== -->
+        <details
+          id="id-pitta-tape"
+          class="goods-accordion"
+          data-category="앨범, MD, 개인"
+          data-name="카세트테이프"
+          data-keywords="ID PITTA, 아이디 피타, 음반, 카세트 테이프"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">3</span>
+            <span class="goods-name">
+              ID: PITTA 음반<br>카세트 테이프
+            </span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1qqB3gjXDOYrqsczUFgV3S-X-Xm2WWKvZ&amp;sz=w1600"
+                alt="ID: PITTA 카세트 테이프"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>16,500원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>카세트 테이프</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 형호 생일 기념 출시</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 3번 상품 끝 ========== -->
+
+
+        <!-- ========== 4번 MD 앨범 상품 시작 ========== -->
+        <details
+          id="id-pitta-md-album"
+          class="goods-accordion"
+          data-category="MD, 개인"
+          data-name="MD 앨범"
+          data-keywords="ID PITTA, 아이디 피타, MD, 음반, 앨범, CD, 씨디, 시디, 종이북커버, 포토북, 포토카드, 엽서"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">4</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>앨범
+            </span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1zM3EzMeCQFiGUXp3eSsFqowBstYrjeHt&amp;sz=w1600"
+                alt="ID: PITTA MD 앨범"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>19,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>
+                    종이 북커버 / 포토북 / CD /
+                    포토카드 4장 / 엽서 2장
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 4번 상품 끝 ========== -->
+
+
+        <!-- ========== 5번 팬라이트 상품 시작 ========== -->
+        <details
+          id="id-pitta-fanlight"
+          class="goods-accordion"
+          data-category="MD, 개인"
+          data-name="팬라이트"
+          data-keywords="ID PITTA, 아이디 피타, MD, 응원, 팬라이트, fanlight, 하차벨"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">5</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>팬라이트
+            </span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1_6MGMwokaQHy5pDJE0g4-WT3vOnQfaW-&amp;sz=w1600"
+                alt="ID: PITTA MD 팬라이트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>23,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>팬라이트</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>
+                    - 버스 하차벨처럼 생겨 별명이 하차벨이다.<br>
+                    - 최근에는 사용하지 않는다. (중앙제어X)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 5번 상품 끝 ========== -->
+
+
+        <!-- ========== 6번 그립톡 상품 시작 ========== -->
+        <details
+          id="id-pitta-grip"
+          class="goods-accordion"
+          data-category="MD, 개인"
+          data-name="그립톡"
+          data-keywords="ID PITTA, 아이디 피타, MD, 그립톡, 스마트톡"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">6</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>그립톡
+            </span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=12rCMxWjO7Bn6w8DQj1VgHqT8R9qfROau&amp;sz=w1600"
+                alt="ID: PITTA MD 그립톡"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>10,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>그립톡</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 6번 상품 끝 ========== -->
+
+
+        <!-- ========== 7번 후드집업 상품 시작 ========== -->
+        <details
+          id="id-pitta-hoodie"
+          class="goods-accordion"
+          data-category="MD, 개인"
+          data-name="후드집업"
+          data-keywords="ID PITTA, 아이디 피타, MD, 기모후드집업, 의류"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">7</span>
+            <span class="goods-name">
+              ID: PITTA 콘서트 MD<br>기모 후드 집업
+            </span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=14AgLS8J0YagCni3-2m1cXsJlNWnu1kDx&amp;sz=w1600"
+                alt="ID: PITTA MD 후드집업"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>40,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>후드집업</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 7번 상품 끝 ========== -->
+
+
+        <!-- ========== 8번 잡지 시작 ========== -->
+        <details
+          id="id-pitta-magazine"
+          class="goods-accordion"
+          data-category="기타, 개인"
+          data-name="잡지"
+          data-keywords="ID PITTA, 아이디 피타, theatre+. 시어터플러스, 시플, 씨어터플러스, 씨플, 잡지, 매거진"
+          data-members="형호"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">8</span>
+            <span class="goods-name">
+              ID: PITTA<br>THEATRE+ 2021년 11월호
+            </span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1MW_MoDqHGq9pU3MHucZKNzTrANSu_9eX&amp;sz=w1600"
+                alt="ID: PITTA THEATRE+ 2021년 11월호"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼이 자동으로 들어가는 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>7,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>잡지</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 형호 인터뷰 수록</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 8번 상품 끝 ========== -->
+
+      </div>
+    </section>
+    <!-- ========== 굿즈 목록 끝 ========== -->
+
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+
+  <script>
+    (() => {
+      /*
+        검색 결과·마이페이지 등에서 전달한
+        상품 번호 또는 상품 ID로 해당 상품을 펼칩니다.
+      */
+      const cards = [
+        ...document.querySelectorAll(
+          ".goods-accordion[data-category]"
+        )
+      ];
+
+      const params = new URLSearchParams(location.search);
+      const productNumber = Number(params.get("product"));
+
+      let productId = "";
+
+      try {
+        productId = decodeURIComponent(location.hash.slice(1));
+      } catch {
+        // 해시가 잘못된 형식이면 상품 번호로 확인합니다.
+      }
+
+      /* 고유한 상품 ID로 찾기 */
+      let target = cards.find((card) => {
+        return card.id === productId;
+      });
+
+      /* 상품 ID로 찾지 못하면 상품 번호로 찾기 */
+      if (
+        !target &&
+        Number.isInteger(productNumber) &&
+        productNumber >= 1
+      ) {
+        target = cards[productNumber - 1];
+      }
+
+      /*
+        기존 중복 ID가 포함된 주소도 연결되도록 처리합니다.
+        상품 번호가 없는 예전 주소는 첫 상품을 엽니다.
+      */
+      if (!target && productId === "idpitta-album") {
+        target = cards[0];
+      }
+
+      if (!target) return;
+
+      target.open = true;
+
+      function scrollToProduct() {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({
+            block: "start"
+          });
+        });
+      }
+
+      if (document.readyState === "complete") {
+        scrollToProduct();
+      } else {
+        window.addEventListener("load", scrollToProduct, {
+          once: true
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
