@@ -31,7 +31,8 @@
     { name: "2022년 고우림 생일카페", url: "./WRbirth22.html" },
     { name: "BOTIQUE", url: "./boutique.html" },
     { name: "숲속의 포레시피", url: "./forrecipe22.html" },
-    { name: "2022년 생활지음", url: "./zium22.html" }
+    { name: "2022년 생활지음", url: "./zium22.html" },
+    { name: "The Bloom: UTOPIA", url: "./utopia.html" }
   ];
 
   const validTypes = ["personal", "unit", "group"];

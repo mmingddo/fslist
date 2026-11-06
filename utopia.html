@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./category.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#000000">
+
+  <title>The Bloom: UTOPIA | 굿즈리스트</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1BhDYJ8C4ic59AWids_NZxEaqMQHuUTJV&amp;sz=w1600">
+
+  <!-- 공통 디자인 -->
+  <link rel="stylesheet" href="./category.css">
+
+  <!-- 상품별 북마크·메모 기능 -->
+  <script src="./personal.js" defer></script>
+  <script src="./goods-sort.js" defer></script>
+
+  <style>
+    /* ====================
+       화면에 숨기는 활동 제목
+    ==================== */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .back-link {
+      align-self: flex-start;
+    }
+
+    /* ====================
+       활동 이미지·정보 배치
+    ==================== */
+    .album-header {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      gap: 20px;
+    }
+
+    .album-info {
+      min-width: 0;
+    }
+
+    .album-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--accent-color);
+      border-radius: 12px;
+      background: #f2f2f2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ====================
+       활동 정보 표
+    ==================== */
+    .info-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      table-layout: fixed;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 14px 10px;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .info-table th {
+      width: 36%;
+      border: 0;
+      background: var(--accent-color);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .info-table td {
+      border: 1px solid var(--accent-color);
+      background: #fff;
+      color: #000;
+    }
+
+    .info-table tr + tr th {
+      border-top: 1px solid #fff;
+    }
+
+    .info-table tr + tr td {
+      border-top: 0;
+    }
+
+    .info-table tr:first-child th {
+      border-top-left-radius: 12px;
+    }
+
+    .info-table tr:first-child td {
+      border-top-right-radius: 12px;
+    }
+
+    .info-table tr:last-child th {
+      border-bottom-left-radius: 12px;
+    }
+
+    .info-table tr:last-child td {
+      border-bottom-right-radius: 12px;
+    }
+
+    /* ====================
+       활동 페이지 상품 목록
+    ==================== */
+    .goods-section {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .goods-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    /* 기존 활동 페이지의 세부 설정 유지 */
+    .goods-content {
+      line-height: 1.7;
+    }
+
+    .product-image {
+      height: auto;
+    }
+
+    .product-description {
+      overflow-wrap: anywhere;
+    }
+
+    .product-name {
+      color: #000;
+    }
+
+    .product-table {
+      line-height: 1.6;
+    }
+
+    .photocard-section,
+    .photocard-details {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .photocard-toggle {
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* ====================
+       모바일 활동 정보
+    ==================== */
+    @media (max-width: 480px) {
+      .album-header {
+        gap: 12px;
+      }
+
+      .info-table {
+        font-size: 11px;
+      }
+
+      .info-table th,
+      .info-table td {
+        padding: 10px 4px;
+      }
+
+      .info-table th {
+        width: 40%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- ========== 로고·사이트명 시작 ========== -->
+    <a class="site-brand" href="./index.html#home">
+      <img
+        class="site-logo"
+        src="https://drive.google.com/thumbnail?id=1-pbgQfZiJJAgWXwyRTvR9-FxeN2V2PbB&amp;sz=w1600"
+        alt="FS LIST"
+      >
+      <span class="site-brand-text">굿즈리스트</span>
+    </a>
+    <!-- ========== 로고·사이트명 끝 ========== -->
+
+    <a class="back-link" href="./index.html#list">
+      ← 리스트로 돌아가기
+    </a>
+
+    <!-- ========== 활동 정보 시작 ========== -->
+    <section
+      class="album-header"
+      aria-labelledby="activity-title"
+    >
+      <img
+        class="album-image"
+        src="https://drive.google.com/thumbnail?id=1NHcya0cxBscH8Fg3GEAaTsMihLi6_yLk&amp;sz=w1600"
+        alt="유토피아 활동"
+      >
+
+      <div class="album-info">
+        <h1 id="activity-title" class="visually-hidden">
+          The Bloom: UTOPIA
+        </h1>
+
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th scope="row">활동명</th>
+              <td>The Bloom:<br>UTOPIA<br><br>The Borders<br>of Utopia</td>
+            </tr>
+            <tr>
+              <th scope="row">발매일</th>
+              <td>2022.12.22</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- ========== 활동 정보 끝 ========== -->
+
+
+    <!-- ========== 굿즈 목록 시작 ========== -->
+    <section class="goods-section" aria-labelledby="goods-title">
+      <h2 id="goods-title" class="section-title">
+        굿즈 보기
+      </h2>
+
+
+      <!-- 상품 정렬 버튼 시작 -->
+<div class="goods-sort-buttons" role="group" aria-label="상품 정렬">
+  <button
+    type="button"
+    data-goods-sort="original"
+    aria-pressed="true"
+  >
+    순서대로
+  </button>
+
+  <button
+    type="button"
+    data-goods-sort="reverse"
+    aria-pressed="false"
+  >
+    역순서대로
+  </button>
+</div>
+<!-- 상품 정렬 버튼 끝 -->
+ 
+
+      <div class="goods-list">
+
+        <!-- ========== 1번 앨범 상품 시작 ========== -->
+        <details
+          id="utopia-album"
+          class="goods-accordion"
+          data-category="앨범"
+          data-name="앨범"
+          data-keywords="the bloom utopia the borders of utopia, 더 블룸 유토피아 더 보더스 오브 유토피아, 유톺, 유토퍄, 유토퍄, 싱글1집, 음반, 앨범, CD, 씨디, 시디, 포토북, 스티커, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">1</span>
+            <span class="goods-name">UTOPIA 앨범</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1i4B1fUVMHwpwYOAoymZwRnJeCqxZ0wNL&amp;sz=w1600"
+                alt="유토피아 앨범"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>20,800원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토북 / CD / 스티커 1장 / 포토카드 12개</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 포토카드 뒷면 퍼즐</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1zyTpA939WVKIVD6U6AU6hW825d3d5y2N&amp;sz=w1600"
+                  alt="유토피아 앨범 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+
+            <!-- 뒷면 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>뒷면 퍼즐 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1X7oqOJETvCLScj9QWh7JkMO8_uKFICB-&amp;sz=w1600"
+                  alt="유토피아 앨범 포토카드 뒷면"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 뒷면 영역 끝 -->
+
+
+            <!-- 상세페이지 영역 시작 -->
+            <details class="photocard-section photocard-details">
+              <summary class="photocard-toggle">
+                <span>상세페이지 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  src="https://drive.google.com/thumbnail?id=1U0Y2NeIfF8NEEeZtaVdclCCCqVfWfBS7&amp;sz=w1600"
+                  alt="유토피아 앨범 상세페이지"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 상세페이지 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 1번 상품 끝 ========== -->
+
+
+        <!-- ========== 2번 예판 포스터 문 시작 ========== -->
+        <details
+          id="utopia-poster-utopia"
+          class="goods-accordion"
+          data-category=" "
+          data-name="포스터 (Utopia ver.)"
+          data-keywords="the bloom utopia the borders of utopia, 더 블룸 유토피아 더 보더스 오브 유토피아, 유톺, 유토퍄, 유토퍄, 싱글1집,
+          예약판매 특전 포스터, 예판 특전 포스터, 예판 포스터"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">2</span>
+            <span class="goods-name">UTPOIA 앨범<br>초도 구매자 대상 포스터<br>(Utopia ver.)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1TD5cw2Dj2h6sJn8XWqi2qOxThgWKj2Oe&amp;sz=w1600"
+                alt="유토피아 초도 구매 포스터 유토피아"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포스터 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 3종 중(Utopia/Border line/Dystopia) 중 1종 랜덤</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 2번 상품 끝 ========== -->
+
+
+        <!-- ========== 3번 예판 포스터 문 시작 ========== -->
+        <details
+          id="utopia-poster-border"
+          class="goods-accordion"
+          data-category=" "
+          data-name="포스터 (Border line ver.)"
+          data-keywords="the bloom utopia the borders of utopia, 더 블룸 유토피아 더 보더스 오브 유토피아, 유톺, 유토퍄, 유토퍄, 싱글1집,
+          예약판매 특전 포스터, 예판 특전 포스터, 예판 포스터, 보더라인"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">3</span>
+            <span class="goods-name">UTPOIA 앨범<br>초도 구매자 대상 포스터<br>(Border line ver.)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1cfA7WHLny94YZPoRZSQnuosEfrkT4B7b&amp;sz=w1600"
+                alt="유토피아 초도 구매 포스터 보더라인"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포스터 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 3종 중(Utopia/Border line/Dystopia) 중 1종 랜덤</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 3번 상품 끝 ========== -->
+
+
+        <!-- ========== 4번 예판 포스터 문 시작 ========== -->
+        <details
+          id="utopia-poster-dystopia"
+          class="goods-accordion"
+          data-category=" "
+          data-name="포스터 (Dystopia ver.)"
+          data-keywords="the bloom utopia the borders of utopia, 더 블룸 유토피아 더 보더스 오브 유토피아, 유톺, 유토퍄, 유토퍄, 싱글1집,
+          예약판매 특전 포스터, 예판 특전 포스터, 예판 포스터, 디스토피아"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">4</span>
+            <span class="goods-name">UTPOIA 앨범<br>초도 구매자 대상 포스터<br>(Dystopia ver.)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1Fs68MnxVZ3wZ25DeWxZrYm9R4GacxHSH&amp;sz=w1600"
+                alt="유토피아 초도 구매 포스터 디스토피아"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포스터 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 3종 중(Utopia/Border line/Dystopia) 중 1종 랜덤</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 4번 상품 끝 ========== -->
+
+
+        <!-- ========== 5번 초도 앺뮤 시작 ========== -->
+        <details
+          id="utopia-applemusic"
+          class="goods-accordion"
+          data-category=" "
+          data-name="초도 구매자 대상 포토카드 (applemusic)"
+          data-keywords="the bloom utopia the borders of utopia, 더 블룸 유토피아 더 보더스 오브 유토피아, 유톺, 유토퍄, 유토퍄, 싱글1집, 음반, 앨범, 포토카드, 초도특전, 애플뮤직, applemusic"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">5</span>
+            <span class="goods-name">UTOPIA 앨범<br>초도 구매자 대상 포토카드<br>(applemusic)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1C6t5b1Ai0utQBUEXNw44DlTZFGGRu22B&amp;sz=w1600"
+                alt="유토피아 초도 구매자 대상 애플뮤직 포토카드"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토카드 2장</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal">
+                  개인
+                </span>
+                <span class="photocard-type type-unit active">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="unit"
+                  src="https://drive.google.com/thumbnail?id=1hVj7t9aySV9bw9_0YbhK0_9Clf3uFXEm&amp;sz=w1600"
+                  alt="유토피아 초도 구매자 대상 애플뮤직 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 7번 상품 끝 ========== -->
+
+
+        <!-- ========== 8번 메이크스타시작 ========== -->
+        <details
+          id="worldtree-makestar"
+          class="goods-accordion"
+          data-category=" "
+          data-name="초도 구매자 대상 포토카드 (MAKESTAR)"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 음반, 앨범, 포토카드, 초도특전, 메이크스타, makestar"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">8</span>
+            <span class="goods-name">WORLD TREE 앨범<br>초도 구매자 대상 포토카드<br>(MAKESTAR)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1r3nST1J_E8RNxlL6-moSRSgcgV8ZZ1Dw&amp;sz=w1600"
+                alt="world tree 초도 구매자 대상 메이크스타 포토카드"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토카드 4장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 홀로그램 코팅</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1hVj7t9aySV9bw9_0YbhK0_9Clf3uFXEm&amp;sz=w1600"
+                  alt="world tree 초도 구매자 대상 메이크스타 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 8번 상품 끝 ========== -->
+
+
+        <!-- ========== 9번 위드뮤 시작 ========== -->
+        <details
+          id="worldtree-withmuu"
+          class="goods-accordion"
+          data-category=" "
+          data-name="초도 구매자 대상 포토카드 (위드뮤)"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 음반, 앨범, 포토카드, 초도특전, 위드뮤, withmuu"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">9</span>
+            <span class="goods-name">WORLD TREE 앨범<br>초도 구매자 대상 포토카드<br>(위드뮤)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1r3nST1J_E8RNxlL6-moSRSgcgV8ZZ1Dw&amp;sz=w1600"
+                alt="world tree 초도 구매자 대상 위드뮤 포토카드"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토카드 5장</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal">
+                  개인
+                </span>
+                <span class="photocard-type type-unit active">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="unit group"
+                  src="https://drive.google.com/thumbnail?id=1DFD8HcdW7VKTm3PheAm4-CCm35pq6gtY&amp;sz=w1600"
+                  alt="world tree 초도 구매자 대상 위드뮤 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 9번 상품 끝 ========== -->
+
+
+        <!-- ========== 10번 위드뮤 팬싸 시작 ========== -->
+        <details
+          id="worldtree-withmuu-fansign"
+          class="goods-accordion"
+          data-category=" "
+          data-name="팬사인회 응모자 대상 포토카드 (위드뮤)"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 음반, 앨범, 포토카드, 팬사인회응모특전, 팬싸인회응모특전, 위드뮤, withmuu"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">10</span>
+            <span class="goods-name">WORLD TREE 앨범<br>팬사인회 응모자 대상 포토카드<br>(위드뮤)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1r3nST1J_E8RNxlL6-moSRSgcgV8ZZ1Dw&amp;sz=w1600"
+                alt="world tree 팬사인회 응모자 대상 위드뮤 포토카드"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토카드 4장</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1A8E9jqGRZPJTnu_Ih7fOrbecLafDgALI&amp;sz=w1600"
+                  alt="world tree 팬사인회 응모자 대상 위드뮤 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 10번 상품 끝 ========== -->
+
+
+        <!-- ========== 11번 앺 팬싸 시작 ========== -->
+        <details
+          id="worldtree-applemusic-fansign"
+          class="goods-accordion"
+          data-category=" "
+          data-name="팬사인회 응모자 대상 포토카드 (applemusic)"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 음반, 앨범, 포토카드, 팬사인회응모특전, 팬싸인회응모특전, applemusic, 애플뮤직"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">11</span>
+            <span class="goods-name">WORLD TREE 앨범<br>팬사인회 응모자 대상 포토카드<br>(applemusic)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <!-- 상품 이미지·버튼 영역 -->
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1r3nST1J_E8RNxlL6-moSRSgcgV8ZZ1Dw&amp;sz=w1600"
+                alt="world tree 팬사인회 응모자 대상 애플뮤직 포토카드"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <!-- 가입 정보 표 -->
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>포토카드 5장</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal">
+                  개인
+                </span>
+                <span class="photocard-type type-unit active">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="unit group"
+                  src="https://drive.google.com/thumbnail?id=1q59CzUh_Pch6p72vdUaMO07V5OFS4Vfg&amp;sz=w1600"
+                  alt="world tree 팬사인회 응모자 대상 위드뮤 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 11번 상품 끝 ========== -->
+
+
+        <!-- ========== 12번 응봉 시작 ========== -->
+        <details
+          id="worldtree-md-fanlight"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 공식 응원봉"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 공식응원봉"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">12</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>공식 응원봉</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1uF1gCw4qyULIPnplRbEfwRUtRB8lk-Ne&amp;sz=w1600"
+                alt="world tree MD 응원봉"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>38,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>응원봉 / 스트랩</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 12번 상품 끝 ========== -->
+
+
+        <!-- ========== 13번 응봉 파우치 시작 ========== -->
+        <details
+          id="worldtree-md-fanlightpouch"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 공식 응원봉 파우치"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 공식응원봉파우치, 숲별가방, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">13</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>공식 응원봉 파우치</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1UJM8lpv48-BzMXYFRCGdVVzoWQwxAqOB&amp;sz=w1600"
+                alt="world tree MD 응원봉 파우치"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>28,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>파우치 / 포토카드 4장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1-sg3RxHP4zPRCqaEvrOW29g3SXCpqx07&amp;sz=w1600"
+                  alt="world tree MD 응원봉 파우치 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 13번 상품 끝 ========== -->
+
+
+        <!-- ========== 14번 키링 시작 ========== -->
+        <details
+          id="worldtree-md-fanlightpouch"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 아크릴 키링"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 공식응원봉파우치, 아크릴키링"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">14</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>아크릴 키링</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=10rUa4w0eM89gaHcm196ZNf1pDGH_bHME&amp;sz=w1600"
+                alt="world tree MD 아크릴 키링"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>10,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>아크릴 키링</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 14번 상품 끝 ========== -->
+
+
+        <!-- ========== 15번 방석 시작 ========== -->
+        <details
+          id="worldtree-md-cushion"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 방석"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 방석, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">15</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>방석</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1bneNr7YRvo0Z51F8V-mbHCX5l6KrUNE-&amp;sz=w1600"
+                alt="world tree MD 방석"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>28,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>방석 / 포토카드 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="group"
+                  src="https://drive.google.com/thumbnail?id=164kdKuef50gDCOi8WbALYIHIxJ8tjhsz&amp;sz=w1600"
+                  alt="world tree MD 방석 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 15번 상품 끝 ========== -->
+
+
+        <!-- ========== 16번 에코백 시작 ========== -->
+        <details
+          id="worldtree-md-ecobag"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 에코백"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 에코백, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">16</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>에코백</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1Pn0vLEUqoTIElJmiD9QTrMXxuSiZ5w2Z&amp;sz=w1600"
+                alt="world tree MD 에코백"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>22,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>에코백 / 포토카드 4장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=140CXXrLVeLwZev4c1BBUez2FrCBzkify&amp;sz=w1600"
+                  alt="world tree MD 에코백 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 16번 상품 끝 ========== -->
+
+
+        <!-- ========== 17번 티셔츠 블 시작 ========== -->
+        <details
+          id="worldtree-md-tblack"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 티셔츠(BLACK)"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 티셔츠, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">17</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>티셔츠(BLACK)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1aXnHo4VmHCgRAf3jjnLimZ8F7GM1mbkh&amp;sz=w1600"
+                alt="world tree MD 티셔츠 블랙"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>39,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>티셔츠 / 포토카드 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 티셔츠(WHITE)와 포토카드 동일</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="group"
+                  src="https://drive.google.com/thumbnail?id=130-p9vb3Hlu4ipdHd9l4F9Gs2585E-MT&amp;sz=w1600"
+                  alt="world tree MD 티셔츠 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 17번 상품 끝 ========== -->
+
+
+        <!-- ========== 18번 티셔츠  시작 ========== -->
+        <details
+          id="worldtree-md-tblack"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 티셔츠(WHITE)"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 티셔츠, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">18</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>티셔츠(WHITE)</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1A4WU81Dy_oyo_vCjAuCVwdkhWXK6aUX8&amp;sz=w1600"
+                alt="world tree MD 티셔츠 화이트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>39,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>티셔츠 / 포토카드 1장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- 티셔츠(BLACK)과 포토카드 동일</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="group"
+                  src="https://drive.google.com/thumbnail?id=130-p9vb3Hlu4ipdHd9l4F9Gs2585E-MT&amp;sz=w1600"
+                  alt="world tree MD 티셔츠 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 18번 상품 끝 ========== -->
+
+
+        <!-- ========== 19번 컵 시작 ========== -->
+        <details
+          id="worldtree-md-glass"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 홀로그램 유리컵 & 코스터 세트"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 홀로그램유리컵코스터세트"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">19</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>홀로그램 유리컵 & 코스터 세트</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=14_Z1UxwP2rz4vKuR2eShVAOqk1M8XAoy&amp;sz=w1600"
+                alt="world tree MD 홀로그램 유리컵 코스터 세트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>25,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>홀로그램 유리컵 / 아크릴 코스터</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 19번 상품 끝 ========== -->
+
+
+        <!-- ========== 20번 포토북 시작 ========== -->
+        <details
+          id="worldtree-md-photodook"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 미니 포토북"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 미니 포토북"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">20</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>미니 포토북</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1Dz3x4Vn5JXzn_vPtyKbduyM_IdfyE1-O&amp;sz=w1600"
+                alt="world tree MD 미니 포토북"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>15,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>미니 포토북</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 20번 상품 끝 ========== -->
+
+
+        <!-- ========== 21번 엽서북 시작 ========== -->
+        <details
+          id="worldtree-md-postcard"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 엽서북"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 엽서북"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">21</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>엽서북</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1vzmUAY41HkZvuGEwzsgUHj9WEQVrmv0I&amp;sz=w1600"
+                alt="world tree MD 엽서북"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>18,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>엽서 20장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 21번 상품 끝 ========== -->
+
+
+        <!-- ========== 22번 틴케 시작 ========== -->
+        <details
+          id="worldtree-md-photosticker"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 포토카드 & 스티커 세트"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 포토카드 스티커 세트"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">22</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>포토카드 & 스티커 세트</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1cMV77YRU00ztXHBPdZdAfKqGEm0u0UrS&amp;sz=w1600"
+                alt="world tree MD 포토카드 스티커 세트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>18,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>틴케이스 / 포토카드 10장 / 증명사진 스티커 4장 / 아트웍 스티커 8장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group active">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal group"
+                  src="https://drive.google.com/thumbnail?id=1s0xoEiRLErTJXUjgZveOHldEpigP-T7T&amp;sz=w1600"
+                  alt="world tree MD 포토카드 스티커 세트 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 22번 상품 끝 ========== -->
+
+
+        <!-- ========== 23번 뱃지 시작 ========== -->
+        <details
+          id="worldtree-md-badge"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="콘서트 뱃지 세트"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, 엠디, MD, 뱃지 세트"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">23</span>
+            <span class="goods-name">WORLD TREE 콘서트 MD<br>뱃지 세트</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1DBKEusdvePAQwIU0DLMGXvQVRfKIPPVi&amp;sz=w1600"
+                alt="world tree MD 뱃지 세트"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>42,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>뱃지 5개 / 포토카드 4장</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=17UAqcHjioYjDtkCHpguvDgxtrXEuBVJ8&amp;sz=w1600"
+                  alt="world tree MD 뱃지세트 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+          </div>
+        </details>
+        <!-- ========== 22번 상품 끝 ========== -->
+
+
+        <!-- ========== 24번 응봉 시작 ========== -->
+        <details
+          id="worldtreefe-md-fanlight"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="페스티벌 공식 응원봉"
+          data-keywords="세계수, worldtree festival, 월드트리 페스티벌, thebeginning, 더비기닝, 미니1집, 엠디, MD, 공식응원봉"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">24</span>
+            <span class="goods-name">WORLD TREE 페스티벌 MD<br>공식 응원봉</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1uF1gCw4qyULIPnplRbEfwRUtRB8lk-Ne&amp;sz=w1600"
+                alt="world tree 페스티벌 MD 응원봉"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>38,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>응원봉 / 스트랩</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <!-- ========== 24번 상품 끝 ========== -->
+
+
+        <!-- ========== 25번 응봉 파우치 시작 ========== -->
+        <details
+          id="worldtreefe-md-fanlightpouch"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="페스티벌 공식 응원봉 파우치"
+          data-keywords="세계수, worldtree festival, 월드트리 페스티벌, thebeginning, 더비기닝, 미니1집, 엠디, MD, 공식응원봉파우치, 숲별가방"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">25</span>
+            <span class="goods-name">WORLD TREE 페스티벌 MD<br>공식 응원봉 파우치</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1UJM8lpv48-BzMXYFRCGdVVzoWQwxAqOB&amp;sz=w1600"
+                alt="world tree 페스티벌 MD 응원봉 파우치"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>28,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>파우치</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 25번 상품 끝 ========== -->
+
+
+        <!-- ========== 26번 방석 시작 ========== -->
+        <details
+          id="worldtreefe-md-cushion"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="페스티벌 방석"
+          data-keywords="세계수, worldtree festival, 월드트리 페스티벌, thebeginning, 더비기닝, 미니1집, 엠디, MD, 방석, 포토카드"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">26</span>
+            <span class="goods-name">WORLD TREE 페스티벌 MD<br>방석</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1bneNr7YRvo0Z51F8V-mbHCX5l6KrUNE-&amp;sz=w1600"
+                alt="world tree 페스티벌 MD 방석"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>28,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>방석</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 26번 상품 끝 ========== -->
+
+
+        <!-- ========== 27번 방석 시작 ========== -->
+        <details
+          id="worldtreefe-md-cushion"
+          class="goods-accordion"
+          data-category="MD"
+          data-name="페스티벌 등받이 종이의자"
+          data-keywords="세계수, worldtree festival, 월드트리 페스티벌, thebeginning, 더비기닝, 미니1집, 엠디, MD, 등받이종이의자"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">26</span>
+            <span class="goods-name">WORLD TREE 페스티벌 MD<br>등받이 종이의자</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1ATebBrcovLmrZHbg7LQ4677pFWmQDlgn&amp;sz=w16000"
+                alt="world tree MD 등받이 종이의자"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>28,000원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>방석</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </details>
+        <!-- ========== 27번 상품 끝 ========== -->
+
+
+        <!-- ========== 28번 LP 클래식 시작 ========== -->
+        <details
+          id="thefore-classicLP"
+          class="goods-accordion"
+          data-category="앨범"
+          data-name="LP CLASSIC"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, LP, 엘피, 클래식"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">28</span>
+            <span class="goods-name">WORLD TREE LP<br>CLASSIC</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=135FKNAp5NIK55QAO53D-lyjYW0B6A6R2&amp;sz=w1600"
+                alt="WORLD TREE LP CLASSIC"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>52,200원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>LP</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- SPECIAL과 세트 구매가 122,000원</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1hVj7t9aySV9bw9_0YbhK0_9Clf3uFXEm&amp;sz=w1600"
+                  alt="world tree MD 엘피 클래식 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+
+          </div>
+        </details>
+        <!-- ========== 28번 상품 끝 ========== -->
+
+
+        <!-- ========== 29번 LP 스페셜 시작 ========== -->
+        <details
+          id="thefore-specialLP"
+          class="goods-accordion"
+          data-category="앨범"
+          data-name="LP SPECIAL"
+          data-keywords="세계수, worldtree, 월드트리, thebeginning, 더비기닝, 미니1집, LP, 엘피, 스페셜"
+        >
+          <summary class="goods-summary">
+            <span class="goods-number">29</span>
+            <span class="goods-name">WORLD TREE LP<br>SPECIAL</span>
+            <span class="accordion-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <hr class="goods-divider">
+
+          <div class="goods-content">
+            <div class="product-header">
+              <img
+                class="product-image"
+                src="https://drive.google.com/thumbnail?id=1gquDkjAPzSLXszVriTj0x0rNt8c36TsM&amp;sz=w1600"
+                alt="WORLD TREE LP SPECIAL"
+                loading="lazy"
+              >
+
+              <div class="product-description">
+                <!-- 북마크·메모 버튼 자리 -->
+              </div>
+            </div>
+
+            <table class="product-table">
+              <tbody>
+                <tr>
+                  <th scope="row">원가</th>
+                  <td>71,300원</td>
+                </tr>
+                <tr>
+                  <th scope="row">구성품</th>
+                  <td>LP</td>
+                </tr>
+                <tr>
+                  <th scope="row">비고</th>
+                  <td>- CLASSIC과 세트 구매가 122,000원</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <!-- 포토카드 영역 시작 -->
+            <details
+              class="photocard-section photocard-details"
+              data-photocard
+            >
+              <summary class="photocard-toggle">
+                <span>포토카드 보기</span>
+                <span
+                  class="photocard-arrow"
+                  aria-hidden="true"
+                ></span>
+              </summary>
+
+              <div
+                class="photocard-types"
+                aria-label="포토카드 유형"
+              >
+                <span class="photocard-type type-personal active">
+                  개인
+                </span>
+                <span class="photocard-type type-unit">
+                  유닛
+                </span>
+                <span class="photocard-type type-group">
+                  단체
+                </span>
+              </div>
+
+              <div class="photocard-content">
+                <img
+                  class="photocard-image"
+                  data-pc-types="personal"
+                  src="https://drive.google.com/thumbnail?id=1hVj7t9aySV9bw9_0YbhK0_9Clf3uFXEm&amp;sz=w1600"
+                  alt="world tree MD 엘피 스페셜 포토카드"
+                  loading="lazy"
+                >
+              </div>
+            </details>
+            <!-- 포토카드 영역 끝 -->
+
+
+          </div>
+        </details>
+        <!-- ========== 29번 상품 끝 ========== -->
+
+
+      </div>
+      <!-- goods-list 끝 -->
+    </section>
+    <!-- ========== 굿즈 목록 끝 ========== -->
+
+
+    <!-- ========== 제작자 표기 시작 ========== -->
+    <footer class="site-credit">
+      제작<br>
+
+      <a
+        href="https://x.com/ing_ddo_11"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@ing_ddo_11</a>
+
+      <hr class="credit-divider">
+
+      도움<br>
+
+      <a
+        href="https://x.com/hhhh_7989"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@hhhh_7989</a><br>
+
+      <a
+        href="https://x.com/UrimThummim0505"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@UrimThummim0505</a><br>
+
+      <a
+        href="https://x.com/forkkeu"
+        target="_blank"
+        rel="noopener noreferrer"
+      >@forkkeu</a>
+    </footer>
+    <!-- ========== 제작자 표기 끝 ========== -->
+  </main>
+
+  <script>
+    (() => {
+      /*
+        검색 결과·마이페이지 등에서 전달한
+        상품 번호 또는 상품 ID로 해당 상품을 펼칩니다.
+      */
+      const cards = [
+        ...document.querySelectorAll(
+          ".goods-accordion[data-category]"
+        )
+      ];
+
+      const params = new URLSearchParams(location.search);
+      const productNumber = Number(params.get("product"));
+
+      let productId = "";
+
+      try {
+        productId = decodeURIComponent(location.hash.slice(1));
+      } catch {
+        // 해시가 잘못된 형식이면 상품 번호로 확인합니다.
+      }
+
+      /* 고유한 상품 ID로 찾기 */
+      let target = cards.find((card) => {
+        return card.id === productId;
+      });
+
+      /* 상품 ID로 찾지 못하면 상품 번호로 찾기 */
+      if (
+        !target &&
+        Number.isInteger(productNumber) &&
+        productNumber >= 1
+      ) {
+        target = cards[productNumber - 1];
+      }
+
+      /*
+        예전 중복 ID가 포함된 주소도 연결합니다.
+        상품 번호가 없으면 해당 그룹의 첫 상품을 엽니다.
+      */
+      if (!target) {
+        const legacyTargets = {
+          "TheForestella-album": "product-1",
+          "TheForestella-md": "product-4"
+        };
+
+        const legacyId = legacyTargets[productId];
+
+        if (legacyId) {
+          target = cards.find((card) => {
+            return card.id === legacyId;
+          });
+        }
+      }
+
+      if (!target) return;
+
+      target.open = true;
+
+      function scrollToProduct() {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({
+            block: "start"
+          });
+        });
+      }
+
+      if (document.readyState === "complete") {
+        scrollToProduct();
+      } else {
+        window.addEventListener("load", scrollToProduct, {
+          once: true
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
